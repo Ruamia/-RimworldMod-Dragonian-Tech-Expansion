@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 黑暗龙珠 物品 -->
+	<ThingDef ParentName="BodyPartDROrbsBase">
+		<defName>DarkDragonianOrb</defName>
+		<label>龙娘 黑暗龙珠</label>
+		<description>一颗龙珠。拥有强大的虚空操控能力。装备或植入时攻击额外释放恐惧毒气。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Dorb_Dark</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techHediffsTags>
+			<li>DarkDragonianOrb</li>
+			<li>DragonianOrbAdvanced</li>
+		</techHediffsTags>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+			<Mass>0.3</Mass>
+		</statBases>
+		<!-- 恢复原作者的 ModExtension -->
+		<modExtensions>
+			<li Class="DragonianMix.ProphecyGearEffect">
+				<enableHediffEffect>true</enableHediffEffect>
+				<extraDamageFactor>0.2</extraDamageFactor>
+				<extraDamageType>DTE_Damage_FearCover_ex</extraDamageType>
+				<armorPenetration>0.1</armorPenetration>
+			</li>
+		</modExtensions>
+		<thingSetMakerTags>
+			<li>RewardStandardCore</li>
+		</thingSetMakerTags>
+	</ThingDef>
+	
+	<!-- 黑暗龙珠 植入状态 -->
+    <HediffDef ParentName="AddedBodyPartBase" MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DarkDragonianOrb</defName>
+        <label>龙娘 黑暗龙珠</label>
+        <labelNoun>一颗黑暗龙珠</labelNoun>
+        <description>一颗龙珠。拥有强大的虚空操控能力。</description>
+        <priceImpact>false</priceImpact>
+		<abilities>
+			<li MayRequire="Ludeon.RimWorld.Anomaly">DorbDark_VoidTerror</li>
+			<li MayRequire="Ludeon.RimWorld.Anomaly">DorbDark_AgonyPulse</li>
+		</abilities>
+        <addedPartProps>
+            <solid>true</solid>
+        </addedPartProps>
+		<!-- 恢复原作者的 ModExtension -->
+        <modExtensions>
+            <li Class="DragonianMix.ProphecyGearEffect">
+                <enableHediffEffect>true</enableHediffEffect>
+                <extraDamageFactor>0.2</extraDamageFactor>
+                <extraDamageType>DTE_Damage_FearCover_ex</extraDamageType>
+                <armorPenetration>0.1</armorPenetration>
+            </li>
+        </modExtensions>
+        <spawnThingOnRemoved>DarkDragonianOrb</spawnThingOnRemoved>
+    </HediffDef>
+	
+	<!-- 黑暗龙珠 伤害类型 恐惧气体效果 -->
+	<DamageDef>
+		<defName>DTE_Damage_FearCover_ex</defName>
+		<label>Fear gas</label>
+		<!-- 【修复报错】原作者源码没有 DamageWorker_OPToxic，使用原版基础 Worker 即可 -->
+		<workerClass>DamageWorker</workerClass>
+		<canInterruptJobs>false</canInterruptJobs>
+		<makesBlood>false</makesBlood>
+		<defaultDamage>0</defaultDamage>
+		<explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+		<explosionColorEdge>(78,65,167,0.05)</explosionColorEdge>
+		<soundExplosion>Explosion_Stun</soundExplosion>
+		<harmsHealth>false</harmsHealth>
+		<combatLogRules>Damage_Extinguish</combatLogRules>
+		<additionalHediffs>
+			<li>
+				<hediff>DTE_Hediff_FearCoverd_after</hediff>
+				<severityPerDamageDealt>0.01</severityPerDamageDealt>
+				<inverseStatScaling>true</inverseStatScaling>
+				<victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+			</li>
+		</additionalHediffs>
+	</DamageDef>
+	
+	<HediffDef>
+    <defName>DTE_Hediff_FearCoverd_after</defName>
+    <label>恐惧缠绕</label>
+    <description>该目标被恐惧气体缠绕。</description>
+    <defaultLabelColor>(0.6, 0.5, 0.9)</defaultLabelColor>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+		<!-- 直接使用原作者提供的定时爆炸组件 -->
+        <li Class="DragonianMix.HediffCompProperties_TimedExplosion">
+            <damageDef>DRM_Feargas</damageDef>
+            <soundDef>Explosion_Stun</soundDef>
+            <explosionRadius>4</explosionRadius>
+            <showRemainingTime>true</showRemainingTime>
+            <damageAmount>5</damageAmount>
+            <armorPenetration>0.1</armorPenetration>
+            <disappearsAfterTicks>60~120</disappearsAfterTicks>
+            <postExplosionSpawnThingDef>DRM_FearGasCloud</postExplosionSpawnThingDef>
+            <postExplosionSpawnChance>0.5</postExplosionSpawnChance>
+            <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
+        </li>
+        <li Class="HediffCompProperties_DisappearsOnDeath"/>
+    </comps>
+    <stages>
+        <li/>
+    </stages>
+	</HediffDef>
+
+</Defs>

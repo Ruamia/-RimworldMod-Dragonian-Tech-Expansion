@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ResearchProjectDef>
+        <defName>DragonianTechBreakthrough</defName>
+        <label>龙娘技术突破</label>
+        <description>神秘的龙娘博士开始研发的第一步。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>1000</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>Smithing</li>
+        </prerequisites>
+        <!-- 【修改】移动到最上方作为 DTE 高级分支的起点 -->
+        <researchViewX>1</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianAdvancedMelee</defName>
+        <label>先进龙娘近战武器</label>
+        <description>龙娘们使用的特色近战武器，具备强大的战术价值。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>2500</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>DragonianMeleeWeapon</li>
+            <li>DragonianTechBreakthrough</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>1</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianAdvancedRanged</defName>
+        <label>先进龙娘远程武器</label>
+        <description>龙娘工匠制作的经过特殊调校的远程武器。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>2500</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>DragonianFireArmSmithing</li>
+            <li>DragonianTechBreakthrough</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>2</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianUtilityTools</defName>
+        <label>龙娘妙妙工具</label>
+        <description>龙娘们日常工作时会使用的工具和配件。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>500</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>DragonianClothing</li>
+        </prerequisites>
+        <researchViewX>2</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianAdvancedProtection</defName>
+        <label>龙娘高级防护</label>
+        <description>龙娘工匠制作的适配于特殊情况的装甲服装和配件。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>2500</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>DragonianArmorClothing</li>
+            <li>DragonianTechBreakthrough</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>3</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianOrbReforge</defName>
+        <label>龙娘龙珠重铸</label>
+        <description>神秘的龙娘博士所研发的将魔法封印于龙珠并重铸的技术。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>1000</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>DragonianBionics</li>
+        </prerequisites>
+        <researchViewX>1</researchViewX>
+        <researchViewY>4</researchViewY>
+		<requiredAnalyzed>
+			<li>DragonianOrb</li>
+		</requiredAnalyzed>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianSpecializedBionics</defName>
+        <label>龙娘特化仿生</label>
+        <description>神秘的龙娘博士所研发的特化仿生身体部件，能够增强龙娘的战斗力。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>3500</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+			<li>DragonianBionics</li>
+            <li>DragonianTechBreakthrough</li>
+        </prerequisites>
+        <researchViewX>2</researchViewX>
+        <researchViewY>4</researchViewY>
+		<techprintCount>1</techprintCount>
+		<techprintCommonality>1</techprintCommonality>
+		<techprintMarketValue>1000</techprintMarketValue>
+		<heldByFactionCategoryTags><li>Dragonian_Faction</li></heldByFactionCategoryTags>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>DragonianFoodTech</defName>
+        <label>龙娘风味食品</label>
+        <description>龙娘部落特有的食物配方。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>200</baseCost>
+        <techLevel>Neolithic</techLevel>
+        <prerequisites>
+            <li>Pemmican</li>
+        </prerequisites>
+        <researchViewX>0</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+	
+    <ResearchProjectDef>
+        <defName>DragonianAgricultureTech</defName>
+        <label>龙娘农学</label>
+        <description>龙娘部落在极寒之地摸索出的不依赖土地进行农业生产的技术。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>300</baseCost>
+        <techLevel>Neolithic</techLevel>
+        <prerequisites>
+            <li>DragonianFoodTech</li>
+        </prerequisites>
+        <researchViewX>1</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+	
+    <ResearchProjectDef>
+        <defName>DragonianMedicalApplication</defName>
+        <label>龙娘医学应用</label>
+        <description>神秘的龙娘博士研发出的将龙角粉末应用于医学的方式。</description>
+        <tab>DragonianTech</tab>
+        <baseCost>1000</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>DrugProduction</li>
+            <li>DragonianFoodTech</li>
+        </prerequisites>
+        <researchViewX>2</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+	
+    <ResearchProjectDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DragonianForbiddenTech</defName>
+        <label>龙娘禁忌技术</label>
+        <description>永远不要去尝试。</description>
+        <tab>DragonianTech</tab>
+		<knowledgeCost>30</knowledgeCost>
+		<knowledgeCategory>Advanced</knowledgeCategory>
+        <techLevel>Medieval</techLevel>
+        <researchViewX>3</researchViewX>
+        <researchViewY>5</researchViewY>
+    </ResearchProjectDef>
+
+</Defs>

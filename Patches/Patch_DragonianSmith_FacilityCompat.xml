@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <!-- ===== Even More Linkables：只需工作台侧声明（设施无 linkableThings，默认接受所有工作台） ===== -->
+    <Operation Class="PatchOperationAdd" MayRequire="hobbes.bamba.evenmorelinkables16">
+        <xpath>Defs/ThingDef[defName="DragonianSmith"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>HobbesLink_CNCMachine</li>
+            <li>HobbesLink_3DPrinter</li>
+            <li>HobbesLink_RobotAssistant</li>
+            <li>HobbesLink_Lathe</li>
+            <li>HobbesLink_Spacer_Lathe</li>
+            <li>HobbesLink_Vice</li>
+            <li>HobbesLink_Centrifuge</li>
+            <li>HobbesLink_LaserEngraver</li>
+            <li>HobbesLink_IndustrialOven</li>
+            <li>HobbesLink_ConveyorBelt</li>
+            <li>HobbesLink_Incinerator</li>
+        </value>
+    </Operation>
+
+    <!-- ===== VFE Production：同理，只需工作台侧声明 ===== -->
+    <Operation Class="PatchOperationAdd" MayRequire="VanillaExpanded.VFEProduction">
+        <xpath>Defs/ThingDef[defName="DragonianSmith"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>VFE_SmithyCabinet</li>
+            <li>VFE_TailorCabinet</li>
+        </value>
+    </Operation>
+
+</Patch>

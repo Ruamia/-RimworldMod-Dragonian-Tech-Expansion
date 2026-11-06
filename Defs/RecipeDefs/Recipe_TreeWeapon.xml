@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <RecipeDef>
+    <defName>DTE_SmashTreeWeapon</defName>
+    <label>分解树武器</label>
+    <description>将连根拔起的树劈碎，回收其中包含的材料。</description>
+    <jobString>正在分解树武器。</jobString>
+    <workSkill>Crafting</workSkill>
+    <workAmount>300</workAmount>
+    
+    <!-- 【修改】只留一个占位符，反正代码会覆盖它 -->
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    
+    <recipeUsers>
+      <li>TableStonecutter</li>
+    </recipeUsers>
+  </RecipeDef>
+</Defs>

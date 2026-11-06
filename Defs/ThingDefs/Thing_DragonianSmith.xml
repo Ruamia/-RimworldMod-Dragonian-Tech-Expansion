@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef>
+        <defName>DragonianSmith</defName>
+        <label>龙人精工制造台</label>
+        <description>一个由龙人魔法锻造工艺改良的锻造台。它不需要电力或燃料即可运作，同时具备锻造台和裁缝台的全部功能，在工作温度达到零下时能够以惊人的效率进行运转。</description>
+        <thingClass>Building_WorkTable</thingClass>
+        <category>Building</category>
+        <selectable>true</selectable>
+        <useHitPoints>true</useHitPoints>
+        <techLevel>Medieval</techLevel>
+        <designationCategory>Production</designationCategory>
+        <thingCategories>
+            <li>BuildingsProduction</li>
+        </thingCategories>
+        <size>(3,1)</size>
+        <hasInteractionCell>true</hasInteractionCell>
+        <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<interactionCellIcon>DiningChair</interactionCellIcon>
+        <graphicData>
+            <texPath>Things/Building/DragonianSmith</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>(4,4)</drawSize>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>
+        <passability>PassThroughOnly</passability>
+        <fillPercent>0.5</fillPercent>
+        <pathCost>50</pathCost>
+        <constructEffect>ConstructMetal</constructEffect>
+        <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+        <castEdgeShadows>true</castEdgeShadows>
+        <staticSunShadowHeight>0.5</staticSunShadowHeight>
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<statBases>
+			<Mass>30</Mass>
+		</statBases>
+
+        <!-- 新增：让工作台显示"制造清单"标签页 -->
+        <inspectorTabs>
+            <li>ITab_Bills</li>
+        </inspectorTabs>
+
+        <!-- 新增：允许卸载/重新安装 -->
+        <minifiedDef>MinifiedThing</minifiedDef>
+
+        <costList>
+            <Steel>150</Steel>
+            <ComponentIndustrial>5</ComponentIndustrial>
+            <WoolDragonian>40</WoolDragonian>
+        </costList>
+        <building>
+            <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+            <isEdifice>true</isEdifice>
+            <ai_chillDestination>false</ai_chillDestination>
+            <fixedStorageSettings>
+                <priority>Preferred</priority>
+            </fixedStorageSettings>
+            <defaultStorageSettings>
+                <priority>Preferred</priority>
+            </defaultStorageSettings>
+        </building>
+        <researchPrerequisites>
+            <li>DragonianTechBreakthrough</li>
+        </researchPrerequisites>
+        <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+	
+			<!-- 新增：左下角工作速度系数 -->
+			<li Class="CompProperties_ReportWorkSpeed">
+				<workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
+			</li>
+		</comps>
+
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+			<!-- 新增：报告工作速度惩罚（原版工作台都有） -->
+			<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+		</placeWorkers>
+    </ThingDef>
+
+</Defs>

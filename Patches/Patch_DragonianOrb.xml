@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="DragonianOrb"]/comps</xpath>
+        <value>
+            <li Class="CompProperties_CompAnalyzableUnlockResearch">
+                <!-- 分析ID需要是一个独一无二的数字，随便填一个不冲突的即可 -->
+                <analysisID>88291002</analysisID>
+                <!-- 龙娘不是机械师，所以设为 false -->
+                <requiresMechanitor>false</requiresMechanitor>
+
+                <!-- 分析所需的时间（小时） -->
+                <analysisDurationHours>0.5</analysisDurationHours>
+                <!-- 分析后是否销毁物品（龙珠很贵重，设为 false 保留） -->
+                <destroyedOnAnalyzed>false</destroyedOnAnalyzed>
+                
+                <!-- 完成分析的提示文本 -->
+                <completedLetterLabel>已研究龙珠：已解锁 {RESEARCH}</completedLetterLabel>
+                <completedLetter>通过仔细研究这颗神秘的龙珠，{PAWN_labelShort} 参透了其中蕴含的灵能潜力，获得了研究项目 {RESEARCH} 所需的关键灵感。\n\n你现在可以在研究台上开始研究了。</completedLetter>
+                <completedLetterDef>PositiveEvent</completedLetterDef>
+
+                <!-- 右键菜单与交互文本 -->
+                <activateTexPath>UI/Icons/Study</activateTexPath>
+                <activateLabelString>分析...</activateLabelString>
+                <activateDescString>分析这颗龙珠蕴含的潜力。</activateDescString>
+                <jobString>正在分析龙珠</jobString>
+                <guiLabelString>选择谁来分析这颗龙珠</guiLabelString>
+                <inspectString>可以被小人分析以解锁研究。</inspectString>
+
+                <targetingParameters>
+                    <canTargetBuildings>false</canTargetBuildings>
+                    <canTargetAnimals>false</canTargetAnimals>
+                    <canTargetMechs>false</canTargetMechs>
+                    <!-- 只能由玩家控制的单位来分析 -->
+                    <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+                </targetingParameters>
+            </li>
+        </value>
+    </Operation>
+</Patch>

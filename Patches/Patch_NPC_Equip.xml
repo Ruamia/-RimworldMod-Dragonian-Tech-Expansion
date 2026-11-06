@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <!-- 修复预算报错：提高特定角色的最低武器预算 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Clan_Warrier"]/weaponMoney/min</xpath>
+        <value>
+            <min>1200</min> <!-- 拉高到能买得起铳枪 -->
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Royal_Warrier"]/weaponMoney/min</xpath>
+        <value>
+            <min>1200</min>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Princess"]/weaponMoney/min</xpath>
+        <value>
+            <min>2100</min> <!-- 公主必须买得起龙珠权杖 -->
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 1. 村民 (Villager) - 携带通用工具和配件 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Villager"]/weaponTags</xpath>
+        <value>
+            <li>DTE_Tools</li>
+        </value>
+    </Operation>
+    <!-- 注意：因为拖车标签被剥离，这里加入 DTE_ApparelTools 不会抽到拖车 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Villager"]/apparelTags</xpath>
+        <value>
+            <li>DTE_ApparelTools</li>
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 2. 商人 (Trader) - 携带通用工具、配件，且必定/大概率携带拖车 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Clan_Trader"]/weaponTags</xpath>
+        <value>
+            <li>DTE_Tools</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Clan_Trader"]/apparelTags</xpath>
+        <value>
+            <li>DTE_ApparelTools</li>
+            <li>DTE_Trailer</li> <!-- 只有商人的服装池里加入了拖车标签 -->
+        </value>
+    </Operation>
+    
+    <!-- 为了让商人“大概率”带拖车，我们用 specificApparelRequirements 强制指定 -->
+    <!-- 原版机制：如果有这个要求，并且预算足够，就会大概率优先满足它 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Clan_Trader"]</xpath>
+        <value>
+            <specificApparelRequirements>
+                <li>
+                    <bodyPartGroup>Torso</bodyPartGroup>
+                    <alternateTagChoices>
+                        <li>
+                            <tag>DTE_Trailer</tag>
+                            <chance>0.85</chance> <!-- 85% 概率直接指定带拖车 -->
+                        </li>
+                    </alternateTagChoices>
+                </li>
+            </specificApparelRequirements>
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 3. 议员 (Councilman) - 携带专业武器：龙珠权杖 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Clan_Councilman"]/weaponTags</xpath>
+        <value>
+            <li>DR_OrbStaff</li>
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 4. 皇家守卫 (Royal_Guard) - 携带专业武器：铳枪 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Royal_Guard"]/weaponTags</xpath>
+        <value>
+            <li>DR_Gunlance</li>
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 5. 皇家猎人 (Royal_Hunter) - 携带专属武器：牧羊杖 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Royal_Hunter"]/weaponTags</xpath>
+        <value>
+            <li>DTE_Staff_Shepherd</li>
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 6. 皇家战士 (Royal_Warrier) - 携带专业武器：铳枪 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Royal_Warrier"]/weaponTags</xpath>
+        <value>
+            <li>DR_Gunlance</li>
+        </value>
+    </Operation>
+
+    <!-- ========================================================== -->
+    <!-- 7. 公主 (Princess) - 唯一拥有龙珠权杖使用资格 -->
+    <!-- ========================================================== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[defName="Dragonian_Princess"]/weaponTags</xpath>
+        <value>
+            <weaponTags>
+                <li>DR_OrbStaff</li> <!-- 只有公主必定拿龙珠权杖 -->
+            </weaponTags>
+        </value>
+    </Operation>
+
+</Patch>

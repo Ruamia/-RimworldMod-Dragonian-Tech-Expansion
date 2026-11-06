@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <!-- ===== 手写的 RecipeDef ===== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[recipeUsers/li[text()="ElectricSmithy"]]/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[recipeUsers/li[text()="FueledSmithy"]]/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[recipeUsers/li[text()="ElectricTailoringBench"]]/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[recipeUsers/li[text()="HandTailoringBench"]]/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+
+    <!-- ===== ThingDef 的自动生成配方 ===== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[recipeMaker/recipeUsers/li[text()="ElectricSmithy"]]/recipeMaker/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[recipeMaker/recipeUsers/li[text()="FueledSmithy"]]/recipeMaker/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[recipeMaker/recipeUsers/li[text()="ElectricTailoringBench"]]/recipeMaker/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[recipeMaker/recipeUsers/li[text()="HandTailoringBench"]]/recipeMaker/recipeUsers</xpath>
+        <value><li>DragonianSmith</li></value>
+    </Operation>
+
+</Patch>

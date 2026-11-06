@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ============================================ -->
+    <!-- 基础龙珠配方（3 材料：龙珠 + 玻璃钢 + 高级零部件） -->
+    <!-- ============================================ -->
+
+    <!-- 硬化龙珠 -->
+    <RecipeDef>
+        <defName>MakeHardenDragonianOrb</defName>
+        <label>重铸硬化龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗硬化龙珠。</description>
+        <jobString>重铸硬化龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <HardenDragonianOrb>1</HardenDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 超再生珠 -->
+    <RecipeDef>
+        <defName>MakeHyperhealDragonianOrb</defName>
+        <label>重铸超再生珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗超再生珠。</description>
+        <jobString>重铸超再生珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <HyperhealDragonianOrb>1</HyperhealDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 火炎龙珠 -->
+    <RecipeDef>
+        <defName>MakeFlareDragonianOrb</defName>
+        <label>重铸火炎龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗火炎龙珠。</description>
+        <jobString>重铸火炎龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <FlareDragonianOrb>1</FlareDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 雷光龙珠 -->
+    <RecipeDef>
+        <defName>MakeThunderDragonianOrb</defName>
+        <label>重铸雷光龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗雷光龙珠。</description>
+        <jobString>重铸雷光龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <ThunderDragonianOrb>1</ThunderDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 冰结龙珠 -->
+    <RecipeDef>
+        <defName>MakeFrozenDragonianOrb</defName>
+        <label>重铸冰结龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗冰结龙珠。</description>
+        <jobString>重铸冰结龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <FrozenDragonianOrb>1</FrozenDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 末影龙珠（依赖 Royalty DLC，因为它引用了原版 Skip 能力） -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Royalty">
+        <defName>MakeEnderDragonianOrb</defName>
+        <label>重铸末影龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗末影龙珠。</description>
+        <jobString>重铸末影龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <EnderDragonianOrb>1</EnderDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 酸解龙珠（依赖 Biotech DLC） -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Biotech">
+        <defName>MakeAcidifierDragonianOrb</defName>
+        <label>重铸酸解龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗酸解龙珠。</description>
+        <jobString>重铸酸解龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <AcidifierDragonianOrb>1</AcidifierDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 毒素龙珠（依赖 Biotech DLC） -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Biotech">
+        <defName>MakeToxicDragonianOrb</defName>
+        <label>重铸毒素龙珠</label>
+        <description>使用龙珠、玻璃钢和高级零部件重铸一颗毒素龙珠。</description>
+        <jobString>重铸毒素龙珠中。</jobString>
+        <workAmount>30000</workAmount>
+        <researchPrerequisite>DragonianOrbReforge</researchPrerequisite>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+        </ingredients>
+        <products>
+            <ToxicDragonianOrb>1</ToxicDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- ============================================== -->
+    <!-- 特殊龙珠配方（4 材料：龙珠 + 玻璃钢 + 高级零部件 + 特殊材料） -->
+    <!-- ============================================== -->
+
+    <!-- 护盾龙珠（额外需要护盾核心） -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Royalty">
+        <defName>MakeShieldDragonianOrb</defName>
+        <label>重铸护盾龙珠</label>
+        <description>使用龙珠、玻璃钢、高级零部件和护盾核心重铸一颗护盾龙珠。</description>
+        <jobString>重铸护盾龙珠中。</jobString>
+        <workAmount>35000</workAmount>
+		<researchPrerequisites>
+            <li>DragonianOrbReforge</li>
+			<li>ShieldBelt</li>
+        </researchPrerequisites>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Plasteel</li></thingDefs></filter><count>40</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+            <li><filter><thingDefs><li>BroadshieldCore</li></thingDefs></filter><count>1</count></li>
+        </ingredients>
+        <products>
+            <ShieldDragonianOrb>1</ShieldDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 死灵龙珠（依赖 Anomaly DLC，额外需要暗黑超凡碎片） -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>MakeNecroDragonianOrb</defName>
+        <label>重铸死灵龙珠</label>
+        <description>使用龙珠、玻璃钢、高级零部件和暗黑超凡碎片重铸一颗死灵龙珠。</description>
+        <jobString>重铸死灵龙珠中。</jobString>
+        <workAmount>40000</workAmount>
+		<researchPrerequisites>
+            <li>DragonianOrbReforge</li>
+			<li>DragonianForbiddenTech</li>
+        </researchPrerequisites>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Bioferrite</li></thingDefs></filter><count>80</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+            <li><filter><thingDefs><li>Shard</li></thingDefs></filter><count>2</count></li>
+        </ingredients>
+        <products>
+            <NecroDragonianOrb>1</NecroDragonianOrb>
+        </products>
+    </RecipeDef>
+
+    <!-- 黑暗龙珠（依赖 Anomaly DLC，额外需要暗黑超凡碎片） -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>MakeDorbDark</defName>
+        <label>重铸黑暗龙珠</label>
+        <description>使用龙珠、玻璃钢、高级零部件和暗黑超凡碎片重铸一颗黑暗龙珠。</description>
+        <jobString>重铸黑暗龙珠中。</jobString>
+        <workAmount>40000</workAmount>
+		<researchPrerequisites>
+            <li>DragonianOrbReforge</li>
+			<li>DragonianForbiddenTech</li>
+        </researchPrerequisites>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+        <ingredients>
+            <li><filter><thingDefs><li>DragonianOrb</li></thingDefs></filter><count>1</count></li>
+            <li><filter><thingDefs><li>Bioferrite</li></thingDefs></filter><count>80</count></li>
+            <li><filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter><count>3</count></li>
+            <li><filter><thingDefs><li>Shard</li></thingDefs></filter><count>2</count></li>
+        </ingredients>
+        <products>
+            <DarkDragonianOrb>1</DarkDragonianOrb>
+        </products>
+    </RecipeDef>
+
+</Defs>

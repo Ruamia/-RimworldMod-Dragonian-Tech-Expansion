@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <!-- 让龙娘只免疫干草饼干带来的负面心情，不影响吃其他糟糕食物 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Dragonian_Race"]/alienRace/thoughtSettings/cannotReceiveThoughts</xpath>
+        <value>
+            <li>DTE_AteHayBiscuitMood</li>
+        </value>
+    </Operation>
+</Patch>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <!-- ========================================== -->
+    <!-- 1. 斩龙尾 (基础版本) -->
+    <!-- ========================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DRM_SlashTail"]</xpath>
+        <value>
+            <!-- 强制覆盖分类为仿生体，Inherit="False" 代表不继承父类的列表 -->
+            <thingCategories Inherit="False">
+                <li>BodyPartsProsthetic</li>
+            </thingCategories>
+            <costList>
+                <Plasteel>25</Plasteel>
+                <ComponentSpacer>4</ComponentSpacer>
+            </costList>
+            <recipeMaker>
+                <recipeUsers>
+                    <li>DragonianSmith</li>
+                    <li>FueledSmithy</li>
+                    <li>ElectricSmithy</li>
+                </recipeUsers>
+                <researchPrerequisites>
+                    <li>DragonianSpecializedBionics</li>
+                </researchPrerequisites>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+
+    <!-- ========================================== -->
+    <!-- 2. 酸斩尾 -->
+    <!-- ========================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DRM_AcidSlashTail"]</xpath>
+        <value>
+            <thingCategories Inherit="False">
+                <li>BodyPartsProsthetic</li>
+            </thingCategories>
+            <costList>
+                <DRM_SlashTail>1</DRM_SlashTail>
+                <Plasteel>15</Plasteel>
+                <ComponentSpacer>2</ComponentSpacer>
+            </costList>
+            <recipeMaker>
+                <recipeUsers>
+                    <li>DragonianSmith</li>
+                    <li>FueledSmithy</li>
+                    <li>ElectricSmithy</li>
+                </recipeUsers>
+                <researchPrerequisites>
+                    <li>DragonianSpecializedBionics</li>
+                </researchPrerequisites>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+
+    <!-- ========================================== -->
+    <!-- 3. 碎斩尾 (Explosive) -->
+    <!-- ========================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DRM_ExplosiveSlashTail"]</xpath>
+        <value>
+            <thingCategories Inherit="False">
+                <li>BodyPartsProsthetic</li>
+            </thingCategories>
+            <costList>
+                <DRM_SlashTail>1</DRM_SlashTail>
+                <Plasteel>15</Plasteel>
+                <ComponentSpacer>2</ComponentSpacer>
+            </costList>
+            <recipeMaker>
+                <recipeUsers>
+                    <li>DragonianSmith</li>
+                    <li>FueledSmithy</li>
+                    <li>ElectricSmithy</li>
+                </recipeUsers>
+                <researchPrerequisites>
+                    <li>DragonianSpecializedBionics</li>
+                </researchPrerequisites>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+            </recipeMaker>
+        </value>
+    </Operation>
+    <!-- 修正原文件Bug：碎斩尾拆除时掉落物错误地写成了酸斩尾 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/HediffDef[defName="DRM_ExplosiveSlashTail"]/spawnThingOnRemoved</xpath>
+        <value>
+            <spawnThingOnRemoved>DRM_ExplosiveSlashTail</spawnThingOnRemoved>
+        </value>
+    </Operation>
+
+
+    <!-- ========================================== -->
+    <!-- 4. 焚斩尾 (Flame) -->
+    <!-- ========================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DRM_FlameSlashTail"]</xpath>
+        <value>
+            <thingCategories Inherit="False">
+                <li>BodyPartsProsthetic</li>
+            </thingCategories>
+            <costList>
+                <DRM_SlashTail>1</DRM_SlashTail>
+                <Plasteel>15</Plasteel>
+                <ComponentSpacer>2</ComponentSpacer>
+            </costList>
+            <recipeMaker>
+                <recipeUsers>
+                    <li>DragonianSmith</li>
+                    <li>FueledSmithy</li>
+                    <li>ElectricSmithy</li>
+                </recipeUsers>
+                <researchPrerequisites>
+                    <li>DragonianSpecializedBionics</li>
+                </researchPrerequisites>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+
+    <!-- ========================================== -->
+    <!-- 5. 冰斩尾 (Cryo) -->
+    <!-- ========================================== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DRM_CryoSlashTail"]</xpath>
+        <value>
+            <thingCategories Inherit="False">
+                <li>BodyPartsProsthetic</li>
+            </thingCategories>
+            <costList>
+                <DRM_SlashTail>1</DRM_SlashTail>
+                <Plasteel>15</Plasteel>
+                <ComponentSpacer>2</ComponentSpacer>
+            </costList>
+            <recipeMaker>
+                <recipeUsers>
+                    <li>DragonianSmith</li>
+                    <li>FueledSmithy</li>
+                    <li>ElectricSmithy</li>
+                </recipeUsers>
+                <researchPrerequisites>
+                    <li>DragonianSpecializedBionics</li>
+                </researchPrerequisites>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+</Patch>

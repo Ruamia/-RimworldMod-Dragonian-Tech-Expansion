@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+    <!-- ========================================== -->
+    <!-- 1. 龙尾三轴稳定器 -->
+    <!-- ========================================== -->
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>DTE_TailStabilizer</defName>
+        <label>三轴稳定器</label>
+        <description>一种植入于脊椎与尾巴之间的微型三轴陀螺仪，它能读取尾部肌肉的微小摆动，实时修正植入者的站姿与持械手部偏移。与反射增强器和动力学优化器互斥。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DTE_TailStabilizer</HediffDef>
+        </descriptionHyperlinks>
+        <techLevel>Spacer</techLevel>
+        <costList><Plasteel>20</Plasteel><ComponentSpacer>3</ComponentSpacer></costList>
+        <recipeMaker>
+            <recipeUsers><li>DragonianSmith</li><li>FueledSmithy</li><li>ElectricSmithy</li></recipeUsers>
+            <researchPrerequisites><li>DragonianSpecializedBionics</li></researchPrerequisites>
+            <skillRequirements><Crafting>8</Crafting></skillRequirements>
+        </recipeMaker>
+    </ThingDef>
+    <HediffDef ParentName="ImplantHediffBase">
+        <defName>DTE_TailStabilizer</defName>
+        <label>三轴稳定器</label>
+        <description>一个已安装的三轴稳定器。它能读取尾部肌肉的微小摆动，实时修正植入者的站姿与持械手部偏移。</description>
+        <descriptionHyperlinks>
+            <ThingDef>DTE_TailStabilizer</ThingDef>
+        </descriptionHyperlinks>
+        <tags><li>TailEnhancer</li></tags>
+        <spawnThingOnRemoved>DTE_TailStabilizer</spawnThingOnRemoved>
+        <stages>
+            <li>
+                <statOffsets>
+                    <ShootingAccuracyPawn>0.25</ShootingAccuracyPawn>
+                    <AimingDelayFactor>-0.2</AimingDelayFactor>
+                    <MoveSpeed>-0.02</MoveSpeed>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+    <RecipeDef ParentName="SurgeryInstallImplantBase">
+        <defName>Install_DTE_TailStabilizer</defName>
+        <label>安装三轴稳定器</label>
+        <jobString>正在安装三轴稳定器。</jobString>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <workAmount>3000</workAmount>
+        <skillRequirements><Medicine>8</Medicine></skillRequirements>
+        <appliedOnFixedBodyParts><li>Torso</li></appliedOnFixedBodyParts> <!-- 统一装在躯干 -->
+        <addsHediff>DTE_TailStabilizer</addsHediff>
+        <incompatibleWithHediffTags><li>TailEnhancer</li></incompatibleWithHediffTags>
+        <ingredients><li><filter><thingDefs><li>DTE_TailStabilizer</li></thingDefs></filter><count>1</count></li></ingredients>
+        <fixedIngredientFilter><thingDefs><li>DTE_TailStabilizer</li></thingDefs></fixedIngredientFilter>
+    </RecipeDef>
+    <RecipeDef ParentName="SurgeryRemoveImplantBase">
+        <defName>Remove_DTE_TailStabilizer</defName>
+        <label>移除三轴稳定器</label>
+        <jobString>正在移除三轴稳定器。</jobString>
+        <workAmount>3000</workAmount>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <removesHediff>DTE_TailStabilizer</removesHediff>
+    </RecipeDef>
+
+    <!-- ========================================== -->
+    <!-- 2. 龙尾反射增强器 -->
+    <!-- ========================================== -->
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>DTE_TailReflexEnhancer</defName>
+        <label>反射增强器</label>
+        <description>一种植入于脊椎与尾巴之间的水银反射增强器，大幅增强脊椎神经的整体信号传输效率，使植入者的反应速度变快。与三轴稳定器和动力学优化器互斥。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DTE_TailReflexEnhancer</HediffDef>
+        </descriptionHyperlinks>
+        <techLevel>Spacer</techLevel>
+        <costList><Plasteel>20</Plasteel><ComponentSpacer>3</ComponentSpacer></costList>
+        <recipeMaker>
+            <recipeUsers><li>DragonianSmith</li><li>FueledSmithy</li><li>ElectricSmithy</li></recipeUsers>
+            <researchPrerequisites><li>DragonianSpecializedBionics</li></researchPrerequisites>
+            <skillRequirements><Crafting>8</Crafting></skillRequirements>
+        </recipeMaker>
+    </ThingDef>
+    <HediffDef ParentName="ImplantHediffBase">
+        <defName>DTE_TailReflexEnhancer</defName>
+        <label>反射增强器</label>
+        <description>一个已安装的反射增强器。大幅增强脊椎神经的整体信号传输效率，使植入者的反应速度变快。</description>
+        <descriptionHyperlinks>
+            <ThingDef>DTE_TailReflexEnhancer</ThingDef>
+        </descriptionHyperlinks>
+        <tags><li>TailEnhancer</li></tags>
+        <spawnThingOnRemoved>DTE_TailReflexEnhancer</spawnThingOnRemoved>
+        <stages>
+            <li>
+                <statOffsets>
+                    <MeleeCooldownFactor>-0.15</MeleeCooldownFactor>
+                    <RangedCooldownFactor>-0.15</RangedCooldownFactor>
+                    <MoveSpeed>-0.02</MoveSpeed>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+    <RecipeDef ParentName="SurgeryInstallImplantBase">
+        <defName>Install_DTE_TailReflexEnhancer</defName>
+        <label>安装反射增强器</label>
+        <jobString>正在安装反射增强器。</jobString>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <workAmount>3000</workAmount>
+        <skillRequirements><Medicine>8</Medicine></skillRequirements>
+        <appliedOnFixedBodyParts><li>Torso</li></appliedOnFixedBodyParts>
+        <addsHediff>DTE_TailReflexEnhancer</addsHediff>
+        <incompatibleWithHediffTags><li>TailEnhancer</li></incompatibleWithHediffTags>
+        <ingredients><li><filter><thingDefs><li>DTE_TailReflexEnhancer</li></thingDefs></filter><count>1</count></li></ingredients>
+        <fixedIngredientFilter><thingDefs><li>DTE_TailReflexEnhancer</li></thingDefs></fixedIngredientFilter>
+    </RecipeDef>
+    <RecipeDef ParentName="SurgeryRemoveImplantBase">
+        <defName>Remove_DTE_TailReflexEnhancer</defName>
+        <label>移除反射增强器</label>
+        <jobString>正在移除反射增强器。</jobString>
+        <workAmount>3000</workAmount>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <removesHediff>DTE_TailReflexEnhancer</removesHediff>
+    </RecipeDef>
+
+    <!-- ========================================== -->
+    <!-- 3. 龙尾动力学优化器 -->
+    <!-- ========================================== -->
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>DTE_TailKineticOptimizer</defName>
+        <label>动力学优化器</label>
+        <description>一种植入于脊椎与尾巴之间的姿态调整装置，能调整龙娘的行走和奔跑姿态，将尾巴每次无意识的甩动转化为足以带动全身的动能。与反射增强器和动力学优化器互斥。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DTE_TailKineticOptimizer</HediffDef>
+        </descriptionHyperlinks>
+        <techLevel>Spacer</techLevel>
+        <costList><Plasteel>20</Plasteel><ComponentSpacer>3</ComponentSpacer></costList>
+        <recipeMaker>
+            <recipeUsers><li>DragonianSmith</li><li>FueledSmithy</li><li>ElectricSmithy</li></recipeUsers>
+            <researchPrerequisites><li>DragonianSpecializedBionics</li></researchPrerequisites>
+            <skillRequirements><Crafting>8</Crafting></skillRequirements>
+        </recipeMaker>
+    </ThingDef>
+    <HediffDef ParentName="ImplantHediffBase">
+        <defName>DTE_TailKineticOptimizer</defName>
+        <label>动力学优化器</label>
+        <description>一个已安装的动力学优化器。能调整龙娘的行走和奔跑姿态，将尾巴每次无意识的甩动转化为足以带动全身的动能。</description>
+        <descriptionHyperlinks>
+			<ThingDef>DTE_TailKineticOptimizer</ThingDef>
+        </descriptionHyperlinks>
+        <tags><li>TailEnhancer</li></tags>
+        <spawnThingOnRemoved>DTE_TailKineticOptimizer</spawnThingOnRemoved>
+        <stages>
+            <li>
+                <statOffsets>
+                    <MoveSpeed>1.5</MoveSpeed>
+                    <DTE_RangedDodgeChance>0.20</DTE_RangedDodgeChance>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+    <RecipeDef ParentName="SurgeryInstallImplantBase">
+        <defName>Install_DTE_TailKineticOptimizer</defName>
+        <label>安装动力学优化器</label>
+        <jobString>正在安装动力学优化器。</jobString>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <workAmount>3000</workAmount>
+        <skillRequirements><Medicine>8</Medicine></skillRequirements>
+        <appliedOnFixedBodyParts><li>Torso</li></appliedOnFixedBodyParts>
+        <addsHediff>DTE_TailKineticOptimizer</addsHediff>
+        <incompatibleWithHediffTags><li>TailEnhancer</li></incompatibleWithHediffTags>
+        <ingredients><li><filter><thingDefs><li>DTE_TailKineticOptimizer</li></thingDefs></filter><count>1</count></li></ingredients>
+        <fixedIngredientFilter><thingDefs><li>DTE_TailKineticOptimizer</li></thingDefs></fixedIngredientFilter>
+    </RecipeDef>
+    <RecipeDef ParentName="SurgeryRemoveImplantBase">
+        <defName>Remove_DTE_TailKineticOptimizer</defName>
+        <label>移除动力学优化器</label>
+        <jobString>正在移除动力学优化器。</jobString>
+        <workAmount>3000</workAmount>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <removesHediff>DTE_TailKineticOptimizer</removesHediff>
+    </RecipeDef>
+
+    <!-- ========================================== -->
+    <!-- 4. 龙珠护壳 -->
+    <!-- ========================================== -->
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>DTE_OrbShell</defName>
+        <label>龙珠护壳</label>
+        <description>将龙珠保护在一个外壳之中，这个壳可以稳定地吸收龙珠的再生能量并储存起来，并在植入者濒死时将其从死亡边缘拉回。由于手术风险很大，这个外壳在安装后无法被卸除。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DTE_OrbShell</HediffDef>
+        </descriptionHyperlinks>
+        <techLevel>Spacer</techLevel>
+        <costList><Plasteel>30</Plasteel><ComponentSpacer>5</ComponentSpacer></costList>
+        <recipeMaker>
+            <recipeUsers><li>DragonianSmith</li><li>FueledSmithy</li><li>ElectricSmithy</li></recipeUsers>
+            <researchPrerequisites><li>DragonianSpecializedBionics</li></researchPrerequisites>
+            <skillRequirements><Crafting>9</Crafting></skillRequirements>
+        </recipeMaker>
+    </ThingDef>
+    <HediffDef ParentName="ImplantHediffBase">
+        <defName>DTE_OrbShell</defName>
+        <label>龙珠护壳</label>
+        <description>一个已安装的龙珠护壳。这个壳可以稳定地吸收龙珠的再生能量并储存起来，并在植入者濒死时将其从死亡边缘拉回。无法卸除。</description>
+        <descriptionHyperlinks>
+			<ThingDef>DTE_OrbShell</ThingDef>
+        </descriptionHyperlinks>
+        <everCurableByItem>false</everCurableByItem>
+        <spawnThingOnRemoved>DTE_OrbShell</spawnThingOnRemoved>
+        <comps>
+            <li Class="DragonianTechExpansion.HediffCompProperties_OrbShell">
+                <cooldownTicks>3600000</cooldownTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <statFactors>
+                    <InjuryHealingFactor>0.95</InjuryHealingFactor>
+                </statFactors>
+            </li>
+        </stages>
+    </HediffDef>
+    <RecipeDef ParentName="SurgeryInstallImplantBase">
+        <defName>Install_DTE_OrbShell</defName>
+        <label>安装龙珠护壳</label>
+        <jobString>正在安装龙珠护壳。</jobString>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <workAmount>4500</workAmount>
+        <skillRequirements><Medicine>9</Medicine></skillRequirements>
+        <appliedOnFixedBodyParts><li>Torso</li></appliedOnFixedBodyParts> <!-- 统一装在躯干 -->
+        <addsHediff>DTE_OrbShell</addsHediff>
+        <ingredients><li><filter><thingDefs><li>DTE_OrbShell</li></thingDefs></filter><count>1</count></li></ingredients>
+        <fixedIngredientFilter><thingDefs><li>DTE_OrbShell</li></thingDefs></fixedIngredientFilter>
+    </RecipeDef>
+
+    <!-- ========================================== -->
+    <!-- 5. 力量限制器 -->
+    <!-- ========================================== -->
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>DTE_StrengthLimiter</defName>
+        <label>力量限制器</label>
+        <description>一套可以将植入者的力量压制住的拘束装置，但基本不会影响日常活动。由于被限制了最大力量，植入者终于可以进行更精密的操作了。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DTE_StrengthLimiter</HediffDef>
+        </descriptionHyperlinks>
+        <techLevel>Spacer</techLevel>
+        <costList><Plasteel>25</Plasteel><ComponentSpacer>4</ComponentSpacer></costList>
+        <recipeMaker>
+            <recipeUsers><li>DragonianSmith</li><li>FueledSmithy</li><li>ElectricSmithy</li></recipeUsers>
+            <researchPrerequisites><li>DragonianSpecializedBionics</li></researchPrerequisites>
+            <skillRequirements><Crafting>8</Crafting></skillRequirements>
+        </recipeMaker>
+    </ThingDef>
+    <HediffDef ParentName="ImplantHediffBase">
+        <defName>DTE_StrengthLimiter</defName>
+        <label>力量限制器</label>
+        <description>一个已安装的力量限制器。可以将植入者的力量压制住，但基本不会影响日常活动。由于被限制了最大力量，植入者终于可以进行更精密的操作了。</description>
+        <descriptionHyperlinks>
+			<ThingDef>DTE_StrengthLimiter</ThingDef>
+        </descriptionHyperlinks>
+        <spawnThingOnRemoved>DTE_StrengthLimiter</spawnThingOnRemoved>
+        <stages>
+            <li>
+                <statFactors><MeleeDamageFactor>0.3</MeleeDamageFactor></statFactors>
+                <statOffsets>
+                    <MoveSpeed>-0.05</MoveSpeed>
+                    <ShootingAccuracyPawn>0.25</ShootingAccuracyPawn>
+                    <AimingDelayFactor>-0.2</AimingDelayFactor>
+                    <MeleeCooldownFactor>-0.2</MeleeCooldownFactor>
+                    <RangedCooldownFactor>-0.2</RangedCooldownFactor>
+                    <SurgerySuccessChanceFactor>0.15</SurgerySuccessChanceFactor>
+                    <MedicalTendQuality>0.15</MedicalTendQuality>
+                    <MedicalTendSpeed>0.5</MedicalTendSpeed>
+                </statOffsets>
+                <capMods><li><capacity>Manipulation</capacity><offset>0.25</offset></li></capMods>
+            </li>
+        </stages>
+    </HediffDef>
+    <RecipeDef ParentName="SurgeryInstallImplantBase">
+        <defName>Install_DTE_StrengthLimiter</defName>
+        <label>安装力量限制器</label>
+        <jobString>正在安装力量限制器。</jobString>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <workAmount>3000</workAmount>
+        <skillRequirements><Medicine>8</Medicine></skillRequirements>
+        <appliedOnFixedBodyParts><li>Torso</li></appliedOnFixedBodyParts>
+        <addsHediff>DTE_StrengthLimiter</addsHediff>
+        <ingredients><li><filter><thingDefs><li>DTE_StrengthLimiter</li></thingDefs></filter><count>1</count></li></ingredients>
+        <fixedIngredientFilter><thingDefs><li>DTE_StrengthLimiter</li></thingDefs></fixedIngredientFilter>
+    </RecipeDef>
+    <RecipeDef ParentName="SurgeryRemoveImplantBase">
+        <defName>Remove_DTE_StrengthLimiter</defName>
+        <label>移除力量限制器</label>
+        <jobString>正在移除力量限制器。</jobString>
+        <workAmount>3000</workAmount>
+        <recipeUsers Inherit="false"><li>Dragonian_Race</li></recipeUsers>
+        <removesHediff>DTE_StrengthLimiter</removesHediff>
+    </RecipeDef>
+</Defs>

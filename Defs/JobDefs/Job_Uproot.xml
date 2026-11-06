@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <JobDef>
+        <defName>DRM_UprootTree</defName>
+        <driverClass>DragonianTechExpansion.JobDriver_UprootTree</driverClass>
+        <reportString>正在拔树。</reportString>
+        <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+    </JobDef>
+</Defs>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ========== 植入黑暗龙珠 ========== -->
+	<RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase" MayRequire="Ludeon.RimWorld.Anomaly">
+		<defName>InstallDorbDark</defName>
+		<label>植入黑暗龙珠</label>
+		<description>植入黑暗龙珠。</description>
+		<descriptionHyperlinks>
+			<ThingDef>DarkDragonianOrb</ThingDef>
+			<HediffDef>DarkDragonianOrb</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>植入黑暗龙珠中。</jobString>
+		<surgeryOutcomeEffect IsNull="True" />
+		<skillRequirements>
+			<Medicine>6</Medicine>
+		</skillRequirements>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>DarkDragonianOrb</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>DarkDragonianOrb</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>DragonianOrb</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>DarkDragonianOrb</addsHediff>
+	</RecipeDef>
+
+    <!-- ========== 采集龙鳞 ========== -->
+    <RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+        <defName>HarvestDragonianScale</defName>
+        <label>采集龙鳞</label>
+        <description>通过手术剥取龙人身上的鳞片。这会导致龙人在一段时间内失去部分防护并增加承受的伤害。期间无法再次采集，也无法通过龙部件收集器产出龙鳞。对非本殖民地的龙人执行此手术会被视为侵犯行为。</description>
+        <jobString>采集龙鳞中。</jobString>
+        <workerClass>DragonianTechExpansion.Recipe_HarvestDragonianPart</workerClass>
+        <workAmount>200</workAmount>
+        <anesthetize>false</anesthetize>
+        <isViolation>true</isViolation>
+        <researchPrerequisite>DragonianTechBreakthrough</researchPrerequisite>
+        <skillRequirements>
+            <Medicine>2</Medicine>
+        </skillRequirements>
+        <recipeUsers Inherit="false">
+            <li>Dragonian_Race</li>
+        </recipeUsers>
+        <ingredients Inherit="false" />
+        <fixedIngredientFilter Inherit="false" />
+        <appliedOnFixedBodyParts>
+            <li>Torso</li>
+        </appliedOnFixedBodyParts>
+        <addsHediff>DragonianScaleStripped</addsHediff>
+        <products>
+            <DragonianScale>20</DragonianScale>
+        </products>
+    </RecipeDef>
+	
+    <!-- 龙鳞剥离：降低防护，增加承伤 -->
+    <HediffDef>
+        <defName>DragonianScaleStripped</defName>
+        <label>龙鳞剥离</label>
+        <description>龙鳞被手术剥离，暂时失去了天然防护。鳞片愈合前无法再次采集，也无法通过收集器产出。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <stages>
+            <li>
+                <statOffsets>
+                    <ComfyTemperatureMin>25</ComfyTemperatureMin>
+                    <ComfyTemperatureMax>-25</ComfyTemperatureMax>
+                </statOffsets>
+                <statFactors>
+                    <IncomingDamageFactor>1.2</IncomingDamageFactor>
+                </statFactors>
+            </li>
+        </stages>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>480000</disappearsAfterTicks> <!-- 8 天 -->
+                <showRemainingTime>true</showRemainingTime>
+            </li>
+            <li Class="HediffCompProperties_DisappearsOnDeath" />
+            <!-- 持续心情影响 -->
+            <li Class="HediffCompProperties_ThoughtSetter">
+                <thought>DragonianScaleStrippedMood</thought>
+            </li>
+        </comps>
+    </HediffDef>
+	
+    <!-- 龙鳞剥离 -->
+    <ThoughtDef>
+        <defName>DragonianScaleStrippedMood</defName>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <durationDays>1</durationDays>
+        <stackedEffectMultiplier>1</stackedEffectMultiplier>
+        <stages>
+            <li>
+                <label>没有龙鳞的保护</label>
+                <description>我就像条鱼一样被粗暴地剥去了鳞片！</description>
+                <baseMoodEffect>-3</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- ========== 采集龙角粉末 ========== -->
+    <RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+        <defName>HarvestDragonianHornPowder</defName>
+        <label>采集龙角粉末</label>
+        <description>通过手术切除龙人一部分的角并研磨成粉末。虽然龙角会重新生长，但龙娘对此会感到非常痛苦和愤怒。期间无法再次采集，也无法通过龙部件收集器产出龙角粉末。对非本殖民地的龙人执行此手术会被视为侵犯行为。</description>
+        <jobString>采集龙角粉末中。</jobString>
+        <workerClass>DragonianTechExpansion.Recipe_HarvestDragonianPart</workerClass>
+        <workAmount>200</workAmount>
+        <anesthetize>false</anesthetize>
+        <isViolation>true</isViolation>
+        <researchPrerequisite>DragonianTechBreakthrough</researchPrerequisite>
+        <skillRequirements>
+            <Medicine>2</Medicine>
+        </skillRequirements>
+        <recipeUsers Inherit="false">
+            <li>Dragonian_Race</li>
+        </recipeUsers>
+        <ingredients Inherit="false" />
+        <fixedIngredientFilter Inherit="false" />
+        <appliedOnFixedBodyParts>
+            <li>Head</li>
+        </appliedOnFixedBodyParts>
+        <addsHediff>DragonianHornRemoved</addsHediff>
+        <products>
+            <DragonianHornPowder>2</DragonianHornPowder>
+        </products>
+    </RecipeDef>
+	
+    <!-- 摘除龙角：严重心情减益 -->
+    <HediffDef>
+        <defName>DragonianHornRemoved</defName>
+        <label>龙角摘除</label>
+        <description>龙角被手术摘除了一部分。虽然会重新生长，但龙娘对此感到非常痛苦和愤怒。再生期间无法通过收集器产出龙角粉末。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <stages>
+            <li>
+                <painOffset>0.1</painOffset>
+                <statOffsets>
+                    <MentalBreakThreshold>0.08</MentalBreakThreshold>
+                </statOffsets>
+            </li>
+        </stages>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>480000</disappearsAfterTicks>
+                <showRemainingTime>true</showRemainingTime>
+            </li>
+            <li Class="HediffCompProperties_DisappearsOnDeath" />
+            <!-- 持续心情影响 -->
+            <li Class="HediffCompProperties_ThoughtSetter">
+                <thought>DragonianHornRemovedMood</thought>
+            </li>
+        </comps>
+    </HediffDef>
+	
+    <!-- 龙角摘除 -->
+    <ThoughtDef>
+        <defName>DragonianHornRemovedMood</defName>
+        <thoughtClass>Thought_Memory</thoughtClass>
+        <durationDays>1</durationDays>
+        <stackedEffectMultiplier>1</stackedEffectMultiplier>
+        <stages>
+            <li>
+                <label>断角</label>
+                <description>我失去了角的一部分，真是耻辱</description>
+                <baseMoodEffect>-8</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+</Defs>

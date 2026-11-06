@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ==================== 龙娘霰弹枪 子弹 ==================== -->
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_DragonianShotgun</defName>
+        <label>霰弹</label>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_Small</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>4</damageAmountBase>
+            <stoppingPower>1</stoppingPower>
+            <speed>70</speed>
+        </projectile>
+        <!-- 配置弹丸数量：一次发射 8 发 -->
+        <modExtensions>
+            <li Class="DragonianMix.ShotgunExtension">
+                <pelletCount>8</pelletCount>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <!-- ==================== 龙娘霰弹枪 本体 ==================== -->
+    <ThingDef ParentName="BaseMakeableGun">
+        <defName>DragonianShotgun</defName>
+        <label>龙娘 霰弹枪</label>
+        <description>杠杆式霰弹枪，相比龙娘燧发枪作战距离更近，但一次能够射出惊人数量的弹丸。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DragonianShotgun</texPath> <!-- 占位图，可替换 -->
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Interact_Shotgun</soundInteract>
+		<researchPrerequisites>
+			<li>DragonianAdvancedRanged</li>
+		</researchPrerequisites>
+        <weaponTags>
+            <li>DR_Guns</li>
+        </weaponTags>
+        <weaponClasses>
+            <li>Ranged</li>
+        </weaponClasses>
+        <statBases>
+            <WorkToMake>10000</WorkToMake>
+            <Mass>4.0</Mass>
+            <AccuracyTouch>0.80</AccuracyTouch>
+            <AccuracyShort>0.65</AccuracyShort>
+            <AccuracyMedium>0.40</AccuracyMedium>
+            <AccuracyLong>0.20</AccuracyLong>
+            <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+        </statBases>
+        <!-- 制造材料 -->
+        <costList>
+            <Steel>50</Steel>
+            <ComponentIndustrial>4</ComponentIndustrial>
+            <DragonianScale>10</DragonianScale>
+        </costList>
+        <!-- 制造台与前置科技 -->
+        <recipeMaker>
+            <recipeUsers>
+                <li>TableMachining</li> <!-- 锻造台 -->
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <!-- 自定义开火逻辑 -->
+        <verbs>
+            <li Class="DragonianTechExpansion.VerbProperties_ShotgunShockwave">
+                <verbClass>DragonianTechExpansion.Verb_ShotgunShockwave</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_DragonianShotgun</defaultProjectile>
+                <warmupTime>0.1</warmupTime> <!-- 几乎没有瞄准时间 -->
+                <range>15.9</range> <!-- 作战距离更近 -->
+                <burstShotCount>1</burstShotCount> <!-- 由 ShotgunExtension 控制散弹数量，这里只需要一发 -->
+                <soundCast>Shot_Shotgun</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>9</muzzleFlashScale>
+                <!-- 自定义冲击波参数 -->
+                <shockwaveRadius>5.0</shockwaveRadius>
+				<angleWidth>90</angleWidth> <!-- 正前方 90 度扇区 -->
+                <stunTicks>60</stunTicks> <!-- 1秒眩晕 -->
+				<fleckChance>0.35</fleckChance>
+            </li>
+        </verbs>
+        <!-- 近战工具 -->
+        <tools>
+            <li>
+                <label>stock</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>barrel</label>
+                <capacities><li>Blunt</li><li>Poke</li></capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <DR_DragonSculptureR>1</DR_DragonSculptureR>
+        </equippedStatOffsets>
+    </ThingDef>
+
+
+    <!-- ==================== 龙娘龙息霰弹枪 子弹 ==================== -->
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_DragonbreathShotgun</defName>
+        <label>龙息霰弹</label>
+        <graphicData>
+            <texPath>Things/Weapon/Fire_Bullet_Small</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile>
+            <!-- 伤害类型改为火焰，直接伤害较低 -->
+            <damageDef>DRM_Flame</damageDef> 
+            <damageAmountBase>2</damageAmountBase>
+            <stoppingPower>0.5</stoppingPower>
+            <speed>60</speed>
+        </projectile>
+        <modExtensions>
+            <li Class="DragonianMix.ShotgunExtension">
+                <pelletCount>10</pelletCount> <!-- 龙息弹丸数量更多 -->
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <!-- ==================== 龙娘龙息霰弹枪 本体 ==================== -->
+    <ThingDef ParentName="BaseMakeableGun">
+        <defName>DragonianbreathShotgun</defName>
+        <label>龙娘 龙息霰弹枪</label>
+        <description>杠杆式霰弹枪，相比龙娘燧发枪作战距离更近，但一次能够射出惊人数量的弹丸。这把霰弹枪的枪管蚀刻了火炎魔法，以射程为代价使弹丸能够点燃敌人。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DragonbreathShotgun</texPath> <!-- 占位图，可替换 -->
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Interact_Shotgun</soundInteract>
+		<researchPrerequisites>
+			<li>DragonianAdvancedRanged</li>
+		</researchPrerequisites>
+        <weaponTags>
+            <li>DR_Guns</li>
+        </weaponTags>
+        <weaponClasses>
+            <li>Ranged</li>
+        </weaponClasses>
+        <statBases>
+            <WorkToMake>12000</WorkToMake>
+            <Mass>4.2</Mass>
+            <AccuracyTouch>0.75</AccuracyTouch>
+            <AccuracyShort>0.60</AccuracyShort>
+            <AccuracyMedium>0.35</AccuracyMedium>
+            <AccuracyLong>0.15</AccuracyLong>
+            <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+        </statBases>
+        <!-- 制造材料 -->
+        <costList>
+            <Steel>50</Steel>
+            <ComponentIndustrial>4</ComponentIndustrial>
+			<DragonianScale>10</DragonianScale>
+            <Chemfuel>30</Chemfuel>
+        </costList>
+        <recipeMaker>
+            <recipeUsers>
+                <li>TableMachining</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>6</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <verbs>
+            <li Class="DragonianTechExpansion.VerbProperties_ShotgunShockwave">
+                <verbClass>DragonianTechExpansion.Verb_ShotgunShockwave</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_DragonbreathShotgun</defaultProjectile>
+                <warmupTime>0.1</warmupTime>
+                <range>13.9</range>
+                <burstShotCount>1</burstShotCount>
+                <soundCast>Shot_Shotgun</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>11</muzzleFlashScale>
+                <!-- 龙息专属冲击波参数 -->
+                <shockwaveRadius>5.0</shockwaveRadius>
+				<angleWidth>120</angleWidth> <!-- 正前方 120 度扇区 -->
+                <stunTicks>0</stunTicks> <!-- 龙息版本不眩晕，主打融甲 -->
+                <hediffToApply>DRM_ArmorMeltdown</hediffToApply> <!-- 附加融甲 -->
+                <startFire>true</startFire> <!-- 点燃目标 -->
+                <fireSize>0.8</fireSize>
+				<useMicroSparks>true</useMicroSparks>
+                <fleckChance>0.4</fleckChance> <!-- 40% 的概率生成 -->
+            </li>
+        </verbs>
+        <tools>
+            <li>
+                <label>stock</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+            <li>
+                <label>barrel</label>
+                <capacities><li>Blunt</li><li>Poke</li></capacities>
+                <power>9</power>
+                <cooldownTime>2</cooldownTime>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <DR_DragonSculptureR>1</DR_DragonSculptureR>
+        </equippedStatOffsets>
+    </ThingDef>
+	
+    <!-- ==================== 手摇机枪 子弹 ==================== -->
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_HandCranked</defName>
+        <label>手摇机枪弹丸</label>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_big</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile>
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>12</damageAmountBase>
+            <armorPenetrationBase>0.3</armorPenetrationBase>
+            <stoppingPower>2.0</stoppingPower>
+            <speed>60</speed>
+        </projectile>
+        <!-- 每次开火射出 3 发弹丸 -->
+        <modExtensions>
+            <li Class="DragonianMix.ShotgunExtension">
+                <pelletCount>3</pelletCount>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <!-- ==================== 龙娘手摇机枪 本体 ==================== -->
+    <ThingDef ParentName="BaseMakeableGun">
+        <defName>DragonianHandCrankedGun</defName>
+        <label>龙娘 手摇机枪</label>
+        <description>火力强劲但非常笨重的手摇式全自动霰弹枪，开火速率完全取决于使用者摇的有多快，同时每次开火的后坐力就像是被龙娘揍了一拳。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DragonianHandCrankedGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.2,1.2)</drawSize>
+        </graphicData>
+        <soundInteract>Interact_Shotgun</soundInteract>
+		<researchPrerequisites>
+			<li>DragonianAdvancedRanged</li>
+			<li>MultibarrelWeapons</li>
+		</researchPrerequisites>
+        <weaponTags>
+            <li>DR_Guns</li>
+			<li>DR_BattlePila</li>
+        </weaponTags>
+        <weaponClasses>
+            <li>Ranged</li>
+        </weaponClasses>
+        
+        <!-- 【新增】必须开启 ticker，才能实现 10 秒衰减重置 -->
+        <tickerType>Normal</tickerType>
+
+        <statBases>
+            <WorkToMake>20000</WorkToMake>
+            <Mass>7.5</Mass>
+            <AccuracyTouch>0.45</AccuracyTouch>
+            <AccuracyShort>0.30</AccuracyShort>
+            <AccuracyMedium>0.15</AccuracyMedium>
+            <AccuracyLong>0.05</AccuracyLong>
+            <!-- 固定冷却时间 3 秒 -->
+            <RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown> 
+        </statBases>
+        
+        <costList>
+            <Steel>100</Steel>
+            <ComponentSpacer>4</ComponentSpacer>
+            <DragonianScale>15</DragonianScale>
+        </costList>
+        
+        <recipeMaker>
+            <recipeUsers>
+                <li>TableMachining</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>7</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        
+        <!-- 挂载核心组件 -->
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_CrankGun">
+                <baseRPM>250</baseRPM>
+                <maxRPM>1250</maxRPM>
+                <baseRPMAddPerShot>5</baseRPMAddPerShot>
+                <meleeLevelRPMFactor>2</meleeLevelRPMFactor>
+                <resetTicks>600</resetTicks>
+            </li>
+        </comps>
+
+        <verbs>
+            <li>
+                <verbClass>DragonianTechExpansion.Verb_HandCrankedGun</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_HandCranked</defaultProjectile>
+                <!-- 瞄准时间固定 1.5 秒 -->
+                <warmupTime>1.5</warmupTime> 
+                <!-- 射程 29 -->
+                <range>29</range>
+                <!-- 连射 20 次 -->
+                <burstShotCount>20</burstShotCount> 
+                <!-- 默认间隔（会被 C# 动态覆盖） -->
+                <ticksBetweenBurstShots>14</ticksBetweenBurstShots>
+                <soundCast>Shot_Minigun</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>10</muzzleFlashScale>
+            </li>
+        </verbs>
+        
+        <tools>
+            <li>
+                <label>stock</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>12</power>
+                <cooldownTime>2.5</cooldownTime>
+            </li>
+        </tools>
+        
+        <equippedStatOffsets>
+            <MoveSpeed>-0.45</MoveSpeed>
+            <DR_DragonSculptureR>1</DR_DragonSculptureR>
+        </equippedStatOffsets>
+    </ThingDef>
+
+    <!-- ==================== 迫击炮弹 ==================== -->
+    <ThingDef ParentName="BaseBullet">
+        <defName>DragonianMortarShell</defName>
+        <label>龙娘迫击炮弹</label>
+        <graphicData>
+            <texPath>Things/Weapon/DragonianMortarShell</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1,1)</drawSize>
+        </graphicData>
+        <thingClass>Projectile_Explosive</thingClass>
+        <projectile>
+            <damageDef>Bomb</damageDef>
+            <damageAmountBase>40</damageAmountBase>
+            <armorPenetrationBase>0.4</armorPenetrationBase>
+            <stoppingPower>1</stoppingPower>
+            <speed>35</speed>
+            <!-- 飞跃墙壁和山体 -->
+            <flyOverhead>true</flyOverhead>
+            <!-- 爆炸范围 -->
+            <explosionRadius>1.9</explosionRadius>
+            <explosionChanceToStartFire>0.5</explosionChanceToStartFire>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>MortarBomb_Explode</soundExplode>
+			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+            <arcHeightFactor>3.5</arcHeightFactor>
+            <shadowSize>0.5</shadowSize>
+            <filth>Filth_BlastMark</filth>
+			<filthCount>1</filthCount>
+        </projectile>
+    </ThingDef>
+
+    <!-- ==================== 龙娘手持迫击炮 本体 ==================== -->
+    <ThingDef ParentName="BaseMakeableGun">
+        <defName>DragonianMortar</defName>
+        <label>龙娘 手持迫击炮</label>
+        <description>龙娘工程师将固定式迫击炮小型化后的产物，使其可以手持发射。非常笨重，但可以连续发射以压制龟缩的敌人。</description>
+        
+        <graphicData>
+            <texPath>Things/Weapon/DragonianMortar</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.2,1.2)</drawSize>
+        </graphicData>
+        
+        <soundInteract>Interact_Shotgun</soundInteract>
+		<researchPrerequisites>
+			<li>DragonianAdvancedRanged</li>
+			<li>Mortars</li>
+		</researchPrerequisites>
+        <weaponTags>
+            <li>DR_Guns</li>
+			<li>DR_BattleStaff_Ranged</li>
+        </weaponTags>
+        <weaponClasses>
+            <li>Ranged</li>
+        </weaponClasses>
+        
+        <statBases>
+            <WorkToMake>30000</WorkToMake>
+            <Mass>15.0</Mass>
+            <AccuracyTouch>0.50</AccuracyTouch>
+            <AccuracyShort>0.50</AccuracyShort>
+            <AccuracyMedium>0.50</AccuracyMedium>
+            <AccuracyLong>0.50</AccuracyLong>
+            <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown> 
+        </statBases>
+
+        <costList>
+            <Steel>150</Steel>
+            <ComponentSpacer>6</ComponentSpacer>
+            <DragonianScale>20</DragonianScale>
+            <ReinforcedBarrel>3</ReinforcedBarrel> 
+        </costList>
+        
+        <recipeMaker>
+            <recipeUsers>
+                <li>TableMachining</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>8</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+
+        <verbs>
+            <li>
+                <verbClass>DragonianTechExpansion.Verb_DragonianMortar</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>DragonianMortarShell</defaultProjectile>
+                <warmupTime>6</warmupTime> 
+                <range>80</range>
+                <minRange>10</minRange>
+				<forcedMissRadius>1.5</forcedMissRadius>
+                
+                <!-- 连发 3 发炮弹 -->
+                <burstShotCount>3</burstShotCount> 
+                <ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+                
+                <soundCast>Mortar_LaunchA</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>14</muzzleFlashScale>
+                
+                <requireLineOfSight>false</requireLineOfSight>
+                
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                    <canTargetPawns>true</canTargetPawns>
+                    <canTargetBuildings>true</canTargetBuildings>
+                </targetParams>
+            </li>
+        </verbs>
+        
+        <tools>
+            <li>
+                <label>barrel</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>15</power>
+                <cooldownTime>3</cooldownTime>
+            </li>
+        </tools>
+        
+        <equippedStatOffsets>
+            <MoveSpeed>-1.2</MoveSpeed>
+            <DR_DragonSculptureR>2</DR_DragonSculptureR>
+        </equippedStatOffsets>
+    </ThingDef>
+	
+	<!-- ==================== 狙击炮弹丸 ==================== -->
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_DragonianSniperCannon</defName>
+        <label>狙击炮弹丸</label>
+        <thingClass>DragonianTechExpansion.Projectile_DragonianSniperCannon</thingClass>
+        <graphicData>
+            <texPath>Things/Projectile/Bullet_big</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.5,1.5)</drawSize>
+        </graphicData>
+        
+        <!-- 【新增】挂载扩展，指定使用的 Hediff -->
+        <modExtensions>
+            <li Class="DragonianTechExpansion.SniperCannonExtension">
+                <!-- 这里填你龙息用的那个 HediffDef 名字 -->
+                <spreadHediffDef>DTE_GunlanceBreathSpread</spreadHediffDef> 
+                <maxWidth>6</maxWidth> <!-- 扇形最大宽度 -->
+				<!-- 【新增】这里自定义扇形爆炸的伤害 -->
+                <customDamageDef>Thump</customDamageDef> <!-- 比如改成切割伤害，或者填你自己的伤害Def -->
+                <customDamageAmount>15</customDamageAmount>
+            </li>
+        </modExtensions>
+
+        <projectile>
+            <damageDef>Blunt</damageDef>
+            <damageAmountBase>45</damageAmountBase>
+            <armorPenetrationBase>0.5</armorPenetrationBase>
+            <stoppingPower>2.0</stoppingPower>
+            <speed>80</speed>
+            <!-- 这里的 explosionRadius 会作为逐格爆炸的最大长度（射程） -->
+            <explosionRadius>8.0</explosionRadius> 
+			
+			<soundExplode>Explosion_Thump</soundExplode>
+			
+        </projectile>
+    </ThingDef>
+	
+	<!-- ==================== 龙娘狙击炮 本体 ==================== -->
+    <ThingDef ParentName="BaseMakeableGun">
+        <defName>DragonianSniperCannon</defName>
+        <label>龙娘 狙击炮</label>
+        <description>一把发射大口径球形弹丸的重型武器，龙娘们普遍不擅长远距离射击，因此发射的弹丸蚀刻了风压魔法，可以造成范围性伤害以弥补精度的不足。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DragonianSniperCannon</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.3,1.3)</drawSize>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract>
+		<researchPrerequisites>
+			<li>DragonianAdvancedRanged</li>
+			<li>PrecisionRifling</li>
+		</researchPrerequisites>
+        <weaponTags>
+            <li>DR_Guns</li>
+			<li>DR_BattleStaff_Ranged</li>
+        </weaponTags>
+        <weaponClasses>
+            <li>Ranged</li>
+        </weaponClasses>
+        
+        <statBases>
+            <WorkToMake>35000</WorkToMake>
+            <Mass>12.0</Mass>
+            <!-- 精度极差 -->
+            <AccuracyTouch>0.10</AccuracyTouch>
+            <AccuracyShort>0.15</AccuracyShort>
+            <AccuracyMedium>0.60</AccuracyMedium>
+            <AccuracyLong>0.90</AccuracyLong>
+            <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown> 
+        </statBases>
+        
+        <costList>
+            <Steel>120</Steel>
+            <ComponentSpacer>5</ComponentSpacer>
+            <DragonianScale>15</DragonianScale>
+            <ReinforcedBarrel>1</ReinforcedBarrel> 
+        </costList>
+        
+        <recipeMaker>
+            <recipeUsers>
+                <li>TableMachining</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>8</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+
+        <verbs>
+            <li>
+                <!-- 使用原版的 Verb_Shoot 即可，因为特效在子弹逻辑里 -->
+                <verbClass>Verb_Shoot</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_DragonianSniperCannon</defaultProjectile>
+                <!-- 稍微长一点的瞄准时间 -->
+                <warmupTime>2.0</warmupTime> 
+                <!-- 射程 42 -->
+                <range>42</range>
+                
+                <soundCast>Shot_SniperRifle</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>12</muzzleFlashScale>
+				<forcedMissRadius>0.01</forcedMissRadius>
+                
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                    <canTargetPawns>true</canTargetPawns>
+                    <canTargetBuildings>true</canTargetBuildings>
+                </targetParams>
+            </li>
+        </verbs>
+        
+        <tools>
+            <li>
+                <label>barrel</label>
+                <capacities><li>Blunt</li></capacities>
+                <power>15</power>
+                <cooldownTime>2.5</cooldownTime>
+            </li>
+        </tools>
+        
+        <equippedStatOffsets>
+            <MoveSpeed>-0.3</MoveSpeed>
+            <DR_DragonSculptureR>2</DR_DragonSculptureR>
+        </equippedStatOffsets>
+    </ThingDef>
+	
+    <!-- ==================== 贯穿伤 Hediff ==================== -->
+    <HediffDef>
+        <defName>HarpoonBleeding</defName>
+        <label>贯穿伤</label>
+		<defaultLabelColor>(0.8, 0.2, 0.2)</defaultLabelColor>
+        <description>一个极深的贯穿伤口，会极大地加重出血速度。如果不进行包扎，需要极长时间才能自然愈合。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <tendable>true</tendable>
+        
+        <!-- 【新增】强制 UI 显示严重度进度条（0% - 100%） -->
+        <maxSeverity>1.0</maxSeverity>
+        <alwaysShowSeverity>true</alwaysShowSeverity>
+
+        <comps>
+            <!-- 未包扎时自然恢复：极慢（每天 0.3） -->
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-0.3</severityPerDay> 
+            </li>
+            <!-- 包扎后加速恢复：受治疗质量影响 -->
+            <li Class="HediffCompProperties_TendDuration">
+                <baseTendDurationHours>12</baseTendDurationHours>
+                <severityPerDayTended>-2.5</severityPerDayTended> 
+            </li>
+            <li Class="HediffCompProperties_DisappearsOnDeath"/>
+        </comps>
+        
+        <stages>
+            <!-- 0% - 33% 阶段 -->
+            <li>
+                <label>轻微</label>
+                <becomeVisible>true</becomeVisible>
+                <totalBleedFactor>1.5</totalBleedFactor>
+				<painOffset>0.1</painOffset>
+            </li>
+            <!-- 33% - 66% 阶段 -->
+            <li>
+                <label>严重</label>
+                <minSeverity>0.33</minSeverity>
+                <totalBleedFactor>2.0</totalBleedFactor>
+				<painOffset>0.2</painOffset>
+                <capMods>
+                    <li><capacity>Moving</capacity><offset>-0.1</offset></li>
+                </capMods>
+            </li>
+            <!-- >66% 阶段 -->
+            <li>
+                <label>致命</label>
+                <minSeverity>0.66</minSeverity>
+                <totalBleedFactor>2.5</totalBleedFactor>
+				<painOffset>0.4</painOffset>
+                <capMods>
+                    <li><capacity>Moving</capacity><offset>-0.2</offset></li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- ==================== 鱼叉子弹 ==================== -->
+    <ThingDef ParentName="BaseBullet">
+        <defName>Bullet_Harpoon</defName>
+        <label>飞矛</label>
+        <thingClass>DragonianTechExpansion.Projectile_Harpoon</thingClass>
+        <graphicData>
+            <texPath>Things/Weapon/Bullet_Harpoon_1</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.0, 1.0)</drawSize>
+        </graphicData>
+        <projectile>
+            <damageDef>Stab</damageDef> <!-- 穿甲刺痛 -->
+            <damageAmountBase>18</damageAmountBase> <!-- 伤害一般 -->
+            <armorPenetrationBase>1.2</armorPenetrationBase> <!-- 高穿甲 -->
+            <stoppingPower>1.5</stoppingPower>
+            <speed>55</speed>
+        </projectile>
+    </ThingDef>
+
+    <!-- ==================== 钩锁技能 ==================== -->
+    <AbilityDef>
+        <defName>HarpoonPull</defName>
+        <label>钩锁飞矛</label>
+        <description>发射必中飞矛，将目标强行拖拽至面前。</description>
+        <iconPath>UI/Abilities/HarpoonPull</iconPath> <!-- 找个合适的图标 -->
+        <cooldownTicksRange>1200</cooldownTicksRange> <!-- 20秒冷却 -->
+        <aiCanUse>true</aiCanUse>
+        <verbProperties>
+            <verbClass>Verb_CastAbility</verbClass>
+            <range>24</range>
+            <warmupTime>1.2</warmupTime>
+            <targetParams>
+                <canTargetPawns>true</canTargetPawns>
+                <canTargetAnimals>true</canTargetAnimals>
+				<canTargetLocations>false</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+            </targetParams>
+        </verbProperties>
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_AbilityHarpoonPull" />
+        </comps>
+    </AbilityDef>
+	
+	<!-- 定义拉拽的工作 -->
+    <JobDef>
+        <defName>DTE_HarpoonPullJob</defName>
+        <driverClass>DragonianTechExpansion.JobDriver_HarpoonPull</driverClass>
+        <reportString>正在拖拽目标。</reportString>
+    </JobDef>
+
+    <!-- 定义锁链特效（Tail_Harpoon） -->
+    <ThingDef ParentName="MoteBase">
+        <defName>Mote_HarpoonChain</defName>
+        <thingClass>MoteDualAttached</thingClass>
+        <graphicData>
+            <texPath>Things/Weapon/Tail_Harpoon</texPath>
+            <!-- 【关键修复】必须用这个类才能拉伸 -->
+            <graphicClass>Graphic_MoteWithAgeSecs</graphicClass> 
+            <drawSize>(1, 1)</drawSize>
+        </graphicData>
+        <altitudeLayer>MoteOverhead</altitudeLayer>
+        <mote>
+            <scaleToConnectTargets>true</scaleToConnectTargets>
+            <rotateTowardsTarget>true</rotateTowardsTarget>
+            <!-- 【新增】必须加上时间，否则一生成就销毁了 -->
+            <fadeInTime>0</fadeInTime>
+            <solidTime>999999</solidTime>
+            <fadeOutTime>0</fadeOutTime>
+            <needsMaintenance>true</needsMaintenance>
+        </mote>
+    </ThingDef>
+	
+    <ThingDef ParentName="MoteBase">
+        <defName>Mote_HarpoonHead</defName>
+        <graphicData>
+            <texPath>Things/Weapon/Bullet_Harpoon_2</texPath>
+            <!-- 【核心修复】改成 Graphic_Mote 才能支持旋转 -->
+            <graphicClass>Graphic_Mote</graphicClass> 
+            <drawSize>(1.0, 1.0)</drawSize>
+        </graphicData>
+        <altitudeLayer>MoteOverhead</altitudeLayer>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>999999</solidTime>
+            <fadeOutTime>0</fadeOutTime>
+            <needsMaintenance>true</needsMaintenance>
+        </mote>
+    </ThingDef>
+
+    <!-- ==================== 龙娘鱼叉枪 本体 ==================== -->
+    <ThingDef ParentName="BaseMakeableGun">
+        <defName>DragonianHarpoonGun</defName>
+        <label>龙娘 矛枪</label>
+        <description>虽然龙娘可以将飞矛投掷至很远的地方，但能否命中完全看运气，这把矛枪使精确命中成为了可能，发射器被蚀刻了雷电魔法，使发射的飞矛具备强大的贯穿性，甚至还能将目标拉至身旁，龙娘有时会用它叉鱼吃。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DragonianHarpoonGun</texPath> <!-- 占位图 -->
+            <graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.2,1.2)</drawSize>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract>
+		<researchPrerequisites>
+			<li>DragonianAdvancedRanged</li>
+			<li>PrecisionRifling</li>
+		</researchPrerequisites>
+        <weaponTags>
+            <li>DR_Guns</li>
+			<li>DR_BattlePila</li>
+        </weaponTags>
+        
+        <statBases>
+            <WorkToMake>25000</WorkToMake>
+            <Mass>6.0</Mass>
+            <AccuracyTouch>0.20</AccuracyTouch>
+            <AccuracyShort>0.35</AccuracyShort>
+            <AccuracyMedium>0.85</AccuracyMedium>
+            <AccuracyLong>0.65</AccuracyLong>
+            <RangedWeapon_Cooldown>2.2</RangedWeapon_Cooldown> 
+        </statBases>
+		
+        <equippedStatOffsets>
+            <FishingSpeed>0.20</FishingSpeed>
+        </equippedStatOffsets>
+        
+        <costList>
+            <Steel>90</Steel>
+            <ComponentIndustrial>6</ComponentIndustrial>
+            <DragonianScale>10</DragonianScale>
+        </costList>
+        
+        <recipeMaker>
+            <recipeUsers>
+                <li>TableMachining</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>6</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+
+        <!-- 挂载钩锁技能（使用你之前写的武器技能组件） -->
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_EquippableAbilities">
+                <abilities>
+                    <li>HarpoonPull</li>
+                </abilities>
+            </li>
+        </comps>
+
+        <verbs>
+            <li>
+                <verbClass>Verb_Shoot</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_Harpoon</defaultProjectile>
+                <warmupTime>1.2</warmupTime> 
+                <range>32</range>
+                <soundCast>Shot_SniperRifle</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+            </li>
+        </verbs>
+		
+        <equippedStatOffsets>
+            <DR_DragonSculptureR>1</DR_DragonSculptureR>
+        </equippedStatOffsets>
+        
+        <!-- 近战工具：效率不如真正的近战武器，但能打 -->
+        <tools>
+            <li>
+                <label>harpoon</label>
+                <capacities>
+                    <li>Stab</li>
+                    <li>Poke</li>
+                </capacities>
+                <power>12</power>
+                <cooldownTime>2.2</cooldownTime> <!-- 冷却较长 -->
+                <armorPenetration>0.3</armorPenetration>
+            </li>
+            <li>
+                <label>stock</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>10</power>
+                <cooldownTime>2.0</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+</Defs>

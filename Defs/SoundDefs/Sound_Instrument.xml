@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<SoundDef>
+		<defName>DTE_DrumPlay</defName>
+		<sustain>True</sustain>
+		<context>MapOnly</context>
+		<sustainFadeoutTime>1</sustainFadeoutTime>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+		<li>
+			<muteWhenPaused>True</muteWhenPaused>
+			<grains>
+			<li Class="AudioGrain_Clip">
+				<clipPath>Instruments/DTE_Drum</clipPath>
+			</li>
+			</grains>
+			<volumeRange>25</volumeRange>
+			<distRange>12~40</distRange>
+		</li>
+		</subSounds>
+	</SoundDef>
+
+	<SoundDef>
+		<defName>DTE_GuitarPlay</defName>
+		<sustain>True</sustain>
+		<context>MapOnly</context>
+		<sustainFadeoutTime>1</sustainFadeoutTime>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+		<li>
+			<muteWhenPaused>True</muteWhenPaused>
+			<grains>
+			<li Class="AudioGrain_Clip">
+				<clipPath>Instruments/DTE_Guitar</clipPath>
+			</li>
+			</grains>
+			<volumeRange>25</volumeRange>
+			<distRange>12~40</distRange>
+		</li>
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>DTE_FlutePlay</defName>
+		<sustain>True</sustain>
+		<context>MapOnly</context>
+		<sustainFadeoutTime>1</sustainFadeoutTime>
+		<priorityMode>PrioritizeNearest</priorityMode>
+		<subSounds>
+		<li>
+			<muteWhenPaused>True</muteWhenPaused>
+			<grains>
+			<li Class="AudioGrain_Clip">
+				<clipPath>Instruments/DTE_Flute</clipPath>
+			</li>
+			</grains>
+			<volumeRange>25</volumeRange>
+			<distRange>12~40</distRange>
+		</li>
+		</subSounds>
+	</SoundDef>
+
+	
+</Defs>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <HediffDef>
+        <defName>DTE_RangedDodgeCooldown</defName>
+        <label>远程闪避冷却</label>
+        <description>刚刚完成了一次极限闪避，短时间内的无法再闪避远程攻击。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>false</isBad>
+        <comps>
+            <!-- 1秒后自动消失，1秒 = 60 ticks -->
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>60</disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <label>冷却中</label>
+            </li>
+        </stages>
+    </HediffDef>
+
+</Defs>

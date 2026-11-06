@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <AbilityDef>
+        <defName>DRM_UprootTreeAbility</defName>
+        <label>拔起树木</label>
+        <description>将附近成熟的树连根拔起，用作临时武器。</description>
+        <iconPath>UI/Abilities/UprootTree</iconPath>
+        <cooldownTicksRange>300</cooldownTicksRange>
+        <hostile>false</hostile>
+        <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+        <aiCanUse>false</aiCanUse>
+        <showCastingProgressBar>true</showCastingProgressBar>
+        <verbProperties>
+            <verbClass>Verb_CastAbility</verbClass>
+            <warmupTime>0.1</warmupTime>
+            <range>3.9</range>
+            <drawAimPie>true</drawAimPie>
+            <requireLineOfSight>true</requireLineOfSight>
+            <targetParams>
+                <canTargetLocations>true</canTargetLocations>
+                <canTargetPawns>false</canTargetPawns>
+                <canTargetBuildings>false</canTargetBuildings>
+                <canTargetSelf>false</canTargetSelf>
+                <canTargetMechs>false</canTargetMechs>
+            </targetParams>
+        </verbProperties>
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_AbilityUprootTree" />
+        </comps>
+    </AbilityDef>
+</Defs>

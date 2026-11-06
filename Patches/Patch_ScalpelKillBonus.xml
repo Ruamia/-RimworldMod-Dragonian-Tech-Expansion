@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <!-- 把自定义 StatPart 挂到 MedicalSurgerySuccessChance 上 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/StatDef[defName="MedicalSurgerySuccessChance"]/parts</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/StatDef[defName="MedicalSurgerySuccessChance"]/parts</xpath>
+            <value>
+                <li Class="DragonianTechExpansion.StatPart_ScalpelKillBonus" />
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/StatDef[defName="MedicalSurgerySuccessChance"]</xpath>
+            <value>
+                <parts>
+                    <li Class="DragonianTechExpansion.StatPart_ScalpelKillBonus" />
+                </parts>
+            </value>
+        </nomatch>
+    </Operation>
+</Patch>

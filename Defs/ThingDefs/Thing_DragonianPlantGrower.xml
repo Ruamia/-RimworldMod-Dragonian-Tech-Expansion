@@ -1,0 +1,344 @@
+<Defs>
+	<!-- ========================================================== -->
+	<!-- ========== 基础抽象类 ========== -->
+	<!-- ========================================================== -->
+	<ThingDef Name="DTE_InsulatedNurseryBase" ParentName="BuildingBase" Abstract="True">
+		<thingClass>Building_PlantGrower</thingClass>
+		<category>Building</category>
+		<designationCategory>Furniture</designationCategory>
+		<staticSunShadowHeight>0.2</staticSunShadowHeight>
+		<altitudeLayer>LowPlant</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>10</pathCost>
+		<fillPercent>0.5</fillPercent>
+		<rotatable>true</rotatable>
+		<tickerType>Normal</tickerType> 
+		<canOverlapZones>false</canOverlapZones>
+		<castEdgeShadows>true</castEdgeShadows>
+		<statBases>
+			<WorkToBuild>1200</WorkToBuild>
+			<Flammability>0</Flammability>
+		</statBases>
+		<building>
+			<isSittable>false</isSittable>
+			<defaultPlantToGrow>Plant_Rice</defaultPlantToGrow>
+			<sowTag>Ground</sowTag> 
+			<buildingTags>
+				<li>PlantGrower</li>
+			</buildingTags>
+		</building>
+	</ThingDef>
+	
+	<!-- ========================================================== -->
+	<!-- ========== 1. 保温苗圃 (肥力 100%) ========== -->
+	<!-- ========================================================== -->
+	
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_Nursery</defName>
+		<label>保温箱</label>
+		<description>不需要电力的种植槽。在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/Nursery</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(1,1)</drawSize>
+        </graphicData>
+		<size>(1,1)</size>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<Fertility>1.0</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<Hay>10</Hay>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_InsulatedNursery_A</defName>
+		<label>保温苗圃 (1x2)</label>
+		<description>不需要电力的种植槽。在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/Nursery_A</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(1,2)</drawSize>
+        </graphicData>
+		<size>(1,2)</size>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Fertility>1.0</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<costList>
+			<Hay>20</Hay>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>2</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_InsulatedNursery_B</defName>
+		<label>保温苗圃 (2x2)</label>
+		<description>不需要电力的种植槽。在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/Nursery_B</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(2,2)</drawSize>
+        </graphicData>
+		<size>(2,2)</size>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<Fertility>1.0</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>200</costStuffCount>
+		<costList>
+			<Hay>40</Hay>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>4</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_InsulatedNursery_C</defName>
+		<label>保温苗圃 (3x2)</label>
+		<description>不需要电力的种植槽。在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/Nursery_C</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(3,2)</drawSize>
+        </graphicData>
+		<size>(3,2)</size>
+		<statBases>
+			<MaxHitPoints>450</MaxHitPoints>
+			<Fertility>1.0</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>300</costStuffCount>
+		<costList>
+			<Hay>60</Hay>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>6</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<!-- ========================================================== -->
+	<!-- ========== 2. 肥沃保温苗圃 (肥力 140%) ========== -->
+	<!-- ========================================================== -->
+
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_FertileNursery</defName>
+		<label>肥沃保温箱</label>
+		<description>不需要电力的高级种植槽。肥力极高，在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/FertileNursery</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(1,1)</drawSize>
+        </graphicData>
+		<size>(1,1)</size>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<Fertility>1.4</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<Hay>10</Hay>
+			<DTE_DragonManure>15</DTE_DragonManure>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_FertileNursery_A</defName>
+		<label>肥沃保温苗圃 (1x2)</label>
+		<description>不需要电力的高级种植槽。肥力极高，在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/FertileNursery_A</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(1,2)</drawSize>
+        </graphicData>
+		<size>(1,2)</size>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Fertility>1.4</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<costList>
+			<Hay>20</Hay>
+			<DTE_DragonManure>30</DTE_DragonManure>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>2</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_FertileNursery_B</defName>
+		<label>肥沃保温苗圃 (2x2)</label>
+		<description>不需要电力的高级种植槽。肥力极高，在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/FertileNursery_B</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(2,2)</drawSize>
+        </graphicData>
+		<size>(2,2)</size>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<Fertility>1.4</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>200</costStuffCount>
+		<costList>
+			<Hay>40</Hay>
+			<DTE_DragonManure>60</DTE_DragonManure>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>4</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="DTE_InsulatedNurseryBase">
+		<defName>DTE_FertileNursery_C</defName>
+		<label>肥沃保温苗圃 (3x2)</label>
+		<description>不需要电力的高级种植槽。肥力极高，在室内铺设能保护作物免受严寒侵袭。</description>
+        <graphicData>
+            <texPath>Things/Building/PlantGrower/FertileNursery_C</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+			<drawSize>(3,2)</drawSize>
+        </graphicData>
+		<size>(3,2)</size>
+		<statBases>
+			<MaxHitPoints>450</MaxHitPoints>
+			<Fertility>1.4</Fertility>
+		</statBases>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>300</costStuffCount>
+		<costList>
+			<Hay>60</Hay>
+			<DTE_DragonManure>90</DTE_DragonManure>
+		</costList>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusher</compClass>
+				<heatPerSecond>6</heatPerSecond>
+				<heatPushMaxTemperature>0</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

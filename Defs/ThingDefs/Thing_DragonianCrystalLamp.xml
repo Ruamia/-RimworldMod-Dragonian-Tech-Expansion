@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ========================================================== -->
+    <!-- ========== 0. 水晶灯 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="BuildingBase">
+        <defName>DTE_CrystalLamp</defName>
+        <label>水晶灯</label>
+        <description>壁挂式水晶灯，无需供电，能够照亮一定范围的区域。</description>
+        
+        <graphicData>
+            <texPath>Things/Building/CrystalLamp</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,1.1)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-1.0)</drawOffsetSouth>
+			<drawOffsetWest>(-1,0,0)</drawOffsetWest>
+			<drawOffsetEast>(1,0,0)</drawOffsetEast>
+			<drawSize>(1.6,1.6)</drawSize>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+        </graphicData>
+		<researchPrerequisites>
+            <li>DragonianTechBreakthrough</li>
+			<li>Electricity</li>
+        </researchPrerequisites>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <designationCategory>Furniture</designationCategory>
+        <tickerType>Normal</tickerType>
+        <rotatable>true</rotatable>
+        <minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+        <statBases>
+            <MarketValue>70</MarketValue>
+            <WorkToBuild>400</WorkToBuild>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Mass>5</Mass>
+            <Flammability>0</Flammability>
+        </statBases>
+        <passability>Standable</passability>
+        <terrainAffordanceNeeded IsNull="True" />
+        <pathCost>0</pathCost>
+        
+        <costStuffCount>10</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>5</WoolDragonian>
+            <Jade>5</Jade>
+        </costList>
+        
+        <building>
+            <isEdifice>false</isEdifice>
+            <isAttachment>true</isAttachment>
+            <expandHomeArea>false</expandHomeArea>
+        </building>
+        
+        <placeWorkers>
+            <li>Placeworker_AttachedToWall</li>
+        </placeWorkers>
+        
+        <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>11</glowRadius>
+                <glowColor>(230,240,255,0)</glowColor>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 1. 低温水晶灯 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="BuildingBase">
+        <defName>DTE_CrystalLamp_Cold</defName>
+        <label>低温水晶灯</label>
+        <description>将室温低效地控制在-5度的壁挂式水晶灯，无需供电，能够照亮小范围的区域。</description>
+        
+        <graphicData>
+            <texPath>Things/Building/CrystalLampCold</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,1.1)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-1.0)</drawOffsetSouth>
+			<drawOffsetWest>(-1,0,0)</drawOffsetWest>
+			<drawOffsetEast>(1,0,0)</drawOffsetEast>
+			<drawSize>(1.6,1.6)</drawSize>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+        </graphicData>
+		<researchPrerequisites>
+            <li>DragonianTechBreakthrough</li>
+			<li>AirConditioning</li>
+        </researchPrerequisites>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <designationCategory>Temperature</designationCategory>
+        <tickerType>Normal</tickerType> <!-- 必须改为 Normal 才能每秒生效 -->
+        <rotatable>true</rotatable>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <thingCategories>
+            <li>BuildingsTemperature</li>
+        </thingCategories>
+        <statBases>
+            <MarketValue>150</MarketValue>
+            <WorkToBuild>800</WorkToBuild>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Mass>5</Mass>
+            <Flammability>0</Flammability>
+        </statBases>
+        <passability>Standable</passability>
+        <terrainAffordanceNeeded IsNull="True" />
+        <pathCost>0</pathCost>
+        
+        <costStuffCount>20</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>10</WoolDragonian>
+            <Jade>10</Jade>
+        </costList>
+        
+        <building>
+            <isEdifice>false</isEdifice>
+            <isAttachment>true</isAttachment>
+            <expandHomeArea>false</expandHomeArea>
+        </building>
+        
+        <placeWorkers>
+            <li>Placeworker_AttachedToWall</li>
+        </placeWorkers>
+        
+        <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>5</glowRadius>
+                <glowColor>(100,150,255,0)</glowColor>
+            </li>
+            <!-- 【替换为原版的热量推送器】 -->
+            <li Class="CompProperties_HeatPusher">
+                <!-- 负数为制冷，-10代表每秒吸收10点热量，比被动散热器弱一些 -->
+                <heatPerSecond>-10</heatPerSecond>
+                <!-- 当房间温度低于-5度时，停止制冷（防止把房间冻成绝对零度） -->
+                <heatPushMinTemperature>-5</heatPushMinTemperature>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 2. 恒温水晶灯 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="BuildingBase">
+        <defName>DTE_CrystalLamp_Temp</defName>
+        <label>恒温水晶灯</label>
+        <description>将室温低效地控制在15度的壁挂式水晶灯，无需供电，能够照亮小范围的区域。</description>
+        
+        <graphicData>
+            <texPath>Things/Building/CrystalLampTemp</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,1.1)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-1.0)</drawOffsetSouth>
+			<drawOffsetWest>(-1,0,0)</drawOffsetWest>
+			<drawOffsetEast>(1,0,0)</drawOffsetEast>
+			<drawSize>(1.6,1.6)</drawSize>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+        </graphicData>
+		<researchPrerequisites>
+            <li>DragonianTechBreakthrough</li>
+			<li>AirConditioning</li>
+        </researchPrerequisites>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <designationCategory>Temperature</designationCategory>
+        <tickerType>Normal</tickerType> <!-- 必须改为 Normal -->
+        <rotatable>true</rotatable>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <thingCategories>
+            <li>BuildingsTemperature</li>
+        </thingCategories>
+        <statBases>
+            <MarketValue>150</MarketValue>
+            <WorkToBuild>800</WorkToBuild>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Mass>5</Mass>
+            <Flammability>0</Flammability>
+        </statBases>
+        <passability>Standable</passability>
+        <terrainAffordanceNeeded IsNull="True" />
+        <pathCost>0</pathCost>
+        
+        <costStuffCount>20</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>10</WoolDragonian>
+            <Jade>10</Jade>
+        </costList>
+        
+        <building>
+            <isEdifice>false</isEdifice>
+            <isAttachment>true</isAttachment>
+            <expandHomeArea>false</expandHomeArea>
+        </building>
+        
+        <placeWorkers>
+            <li>Placeworker_AttachedToWall</li>
+        </placeWorkers>
+        
+        <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>5</glowRadius>
+                <glowColor>(255,220,100,0)</glowColor>
+            </li>
+            <!-- 【替换为原版的热量推送器】 -->
+            <li Class="CompProperties_HeatPusher">
+                <!-- 正数为加热，10代表每秒输出10点热量 -->
+                <heatPerSecond>10</heatPerSecond>
+                <!-- 当房间温度高于15度时，停止加热 -->
+                <heatPushMaxTemperature>15</heatPushMaxTemperature>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 3. 维生水晶灯 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="BuildingBase" MayRequire="Ludeon.RimWorld.Odyssey">
+        <defName>DTE_CrystalLamp_Oxygen</defName>
+        <label>维生水晶灯</label>
+        <description>缓慢填补真空的壁挂式水晶灯，无需供电，能够照亮小范围的区域。</description>
+        
+        <graphicData>
+            <texPath>Things/Building/CrystalLamp</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,1.1)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-1.0)</drawOffsetSouth>
+			<drawOffsetWest>(-1,0,0)</drawOffsetWest>
+			<drawOffsetEast>(1,0,0)</drawOffsetEast>
+			<drawSize>(1.6,1.6)</drawSize>
+            <damageData>
+                <enabled>false</enabled>
+            </damageData>
+        </graphicData>
+		<researchPrerequisites>
+            <li>DragonianTechBreakthrough</li>
+			<li>OrbitalTech</li>
+        </researchPrerequisites>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <designationCategory>Odyssey</designationCategory>
+        <tickerType>Normal</tickerType>
+        <rotatable>true</rotatable>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <thingCategories>
+            <li>BuildingsMisc</li>
+        </thingCategories>
+        <statBases>
+            <MarketValue>200</MarketValue>
+            <WorkToBuild>800</WorkToBuild>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Mass>5</Mass>
+            <Flammability>0</Flammability>
+        </statBases>
+        <passability>Standable</passability>
+        <terrainAffordanceNeeded IsNull="True" />
+        <pathCost>0</pathCost>
+        
+        <costStuffCount>20</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>10</WoolDragonian>
+            <Jade>10</Jade>
+        </costList>
+        
+        <building>
+            <isEdifice>false</isEdifice>
+            <isAttachment>true</isAttachment>
+            <expandHomeArea>false</expandHomeArea>
+        </building>
+        
+        <placeWorkers>
+            <li>Placeworker_AttachedToWall</li>
+        </placeWorkers>
+        
+        <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>5</glowRadius>
+                <glowColor>(255,240,230,0)</glowColor>
+            </li>
+            <li Class="CompProperties_OxygenPusher">
+                <requiresPower>false</requiresPower>
+                <airPerSecondPerHundredCells>0.01</airPerSecondPerHundredCells>
+            </li>
+            <li Class="VanillaGravshipExpanded.CompProperties_ResourceTrader_OxygenPusher" MayRequire="vanillaexpanded.gravship">
+                <pipeNet>VGE_OxygenNet</pipeNet>
+                <consumptionPerTick>0.01666666666666666666666666666667</consumptionPerTick>
+                <visualOnlyConsumption>true</visualOnlyConsumption>
+                <lowPowerConsumptionFactor>0.1</lowPowerConsumptionFactor>
+                <requiresPower>false</requiresPower>
+                <airPerSecondPerHundredCells>0.01</airPerSecondPerHundredCells>
+            </li>
+        </comps>
+    </ThingDef>
+
+</Defs>

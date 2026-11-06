@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ========================================================== -->
+    <!-- ========== 龙娘先进近战武器 - 抽象基类 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef Name="DTE_DragonianAdvancedMeleeBase" ParentName="BaseMeleeWeapon_Sharp_Quality" Abstract="True">
+        <techLevel>Medieval</techLevel>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisites>
+                <li>DragonianAdvancedMelee</li>
+            </researchPrerequisites>
+            <recipeUsers Inherit="false">
+                <li>DragonianSmith</li>
+	            <li>FueledSmithy</li>
+				<li>ElectricSmithy</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <thingCategories Inherit="false">
+            <li>DRWeapons</li>
+        </thingCategories>
+        <tradeTags>
+            <li>DR_WeaponAll</li>
+        </tradeTags>
+    </ThingDef>
+
+
+    <!-- ========================================================== -->
+    <!-- ========== 1. 恶龙指虎 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="DTE_DragonianAdvancedMeleeBase">
+        <defName>DTE_DragonianClaw</defName>
+        <label>龙娘 恶龙指虎</label>
+        <description>一套重型指虎。最终的伤害取决于使用者的肉体能力，还能提高使用者的闪避能力与移动速度。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DTE_Claw</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>0.5</drawSize>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+        <statBases>
+            <WorkToMake>25000</WorkToMake>
+            <Mass>4.5</Mass>
+        </statBases>
+        <equippedAngleOffset>-20</equippedAngleOffset>
+        <costStuffCount>60</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>30</WoolDragonian>
+            <DragonianScale>20</DragonianScale>
+        </costList>
+		<weaponTags>
+			<li>DR_BattleMace</li>
+		</weaponTags>
+        <tools>
+            <li>
+                <label>claw</label>
+                <capacities>
+                    <li>Scratch</li>
+                </capacities>
+                <power>6</power>
+                <cooldownTime>1.2</cooldownTime>
+                <armorPenetration>0.35</armorPenetration>
+                <chanceFactor>2</chanceFactor>
+            </li>
+            <li>
+                <label>fist</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>4</power>
+                <cooldownTime>0.6</cooldownTime>
+                <armorPenetration>0.1</armorPenetration>
+                <chanceFactor>4</chanceFactor>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <MeleeDodgeChance>0.25</MeleeDodgeChance>
+            <MoveSpeed>0.50</MoveSpeed>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+            <DTE_RangedDodgeChance>0.8</DTE_RangedDodgeChance>
+        </equippedStatOffsets>
+        <!-- 被动效果：最终伤害会加上天生武器的数值 -->
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_AddNaturalMeleePower">
+                <multiplier>0.5</multiplier>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 2. 龙娘超大剑 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="DTE_DragonianAdvancedMeleeBase">
+        <defName>DTE_DragonianUltraGreatsword</defName>
+        <label>龙娘 双手大剑</label>
+        <description>即使是龙娘也很难挥动的超重型大剑，但一旦将其挥舞起来将会是一场大屠杀。</description>
+        <graphicData>
+            <texPath>Things/Weapon/UltraGreatsword</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>3.5</drawSize>
+        </graphicData>
+        <uiIconScale>1.0</uiIconScale>
+        <statBases>
+            <WorkToMake>40000</WorkToMake>
+            <Mass>22.0</Mass>
+        </statBases>
+        <equippedAngleOffset>50</equippedAngleOffset>
+        <costStuffCount>120</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>50</WoolDragonian>
+            <DragonianScale>30</DragonianScale>
+        </costList>
+		<weaponTags>
+			<li>DR_Battlesword</li>
+		</weaponTags>
+        <tools>
+            <li>
+                <label>handle</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>15</power>
+                <cooldownTime>2.5</cooldownTime>
+				<chanceFactor>1</chanceFactor>
+            </li>
+            <li>
+                <label>massive blade</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Cut</li>
+                    <li>Demolish</li>
+                </capacities>
+                <power>50</power>
+                <cooldownTime>5</cooldownTime>
+                <armorPenetration>0.20</armorPenetration>
+				<chanceFactor>2</chanceFactor>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <MoveSpeed>-0.30</MoveSpeed>
+            <DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <!-- 技能：回旋斩 (持续AOE，结束眩晕) -->
+        <comps>
+            <li Class="CompProperties_EquippableAbility">
+                <abilityDef>DTE_WhirlwindSlash</abilityDef>
+            </li>
+        </comps>
+    </ThingDef>
+	
+	<!-- 超大剑回旋斩技能 -->
+	<AbilityDef>
+		<defName>DTE_WhirlwindSlash</defName>
+		<label>回旋斩</label>
+		<description>挥舞超大剑进行持续数秒的旋风斩，对半径2内的所有目标造成伤害，期间可以移动。结束后会陷入短暂的眩晕。</description>
+		<iconPath>UI/Abilities/Whirlwind</iconPath>
+		<cooldownTicksRange>3600</cooldownTicksRange>
+		<abilityClass>Ability</abilityClass>
+		
+		<!-- 关键修复 1：关闭目标要求，直接释放 -->
+		<targetRequired>False</targetRequired>
+		
+		<!-- 关键修复 2：加入原版的施法动作，小人会做个原地起手的动作 -->
+		<jobDef>CastAbilityOnThing</jobDef>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+	
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>3</range> <!-- 攻击范围显示 -->
+			<drawAimPie>False</drawAimPie>
+			<requireLineOfSight>False</requireLineOfSight>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetLocations>false</canTargetLocations>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetMechs>false</canTargetMechs>
+				<canTargetAnimals>false</canTargetAnimals>
+			</targetParams>
+		</verbProperties>
+		<comps>
+		<li Class="CompProperties_AbilityEffect">
+			<compClass>DragonianTechExpansion.CompAbilityEffect_Whirlwind</compClass>
+		</li>
+		</comps>
+	</AbilityDef>
+	
+	<HediffDef>
+		<defName>DTE_WhirlwindHediff</defName>
+		<label>回旋斩</label>
+		<description>强行挥舞超大剑进行持续数秒的旋风斩，对附近的所有目标造成伤害。。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+		<li Class="HediffCompProperties_Disappears">
+			<disappearsAfterTicks>180</disappearsAfterTicks> <!-- 持续 3 秒 (180 ticks) -->
+		</li>
+		<li Class="DragonianTechExpansion.HediffCompProperties_Whirlwind">
+			<compClass>DragonianTechExpansion.HediffComp_Whirlwind</compClass>
+			<radius>3.0</radius>
+			<damageIntervalTicks>30</damageIntervalTicks> <!-- 每 0.5 秒判定一次伤害 -->
+		</li>
+		</comps>
+		<stages>
+		<li>
+			<statFactors>
+				<StaggerDurationFactor>0</StaggerDurationFactor>
+			</statFactors>
+			<becomeVisible>false</becomeVisible>
+		</li>
+		</stages>
+	</HediffDef>
+	
+    <ThingDef ParentName="MoteBase">
+        <defName>DTE_WhirlwindEffect</defName>
+        <graphicData>
+            <texPath>Effect/Whirlwind_Effect</texPath>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>6</drawSize>
+        </graphicData>
+        <altitudeLayer>MoteLow</altitudeLayer>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>10</solidTime> <!-- 设个极大的值，我们靠代码掐断它 -->
+            <fadeOutTime>0</fadeOutTime>
+        </mote>
+    </ThingDef>
+
+
+    <!-- ========================================================== -->
+    <!-- ========== 3. 龙娘铳枪 (三种变体) ========== -->
+    <!-- ========================================================== -->
+    
+    <ThingDef ParentName="MoteBase">
+        <defName>DTE_GunlanceChargeTrail</defName>
+        <graphicData>
+            <texPath>Effect/Gunlance_Effect</texPath>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>10.0</drawSize>
+        </graphicData>
+        <altitudeLayer>MoteOverhead</altitudeLayer>
+        <mote>
+            <fadeInTime>0</fadeInTime>
+            <solidTime>120</solidTime>
+            <fadeOutTime>60</fadeOutTime>
+        </mote>
+    </ThingDef>
+	
+    <JobDef>
+        <defName>DTE_GunlanceChargeJob</defName>
+        <driverClass>DragonianTechExpansion.JobDriver_GunlanceCharge</driverClass>
+        <reportString>正在冲锋。</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+	
+	<HediffDef>
+		<defName>DTE_GunlanceCharging_Fire</defName>
+		<label>冲锋</label>
+		<description>正在冲锋！</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>120</disappearsAfterTicks>
+			</li>
+			<li Class="DragonianTechExpansion.HediffCompProperties_GunlanceCharge">
+				<compClass>DragonianTechExpansion.HediffComp_GunlanceCharge</compClass>
+			</li>
+		</comps>
+		<stages>
+		<li>
+			<becomeVisible>false</becomeVisible>
+		</li>
+		</stages>
+	</HediffDef>
+	
+	<HediffDef>
+		<defName>DTE_GunlanceBreathSpread</defName>
+		<label>龙息扩散</label>
+		<description>龙息正在向前方蔓延。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="DragonianTechExpansion.HediffCompProperties_GunlanceBreathSpread">
+				<compClass>DragonianTechExpansion.HediffComp_GunlanceBreathSpread</compClass>
+			</li>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>120</disappearsAfterTicks>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<label>扩散中</label>
+				<becomeVisible>false</becomeVisible>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	<!-- 火炎冲锋 -->
+	<AbilityDef>
+		<defName>DTE_GunlanceCharge_Fire</defName>
+		<label>火炎冲锋</label>
+		<description>短暂蓄力后向目标发起冲刺，对路径上的敌人造成火焰伤害。</description>
+		<iconPath>UI/Abilities/GunlanceCharge</iconPath>
+		<cooldownTicksRange>6000</cooldownTicksRange>
+		<cooldownPerCharge>true</cooldownPerCharge>
+		<charges>2</charges>
+		<jobDef>DTE_GunlanceChargeJob</jobDef>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<soundLanding>Longjump_Land</soundLanding>
+			<warmupTime>0.5</warmupTime>
+			<range>15</range>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+		
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityGunlanceCharge">
+				<compClass>DragonianTechExpansion.CompAbilityEffect_GunlanceCharge</compClass>
+				<damageDef>DRM_Flame</damageDef>
+				<pathWidth>1.5</pathWidth>
+				<damageMultiplier>1</damageMultiplier>
+				<elementDef>DTE_GunlanceCharging_Fire</elementDef>
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 火炎爆射 -->
+	<AbilityDef>
+		<defName>DTE_GunlanceBreath_Fire</defName>
+		<label>火炎爆射</label>
+		<description>向前方喷吐火焰爆炸。</description>
+		<iconPath>UI/Abilities/GunlanceBreath</iconPath>
+		<cooldownTicksRange>1800</cooldownTicksRange>
+		<abilityClass>Ability</abilityClass>
+	
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>12</range>
+			<minRange>2</minRange>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetPawns>true</canTargetPawns>
+			</targetParams>
+		</verbProperties>
+	
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityGunlanceBreath">
+				<compClass>DragonianTechExpansion.CompAbilityEffect_GunlanceBreath</compClass>
+				<damageDef>DRM_Flame</damageDef>
+				<range>10</range>
+				<maxWidth>5</maxWidth>
+				<damageMultiplier>3</damageMultiplier>
+				<spreadHediffDef>DTE_GunlanceBreathSpread</spreadHediffDef>
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 冰结冲锋 -->
+	<AbilityDef>
+		<defName>DTE_GunlanceCharge_Ice</defName>
+		<label>冰结冲锋</label>
+		<description>短暂蓄力后向目标发起冲刺，对路径上的敌人造成冰冻伤害。</description>
+		<iconPath>UI/Abilities/GunlanceCharge</iconPath>
+		<cooldownTicksRange>6000</cooldownTicksRange>
+		<cooldownPerCharge>true</cooldownPerCharge>
+		<charges>2</charges>
+		<jobDef>DTE_GunlanceChargeJob</jobDef>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<soundLanding>Longjump_Land</soundLanding>
+			<warmupTime>0.5</warmupTime>
+			<range>15</range>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityGunlanceCharge">
+				<compClass>DragonianTechExpansion.CompAbilityEffect_GunlanceCharge</compClass>
+				<damageDef>DRM_Damage_Freeze</damageDef> <!-- 只需改这一行！ -->
+				<pathWidth>1.5</pathWidth>
+				<damageMultiplier>1</damageMultiplier>
+				<elementDef>DTE_GunlanceCharging_Fire</elementDef> <!-- Hediff只是个冲锋状态标记，不用换 -->
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 冰结爆射 -->
+	<AbilityDef>
+		<defName>DTE_GunlanceBreath_Ice</defName>
+		<label>冰结爆射</label>
+		<description>向前方喷吐冰结爆炸。</description>
+		<iconPath>UI/Abilities/GunlanceBreath</iconPath>
+		<cooldownTicksRange>1800</cooldownTicksRange>
+		<abilityClass>Ability</abilityClass>
+	
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>12</range>
+			<minRange>2</minRange>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetPawns>true</canTargetPawns>
+			</targetParams>
+		</verbProperties>
+	
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_AbilityGunlanceBreath">
+                <compClass>DragonianTechExpansion.CompAbilityEffect_GunlanceBreath</compClass>
+                <damageDef>DRM_Damage_Freeze</damageDef>
+                <range>10</range>
+                <maxWidth>5</maxWidth>
+                <damageMultiplier>3</damageMultiplier>
+                <spreadHediffDef>DTE_GunlanceBreathSpread</spreadHediffDef>
+            </li>
+        </comps>
+	</AbilityDef>
+	
+	<!-- 酸蚀冲锋 -->
+	<AbilityDef>
+		<defName>DTE_GunlanceCharge_Acid</defName>
+		<label>酸蚀冲锋</label>
+		<description>短暂蓄力后向目标发起冲刺，对路径上的敌人造成酸蚀伤害。</description>
+		<iconPath>UI/Abilities/GunlanceCharge</iconPath>
+		<cooldownTicksRange>6000</cooldownTicksRange>
+		<cooldownPerCharge>true</cooldownPerCharge>
+		<charges>2</charges>
+		<jobDef>DTE_GunlanceChargeJob</jobDef>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<soundLanding>Longjump_Land</soundLanding>
+			<warmupTime>0.5</warmupTime>
+			<range>15</range>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityGunlanceCharge">
+				<compClass>DragonianTechExpansion.CompAbilityEffect_GunlanceCharge</compClass>
+				<damageDef>DRM_AcidCover</damageDef> <!-- 只需改这一行！ -->
+				<pathWidth>1.5</pathWidth>
+				<damageMultiplier>1</damageMultiplier>
+				<elementDef>DTE_GunlanceCharging_Fire</elementDef> <!-- Hediff只是个冲锋状态标记，不用换 -->
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 酸蚀爆射 -->
+	<AbilityDef>
+		<defName>DTE_GunlanceBreath_Acid</defName>
+		<label>酸蚀爆射</label>
+		<description>向前方喷吐酸蚀爆炸。</description>
+		<iconPath>UI/Abilities/GunlanceBreath</iconPath>
+		<cooldownTicksRange>1800</cooldownTicksRange>
+		<abilityClass>Ability</abilityClass>
+	
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>12</range>
+			<minRange>2</minRange>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetPawns>true</canTargetPawns>
+			</targetParams>
+		</verbProperties>
+	
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_AbilityGunlanceBreath">
+                <compClass>DragonianTechExpansion.CompAbilityEffect_GunlanceBreath</compClass>
+                <damageDef>DRM_AcidCover</damageDef>
+                <range>10</range>
+                <maxWidth>5</maxWidth>
+                <damageMultiplier>1</damageMultiplier>
+                <spreadHediffDef>DTE_GunlanceBreathSpread</spreadHediffDef>
+            </li>
+        </comps>
+	</AbilityDef>
+	
+	
+    <!-- 3.1 火炎铳枪 -->
+    <ThingDef ParentName="DTE_DragonianAdvancedMeleeBase">
+        <defName>DTE_Gunlance_Fire</defName>
+        <label>龙娘 火炎铳枪</label>
+        <description>装配了火炎击发装置的龙枪。龙娘可以驾驭它发动冲锋，并引发火焰爆炸。</description>
+        <graphicData>
+            <texPath>Things/Weapon/Gunlance_Fire</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>1.6</drawSize>
+        </graphicData>
+        <uiIconScale>1.1</uiIconScale>
+		<researchPrerequisites>
+            <li>DragonianAdvancedMelee</li>
+			<li>DragonianEnhancedWeapon</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>35000</WorkToMake>
+            <Mass>14.0</Mass>
+        </statBases>
+        <equippedAngleOffset>45</equippedAngleOffset>
+        <costStuffCount>80</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>40</WoolDragonian>
+            <DragonianScale>20</DragonianScale>
+            <ComponentIndustrial>5</ComponentIndustrial>
+        </costList>
+		<weaponTags>
+			<li>DR_Gunlance</li>
+			<li>DR_Battlesword</li>
+		</weaponTags>
+        <tools>
+            <li>
+                <label>spearhead</label>
+                <capacities>
+                    <li>Stab</li>
+                </capacities>
+                <power>20</power>
+                <cooldownTime>3.0</cooldownTime>
+                <armorPenetration>0.30</armorPenetration>
+				<chanceFactor>2</chanceFactor>
+                <extraMeleeDamages>
+                    <li>
+                        <def>DRM_Flame</def>
+                        <amount>5</amount>
+                    </li>
+                </extraMeleeDamages>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <MoveSpeed>-0.10</MoveSpeed>
+            <DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <comps>
+            <!-- 使用自定义的多技能挂载组件 -->
+            <li Class="DragonianTechExpansion.CompProperties_EquippableAbilities">
+                <abilities>
+                    <li>DTE_GunlanceCharge_Fire</li>
+                    <li>DTE_GunlanceBreath_Fire</li>
+                </abilities>
+            </li>
+        </comps>
+        <meleeHitSound>DRHammerSound</meleeHitSound>
+    </ThingDef>
+
+    <!-- 3.2 冰结铳枪 -->
+    <ThingDef ParentName="DTE_DragonianAdvancedMeleeBase">
+        <defName>DTE_Gunlance_Ice</defName>
+        <label>龙娘 冰结铳枪</label>
+        <description>装配了冰结击发装置的龙枪。龙娘可以驾驭它发动冲锋，并引发冰冻爆炸。</description>
+        <graphicData>
+            <texPath>Things/Weapon/Gunlance_Ice</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>1.6</drawSize>
+        </graphicData>
+        <uiIconScale>1.1</uiIconScale>
+		<researchPrerequisites>
+            <li>DragonianAdvancedMelee</li>
+			<li>DragonianEnhancedWeapon</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>35000</WorkToMake>
+            <Mass>14.0</Mass>
+        </statBases>
+        <equippedAngleOffset>45</equippedAngleOffset>
+        <costStuffCount>80</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>40</WoolDragonian>
+            <DragonianScale>20</DragonianScale>
+            <ComponentIndustrial>5</ComponentIndustrial>
+        </costList>
+		<weaponTags>
+			<li>DR_Gunlance</li>
+			<li>DR_Battlesword</li>
+		</weaponTags>
+        <tools>
+            <li>
+                <label>spearhead</label>
+                <capacities>
+                    <li>Stab</li>
+                </capacities>
+                <power>20</power>
+                <cooldownTime>3.0</cooldownTime>
+                <armorPenetration>0.30</armorPenetration>
+				<chanceFactor>2</chanceFactor>
+                <extraMeleeDamages>
+                    <li>
+                        <def>DRM_Damage_Freeze</def>
+                        <amount>5</amount>
+                    </li>
+                </extraMeleeDamages>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <MoveSpeed>-0.10</MoveSpeed>
+            <DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <comps>
+            <!-- 使用自定义的多技能挂载组件 -->
+            <li Class="DragonianTechExpansion.CompProperties_EquippableAbilities">
+                <abilities>
+                    <li>DTE_GunlanceCharge_Ice</li>
+                    <li>DTE_GunlanceBreath_Ice</li>
+                </abilities>
+            </li>
+        </comps>
+        <meleeHitSound>DRHammerSound</meleeHitSound>
+    </ThingDef>
+
+    <!-- 3.3 酸蚀铳枪 -->
+    <ThingDef ParentName="DTE_DragonianAdvancedMeleeBase">
+        <defName>DTE_Gunlance_Acid</defName>
+        <label>龙娘 酸蚀铳枪</label>
+        <description>装配了酸蚀击发装置的龙枪。龙娘可以驾驭它发动冲锋，并引发酸蚀爆炸。</description>
+        <graphicData>
+            <texPath>Things/Weapon/Gunlance_Acid</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>1.6</drawSize>
+        </graphicData>
+        <uiIconScale>1.1</uiIconScale>
+		<researchPrerequisites>
+            <li>DragonianAdvancedMelee</li>
+			<li>DragonianEnhancedWeapon</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>35000</WorkToMake>
+            <Mass>14.0</Mass>
+        </statBases>
+        <equippedAngleOffset>45</equippedAngleOffset>
+        <costStuffCount>80</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>40</WoolDragonian>
+            <DragonianScale>20</DragonianScale>
+            <ComponentIndustrial>5</ComponentIndustrial>
+        </costList>
+		<weaponTags>
+			<li>DR_Gunlance</li>
+			<li>DR_Battlesword</li>
+		</weaponTags>
+        <tools>
+            <li>
+                <label>spearhead</label>
+                <capacities>
+                    <li>Stab</li>
+                </capacities>
+                <power>20</power>
+                <cooldownTime>3.0</cooldownTime>
+                <armorPenetration>0.30</armorPenetration>
+				<chanceFactor>2</chanceFactor>
+                <extraMeleeDamages>
+                    <li>
+                        <def>DRM_AcidBurn</def> <!-- 需确认你的酸蚀DamageDef -->
+                        <amount>5</amount>
+                    </li>
+                </extraMeleeDamages>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <MoveSpeed>-0.10</MoveSpeed>
+            <DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <comps>
+            <!-- 使用自定义的多技能挂载组件 -->
+            <li Class="DragonianTechExpansion.CompProperties_EquippableAbilities">
+                <abilities>
+                    <li>DTE_GunlanceCharge_Acid</li>
+                    <li>DTE_GunlanceBreath_Acid</li>
+                </abilities>
+            </li>
+        </comps>
+        <meleeHitSound>DRHammerSound</meleeHitSound>
+    </ThingDef>
+
+
+    <!-- ========================================================== -->
+    <!-- ========== 4. 龙珠权杖 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="DTE_DragonianAdvancedMeleeBase">
+        <defName>DTE_DragonianOrbStaff</defName>
+        <label>龙娘 龙珠权杖</label>
+        <description>顶端镶嵌着龙珠的权杖，龙珠的神秘力量可以治愈几乎一切伤痛，往往只有部落中最德高望重的龙娘才会持有。</description>
+        <graphicData>
+            <texPath>Things/Weapon/OrbStaff</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+            <drawSize>1.3</drawSize>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+        <statBases>
+            <WorkToMake>30000</WorkToMake>
+            <Mass>5.0</Mass>
+        </statBases>
+        <costStuffCount>50</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>30</WoolDragonian>
+            <DragonianScale>20</DragonianScale>
+            <DragonianOrb>1</DragonianOrb>
+        </costList>
+		<weaponTags>
+			<li>DR_OrbStaff</li>
+		</weaponTags>
+        <tools>
+            <li>
+                <label>staff</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>12</power>
+                <cooldownTime>2.2</cooldownTime>
+				<chanceFactor>1</chanceFactor>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <SocialImpact>0.30</SocialImpact>
+            <PsychicSensitivity>0.20</PsychicSensitivity>
+            <DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <comps>
+            <li Class="CompProperties_EquippableAbility">
+                <abilityDef>DTE_PsychicRegeneration</abilityDef>
+            </li>
+        </comps>
+    </ThingDef>
+	
+	<!-- 心灵再生 -->
+	<AbilityDef>
+		<defName>DTE_PsychicRegeneration</defName>
+		<label>心灵再生</label>
+		<description>瞬间包扎目标的所有伤势，并注入龙珠的神秘能量，使其获得心灵再生状态。在能量较低时能大幅提升自愈与意识，在能量充溢时能够断肢再生，但会导致意识模糊与疼痛。</description>
+		<iconPath>UI/Abilities/PsychicRegen</iconPath>
+		<cooldownTicksRange>60000</cooldownTicksRange>
+		<cooldownPerCharge>true</cooldownPerCharge>
+		<charges>2</charges>
+		<jobDef>CastAbilityOnThingMelee</jobDef>
+		<warmupEffecter>Coagulate</warmupEffecter>
+		<warmupStartSound>Coagulate_Cast</warmupStartSound>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<verbProperties>
+			<verbClass>Verb_CastAbilityTouch</verbClass>
+			<drawAimPie>False</drawAimPie>
+			<range>-1</range>
+			<warmupTime>1.5</warmupTime>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>true</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>true</canTargetAnimals>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<!-- 1. 使用原版组件瞬间包扎（质量 1.0 完美包扎） -->
+			<li Class="CompProperties_AbilityCoagulate">
+				<tendQualityRange>1.0~1.0</tendQualityRange>
+			</li>
+			<!-- 2. 使用自定义极简组件叠加 Hediff 的充能值 -->
+			<li Class="DragonianTechExpansion.CompProperties_AbilityPsychicRegeneration">
+				<hediffDef>DTE_Hediff_PsychicRegeneration</hediffDef>
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 心灵再生状态 -->
+	<HediffDef>
+		<defName>DTE_Hediff_PsychicRegeneration</defName>
+		<label>心灵再生</label>
+		<description>龙珠能量在体内流转，带来强大的自愈能力。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<initialSeverity>0.5</initialSeverity> <!-- 初始 50% -->
+		<maxSeverity>1.0</maxSeverity>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.33</severityPerDay> <!-- 每天掉 10%，10天掉完 -->
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<minSeverity>0</minSeverity>
+				<statOffsets>
+					<InjuryHealingFactor>1.0</InjuryHealingFactor> <!-- 自愈 +100% -->
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>0.25</offset> <!-- 意识 +25% -->
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<label>过载</label>
+				<minSeverity>0.6</minSeverity>
+				<!-- 核心：原版字段，自动再生缺失的身体部位 -->
+				<regeneration>100</regeneration>
+				<painOffset>0.25</painOffset>
+				<statOffsets>
+					<InjuryHealingFactor>1.5</InjuryHealingFactor> <!-- 自愈 +150% -->
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<!-- 核心：使用 setMax 强制限制最大意识为 50% -->
+						<setMax>0.5</setMax> 
+					</li>
+				</capMods>
+			</li>
+		</stages>
+	</HediffDef>
+
+
+    <!-- ========================================================== -->
+    <!-- ========== 5. 龙娘乐器三件套 (腰鼓/吉他/长笛) ========== -->
+    <!-- ========================================================== -->
+    
+	<!-- 战鼓振奋 -->
+	<AbilityDef>
+		<defName>DTE_ToggleWarDrumAura</defName>
+		<label>战鼓振奋</label>
+		<description>切换战鼓光环。激活时持续增强周围友军的战斗能力，但使用者移动与闪避下降。再次使用可关闭。</description>
+		<iconPath>UI/Abilities/InstrumentAura_1</iconPath>
+		<abilityClass>DragonianTechExpansion.Ability_ToggleHediff</abilityClass>
+		
+		<!-- 核心修复：补充缺失的施法动作与条件标签 -->
+		<targetRequired>False</targetRequired>
+		<jobDef>CastAbilityOnThing</jobDef>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<showWhenDrafted>true</showWhenDrafted>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>9.9</range> <!-- 原版光环通常设为一个较大值，配合 canTargetSelf -->
+			<drawAimPie>false</drawAimPie>
+			<requireLineOfSight>false</requireLineOfSight>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetMechs>false</canTargetMechs>
+				<canTargetLocations>false</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityToggleHediff">
+				<hediffDef>DTE_InstrumentAuraActive_Drum</hediffDef>
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 吉他安抚 -->
+	<AbilityDef>
+		<defName>DTE_ToggleGuitarAura</defName>
+		<label>吉他安抚</label>
+		<description>切换吉他光环。安抚周围友军的精神，降低其崩溃临界值和承受伤害，但使用者移动与闪避下降。再次使用可关闭。</description>
+		<iconPath>UI/Abilities/InstrumentAura_2</iconPath>
+		<abilityClass>DragonianTechExpansion.Ability_ToggleHediff</abilityClass>
+		<targetRequired>False</targetRequired>
+		<jobDef>CastAbilityOnThing</jobDef>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<showWhenDrafted>true</showWhenDrafted>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>9.9</range>
+			<drawAimPie>false</drawAimPie>
+			<requireLineOfSight>false</requireLineOfSight>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetMechs>false</canTargetMechs>
+				<canTargetLocations>false</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityToggleHediff">
+				<hediffDef>DTE_InstrumentAuraActive_Guitar</hediffDef>
+			</li>
+		</comps>
+	</AbilityDef>
+
+	<!-- 长笛荡漾 -->
+	<AbilityDef>
+		<defName>DTE_ToggleFluteAura</defName>
+		<label>笛声荡漾</label>
+		<description>切换长笛光环。提升周围友军的意识与学习效率，但使用者移动与闪避下降。再次使用可关闭。</description>
+		<iconPath>UI/Abilities/InstrumentAura_3</iconPath>
+		<abilityClass>DragonianTechExpansion.Ability_ToggleHediff</abilityClass>
+		<targetRequired>False</targetRequired>
+		<jobDef>CastAbilityOnThing</jobDef>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<showWhenDrafted>true</showWhenDrafted>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>9.9</range>
+			<drawAimPie>false</drawAimPie>
+			<requireLineOfSight>false</requireLineOfSight>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetMechs>false</canTargetMechs>
+				<canTargetLocations>false</canTargetLocations>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_AbilityToggleHediff">
+				<hediffDef>DTE_InstrumentAuraActive_Flute</hediffDef>
+			</li>
+		</comps>
+	</AbilityDef>
+	
+	<!-- 腰鼓 激活状态 -->
+	<HediffDef>
+		<defName>DTE_InstrumentAuraActive_Drum</defName>
+		<label>战鼓振奋（激活）</label>
+		<description>战鼓的激励效果正在生效，使用者的移动和闪避受到限制。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>-0.30</MoveSpeed>
+					<MeleeDodgeChance>-0.20</MeleeDodgeChance>
+				</statOffsets>
+			</li>
+		</stages>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>9000</disappearsAfterTicks>
+                <showRemainingTime>true</showRemainingTime>
+            </li>
+            <li Class="HediffCompProperties_GiveHediffsInRange">
+                <range>9.9</range>
+                <hediff>DTE_Aura_WarDrum_Buff</hediff>
+                <mote>Mote_CombatCommand</mote>
+                <hideMoteWhenNotDrafted>true</hideMoteWhenNotDrafted>
+                <targetingParameters>
+                    <canTargetBuildings>false</canTargetBuildings>
+                    <canTargetAnimals>false</canTargetAnimals>
+                    <canTargetMechs>false</canTargetMechs>
+                    <onlyTargetColonists>true</onlyTargetColonists>
+                </targetingParameters>
+            </li>
+            <!-- 自定义的乐器演奏组件 -->
+            <li Class="DragonianTechExpansion.HediffCompProperties_InstrumentPerformance">
+                <radius>9.9</radius>
+                <joyAmountPerSecond>0.1</joyAmountPerSecond>
+                <!-- 使用你找到的音效 DefName -->
+                <soundDefName>DTE_DrumPlay</soundDefName>
+                <moteIntervalSeconds>0.5</moteIntervalSeconds>
+            </li>
+        </comps>
+	</HediffDef>
+	
+	<!-- 腰鼓 增益状态 -->
+	<HediffDef>
+		<defName>DTE_Aura_WarDrum_Buff</defName>
+		<label>战鼓振奋</label>
+		<description>战鼓声激励着友军，提升了战斗能力。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>0.20</MoveSpeed>
+					<MeleeCooldownFactor>-0.15</MeleeCooldownFactor>
+					<RangedCooldownFactor>-0.15</RangedCooldownFactor>
+					<MeleeHitChance>0.10</MeleeHitChance>
+					<ShootingAccuracyPawn>0.10</ShootingAccuracyPawn>
+				</statOffsets>
+			</li>
+		</stages>
+		<comps>
+			<!-- 修复：补回 Disappears，满足原版 GiveHediffsInRange 的强制要求 -->
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>600</disappearsAfterTicks> <!-- 2秒，用于脱战后的短暂残留 -->
+				<showRemainingTime>false</showRemainingTime>
+			</li>
+			<!-- 保留 Link，用于距离超出时立即移除 -->
+			<li Class="HediffCompProperties_Link">
+				<requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+				<maxDistance>10</maxDistance>
+				<customMote>Mote_CombatCommandLinkLine</customMote>
+			</li>
+		</comps>
+	</HediffDef>
+	
+	<!-- 吉他 激活状态 -->
+	<HediffDef>
+		<defName>DTE_InstrumentAuraActive_Guitar</defName>
+		<label>吉他安抚（激活）</label>
+		<description>吉他声正在抚慰心灵，使用者的移动和闪避受到限制。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>-0.30</MoveSpeed>
+					<MeleeDodgeChance>-0.20</MeleeDodgeChance>
+				</statOffsets>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>9000</disappearsAfterTicks>
+				<showRemainingTime>true</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_GiveHediffsInRange">
+				<range>9.9</range>
+				<hediff>DTE_Aura_Guitar_Calm</hediff>
+				<mote>Mote_CombatCommand</mote>
+				<hideMoteWhenNotDrafted>true</hideMoteWhenNotDrafted>
+				<targetingParameters>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetAnimals>false</canTargetAnimals>
+					<canTargetMechs>false</canTargetMechs>
+					<onlyTargetColonists>true</onlyTargetColonists>
+				</targetingParameters>
+			</li>
+            <!-- 自定义的乐器演奏组件 -->
+            <li Class="DragonianTechExpansion.HediffCompProperties_InstrumentPerformance">
+                <radius>9.9</radius>
+                <joyAmountPerSecond>0.1</joyAmountPerSecond>
+                <!-- 使用你找到的音效 DefName -->
+                <soundDefName>DTE_GuitarPlay</soundDefName>
+                <moteIntervalSeconds>0.5</moteIntervalSeconds>
+            </li>
+		</comps>
+	</HediffDef>
+	
+	<!-- 吉他 增益状态 -->
+	<HediffDef>
+		<defName>DTE_Aura_Guitar_Calm</defName>
+		<label>吉他安抚</label>
+		<description>吉他声抚平了焦躁的情绪，受到伤害时更加坚韧。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<statOffsets>
+					<MentalBreakThreshold>-0.5</MentalBreakThreshold> <!-- 降低崩溃临界值 -->
+					<IncomingDamageFactor>-0.25</IncomingDamageFactor> <!-- 降低承伤系数 -->
+				</statOffsets>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>600</disappearsAfterTicks>
+				<showRemainingTime>false</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_Link">
+				<requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+				<maxDistance>10</maxDistance>
+				<customMote>Mote_CombatCommandLinkLine</customMote>
+			</li>
+		</comps>
+	</HediffDef>
+	
+		<!-- 长笛 激活状态 -->
+	<HediffDef>
+		<defName>DTE_InstrumentAuraActive_Flute</defName>
+		<label>笛声荡漾（激活）</label>
+		<description>长笛声正在激发意志，使用者的移动和闪避受到限制。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<everCurableByItem>false</everCurableByItem>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>-0.30</MoveSpeed>
+					<MeleeDodgeChance>-0.20</MeleeDodgeChance>
+				</statOffsets>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>9000</disappearsAfterTicks>
+				<showRemainingTime>true</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_GiveHediffsInRange">
+				<range>9.9</range>
+				<hediff>DTE_Aura_Flute_Inspire</hediff>
+				<mote>Mote_CombatCommand</mote>
+				<hideMoteWhenNotDrafted>true</hideMoteWhenNotDrafted>
+				<targetingParameters>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetAnimals>false</canTargetAnimals>
+					<canTargetMechs>false</canTargetMechs>
+					<onlyTargetColonists>true</onlyTargetColonists>
+				</targetingParameters>
+			</li>
+            <!-- 自定义的乐器演奏组件 -->
+            <li Class="DragonianTechExpansion.HediffCompProperties_InstrumentPerformance">
+                <radius>9.9</radius>
+                <joyAmountPerSecond>0.1</joyAmountPerSecond>
+                <!-- 使用你找到的音效 DefName -->
+                <soundDefName>DTE_FlutePlay</soundDefName>
+                <moteIntervalSeconds>0.5</moteIntervalSeconds>
+            </li>
+		</comps>
+	</HediffDef>
+	
+	<!-- 长笛 增益状态 -->
+	<HediffDef>
+		<defName>DTE_Aura_Flute_Inspire</defName>
+		<label>笛声荡漾</label>
+		<description>长笛声激发着潜能，意识更加清晰，学习效率提升。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<!-- 修复：意识属于能力(Capacity)，必须写在 capMods 里 -->
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>0.2</offset>
+					</li>
+				</capMods>
+				<!-- 学习效率属于属性(Stat)，依然写在 statOffsets 里 -->
+				<statOffsets>
+					<GlobalLearningFactor>0.5</GlobalLearningFactor>
+				</statOffsets>
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>600</disappearsAfterTicks>
+				<showRemainingTime>false</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_Link">
+				<requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+				<maxDistance>10</maxDistance>
+				<customMote>Mote_CombatCommandLinkLine</customMote>
+			</li>
+		</comps>
+	</HediffDef>
+	
+    <!-- 乐器通用抽象基类 -->
+    <ThingDef Name="DTE_DragonianInstrumentBase" ParentName="DTE_DragonianAdvancedMeleeBase" Abstract="True">
+        <techLevel>Neolithic</techLevel> <!-- 乐器偏向原始/中世纪 -->
+        <statBases>
+            <WorkToMake>10000</WorkToMake>
+            <Mass>2.5</Mass> 
+        </statBases>
+        <costStuffCount>40</costStuffCount>
+        <stuffCategories>
+            <li>Woody</li> <!-- 原木 -->
+        </stuffCategories>
+        <costList>
+            <WoolDragonian>30</WoolDragonian>
+        </costList>
+		<weaponTags>
+			<li>DR_Instrument</li>
+		</weaponTags>
+        <recipeMaker>
+            <researchPrerequisites>
+                <li>DragonianAdvancedMelee</li>
+				<li>DragonianUtilityTools</li>
+            </researchPrerequisites>
+			<skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <tools>
+            <li>
+                <label>instrument</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>5</power> <!-- 缺乏战斗力 -->
+                <cooldownTime>2.5</cooldownTime>
+				<chanceFactor>1</chanceFactor>
+            </li>
+        </tools>
+        <equippedStatOffsets>
+            <SocialImpact>0.30</SocialImpact>
+        </equippedStatOffsets>
+        <!-- 开启技能时的通用负面效果占位：降低移速和闪避 -->
+    </ThingDef>
+
+    <!-- 5.1 龙娘腰鼓 -->
+    <ThingDef ParentName="DTE_DragonianInstrumentBase">
+        <defName>DTE_DragonianDrum</defName>
+        <label>龙娘 腰鼓</label>
+        <description>龙娘吟游诗人常会携带的腰鼓，缺乏战斗力，但能增强他人的战斗能力。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DTE_Drum</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+        </graphicData>
+		<tradeTags>
+			<li>DTE_Tool</li>
+		</tradeTags>
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_EquippableAbilityToggle">
+				<abilityDef>DTE_ToggleWarDrumAura</abilityDef>
+			</li>
+		</comps>
+    </ThingDef>
+
+    <!-- 5.2 龙娘吉他 -->
+    <ThingDef ParentName="DTE_DragonianInstrumentBase">
+        <defName>DTE_DragonianGuitar</defName>
+        <label>龙娘 吉他</label>
+        <description>龙娘吟游诗人常会携带的吉他，缺乏战斗力，但能安抚精神受挫的他人。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DTE_Guitar</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <tradeTags>
+            <li>DTE_Tool</li>
+        </tradeTags>
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_EquippableAbilityToggle">
+                <abilityDef>DTE_ToggleGuitarAura</abilityDef>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- 5.3 龙娘长笛 -->
+    <ThingDef ParentName="DTE_DragonianInstrumentBase">
+        <defName>DTE_DragonianFlute</defName>
+        <label>龙娘 长笛</label>
+        <description>龙娘吟游诗人常会携带的长笛，缺乏战斗力，但能激发他人的意志。</description>
+        <graphicData>
+            <texPath>Things/Weapon/DTE_Flute</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.4</uiIconScale>
+        <tradeTags>
+            <li>DTE_Tool</li>
+        </tradeTags>
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_EquippableAbilityToggle">
+                <abilityDef>DTE_ToggleFluteAura</abilityDef>
+            </li>
+        </comps>
+    </ThingDef>
+
+</Defs>

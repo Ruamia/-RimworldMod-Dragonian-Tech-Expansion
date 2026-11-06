@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef ParentName="BodyPartBionicBase">
+        <defName>DragonianPartCollector</defName>
+        <label>龙部件收集器</label>
+        <description>一个坚韧的织物袋和一些小工具，使用龙毛精心编织而成，让龙娘能够顺手收集自然脱落的龙鳞和龙角粉末。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DragonianPartCollector</HediffDef>
+        </descriptionHyperlinks>
+        <statBases>
+            <Mass>0.3</Mass>
+            <WorkToMake>12000</WorkToMake>
+        </statBases>
+        <techHediffsTags>
+            <li>DragonianOrbAdvanced</li>
+        </techHediffsTags>
+        <costList>
+            <Steel>30</Steel>
+            <ComponentIndustrial>4</ComponentIndustrial>
+            <WoolDragonian>15</WoolDragonian>
+        </costList>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+			<researchPrerequisites>
+			<li>DragonianTechBreakthrough</li>
+			<li>DragonianBionics</li>
+			</researchPrerequisites>
+            <recipeUsers>
+                <li>DragonianSmith</li>
+	            <li>FueledSmithy</li>
+				<li>ElectricSmithy</li>
+            </recipeUsers>
+        </recipeMaker>
+
+        <comps>
+            <li Class="CompProperties_Usable">
+                <useJob>UseItem</useJob>
+                <useLabel>安装 {0_label}</useLabel>
+                <useDuration>300</useDuration>
+            </li>
+            <!-- 自定义组件：限制种族 + 植入 -->
+            <li Class="DragonianTechExpansion.CompProperties_UseEffectInstallImplantForRace">
+                <hediffDef>DragonianPartCollector</hediffDef>
+                <bodyPart>Torso</bodyPart>
+                <requiredRace>Dragonian_Race</requiredRace>
+            </li>
+            <!-- 关键：使用后销毁物品 -->
+            <li Class="CompProperties_UseEffectDestroySelf" />
+        </comps>
+    </ThingDef>
+	
+    <HediffDef>
+        <defName>DragonianPartCollector</defName>
+        <label>龙部件收集器</label>
+        <labelNoun>一个龙部件收集器</labelNoun>
+        <description>一个坚韧的织物袋和一些小工具，使用龙毛精心编织而成，让龙娘能够顺手收集自然脱落的龙鳞和龙角粉末。如果对应的部位被手术采集过，收集器会暂停该部位的产出，直到重新长好。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>false</isBad>
+        <priceImpact>false</priceImpact>
+        <everCurableByItem>false</everCurableByItem>
+        <defaultInstallPart>Torso</defaultInstallPart>
+
+        <stages>
+            <li>
+                <statOffsets>
+                    <MoveSpeed>-0.05</MoveSpeed>
+                </statOffsets>
+            </li>
+        </stages>
+
+        <comps>
+            <li Class="DragonianTechExpansion.HediffCompProperties_SpawnItemsAtInterval">
+                <intervalTicks>360000</intervalTicks> <!-- 约 6 天 -->
+                <showRemainingTime>true</showRemainingTime>
+                <items>
+                    <li>
+                        <thingDef>DragonianScale</thingDef>
+                        <count>20</count>
+                        <pauseIfHediff>DragonianScaleStripped</pauseIfHediff>
+                    </li>
+                    <li>
+                        <thingDef>DragonianHornPowder</thingDef>
+                        <count>2</count>
+                        <pauseIfHediff>DragonianHornRemoved</pauseIfHediff>
+                    </li>
+                </items>
+            </li>
+        </comps>
+    </HediffDef>
+
+</Defs>

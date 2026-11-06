@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ========================================================== -->
+    <!-- ========== 龙娘妙妙工具 - 抽象基类 ========== -->
+    <!-- ========================================================== -->
+
+    <!-- 工具类近战武器基类 -->
+    <ThingDef Name="DTE_DragonianToolMeleeBase" ParentName="BaseMeleeWeapon_Sharp_Quality" Abstract="True">
+        <techLevel>Medieval</techLevel>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisites>
+                <li>DragonianUtilityTools</li>
+            </researchPrerequisites>
+            <recipeUsers Inherit="false">
+                <li>DragonianSmith</li>
+	            <li>FueledSmithy</li>
+				<li>ElectricSmithy</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>4</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <weaponTags>
+            <li>DTE_Tools</li>
+        </weaponTags>
+		<thingCategories Inherit="false">
+			<li>WeaponsMelee</li>
+		</thingCategories>
+		<tradeTags>
+			<li>DTE_Tool</li>
+		</tradeTags>
+    </ThingDef>
+
+    <!-- 工具类配件基类（腰带层） -->
+    <ThingDef Name="DTE_DragonianToolApparelBase" ParentName="ApparelBase" Abstract="True">
+        <techLevel>Medieval</techLevel>
+        <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisites>
+                <li>DragonianUtilityTools</li>
+            </researchPrerequisites>
+            <recipeUsers Inherit="false">
+                <li>DragonianSmith</li>
+	            <li>FueledSmithy</li>
+				<li>ElectricSmithy</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>4</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<bodyPartGroups>
+				<li>Torso</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<tags>
+				<li>DTE_ApparelTools</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Worker</li>
+			</defaultOutfitTags>
+			<wornGraphicPath></wornGraphicPath>
+        </apparel>
+		<thingCategories Inherit="false">
+			<li>Apparel</li>
+		</thingCategories>
+    </ThingDef>
+
+
+    <!-- ========================================================== -->
+    <!-- ========== 近战武器类 ========== -->
+    <!-- ========================================================== -->
+
+    <!-- ========== 龙娘法典 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianCodex</defName>
+        <label>龙娘 法典</label>
+        <description>一本厚重的皮革封面法典，由于龙娘普遍不聪明，里面记满了重复的琐碎条款，挥动时颇具分量。</description>
+        <graphicData>
+            <texPath>Things/Tool/Codex</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>0.6</drawSize>
+        </graphicData>
+        <uiIconScale>1</uiIconScale>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>2.5</Mass>
+        </statBases>
+        <costList>
+            <WoodLog>20</WoodLog>
+        </costList>
+        <costStuffCount>30</costStuffCount>
+        <stuffCategories>
+            <li>Leathery</li>
+        </stuffCategories>
+        <equippedStatOffsets>
+            <SocialImpact>0.30</SocialImpact>
+            <TradePriceImprovement>0.08</TradePriceImprovement>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <tools>
+            <li>
+                <label>spine</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>1.8</cooldownTime>
+				<chanceFactor>5</chanceFactor>
+                <extraMeleeDamages>
+                    <li>
+                        <def>Stun</def>
+                        <amount>3</amount>
+                        <chance>1</chance>
+                    </li>
+                </extraMeleeDamages>
+            </li>
+            <li>
+                <label>corner</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Blunt</li>
+                    <li>Poke</li>
+                </capacities>
+                <power>5</power>
+                <cooldownTime>1.2</cooldownTime>
+				<chanceFactor>3</chanceFactor>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <!-- ========== 龙娘锻造锤 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianForgeHammer</defName>
+        <label>龙娘 锻造锤</label>
+        <description>平衡良好的锻造用锤，握把被塑造成适合龙娘持握的摸样，用于敲打金属与精细成型。</description>
+        <graphicData>
+            <texPath>Things/Tool/ForgeHammer</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>0.6</drawSize>
+        </graphicData>
+        <uiIconScale>1</uiIconScale>
+		<researchPrerequisites>
+            <li>Smithing</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>9000</WorkToMake>
+            <Mass>3.0</Mass>
+        </statBases>
+        <costList>
+            <WoodLog>30</WoodLog>
+            <Uranium>20</Uranium>
+            <ComponentIndustrial>2</ComponentIndustrial>
+        </costList>
+        <equippedStatOffsets>
+            <GeneralLaborSpeed>0.50</GeneralLaborSpeed>
+			<WorkSpeedGlobal>0.3</WorkSpeedGlobal>
+			<GlobalLearningFactor>0.2</GlobalLearningFactor>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <tools>
+            <li>
+                <label>handle</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>2.0</cooldownTime>
+				<chanceFactor>2</chanceFactor>
+            </li>
+            <li>
+                <label>head</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Blunt</li>
+                    <li>Demolish</li>
+                </capacities>
+                <power>18</power>
+                <cooldownTime>2.8</cooldownTime>
+				<chanceFactor>3</chanceFactor>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <!-- ========== 龙娘大铁锤 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianSledgehammer</defName>
+        <label>龙娘 大铁锤</label>
+        <description>沉重的双手铁锤，挥舞起来令人疲惫。适用于建筑工作，用来粉碎机械残骸也是得心应手。</description>
+        <graphicData>
+            <texPath>Things/Tool/Sledgehammer</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>1.2</drawSize>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+		<researchPrerequisites>
+            <li>Smithing</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>10000</WorkToMake>
+            <Mass>4.5</Mass>
+        </statBases>
+        <costList>
+            <WoodLog>30</WoodLog>
+        </costList>
+        <costStuffCount>60</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <equippedStatOffsets>
+		    <ConstructionSpeed>0.40</ConstructionSpeed>
+			<ConstructSuccessChance>0.20</ConstructSuccessChance>  <!-- 从0.15提高 -->
+			<FixBrokenDownBuildingSuccessChance>0.15</FixBrokenDownBuildingSuccessChance>
+			<ButcheryMechanoidSpeed>0.50</ButcheryMechanoidSpeed>
+			<ButcheryMechanoidEfficiency>0.20</ButcheryMechanoidEfficiency>
+			<MoveSpeed>-0.10</MoveSpeed>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <equippedAngleOffset>20</equippedAngleOffset>
+		<tools>
+			<li>
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>10</power>
+				<cooldownTime>2.2</cooldownTime>
+				<chanceFactor>2</chanceFactor>
+			</li>
+			<li>
+				<label>head</label>
+				<labelUsedInLogging>false</labelUsedInLogging>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>3.5</cooldownTime>
+				<armorPenetration>0.10</armorPenetration>
+				<chanceFactor>4</chanceFactor>
+			</li>
+			<li>
+				<label>demolish</label>
+				<labelUsedInLogging>false</labelUsedInLogging>
+				<capacities>
+					<li>Demolish</li>
+				</capacities>
+				<power>28</power>
+				<cooldownTime>3.5</cooldownTime>
+				<armorPenetration>0.15</armorPenetration>
+			</li>
+		</tools>
+        <meleeHitSound>DRHammerSound</meleeHitSound>
+    </ThingDef>
+
+    <!-- ========== 龙娘战镐 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianPickaxe</defName>
+        <label>龙娘 战镐</label>
+        <description>加长柄双头镐。尖端锐利，适合破开岩层、挖掘深矿，也能轻易拆毁建筑结构。</description>
+        <graphicData>
+            <texPath>Things/Tool/Pickaxe</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>1.2</drawSize>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+		<researchPrerequisites>
+            <li>Smithing</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>8000</WorkToMake>
+            <Mass>3.0</Mass>
+        </statBases>
+        <costList>
+            <WoodLog>30</WoodLog>
+        </costList>
+        <costStuffCount>50</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <equippedStatOffsets>
+            <MiningSpeed>0.50</MiningSpeed>
+            <MiningYield>0.20</MiningYield>
+            <DeepDrillingSpeed>0.20</DeepDrillingSpeed>
+            <MoveSpeed>-0.10</MoveSpeed>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <equippedAngleOffset>60</equippedAngleOffset>
+		<tools>
+			<li>
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>2.0</cooldownTime>
+				<chanceFactor>2</chanceFactor>
+			</li>
+			<li>
+				<label>point</label>
+				<labelUsedInLogging>false</labelUsedInLogging>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetration>0.30</armorPenetration>
+				<chanceFactor>4</chanceFactor>
+			</li>
+			<li>
+				<label>demolish</label>
+				<labelUsedInLogging>false</labelUsedInLogging>
+				<capacities>
+					<li>Demolish</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>3.2</cooldownTime>
+				<armorPenetration>0.12</armorPenetration>
+			</li>
+		</tools>
+    </ThingDef>
+
+    <!-- ========== 龙娘伐木斧 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianLoggingAxe</defName>
+        <label>龙娘 伐木斧</label>
+        <description>厚重的单刃伐木斧，斧刃宽阔，用于砍伐树木、修剪植被，也能拆毁建筑。</description>
+        <graphicData>
+            <texPath>Things/Tool/LoggingAxe</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>1.2</drawSize>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+		<researchPrerequisites>
+            <li>Smithing</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>8000</WorkToMake>
+            <Mass>2.8</Mass>
+        </statBases>
+        <costList>
+            <WoodLog>30</WoodLog>
+        </costList>
+        <costStuffCount>50</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <equippedStatOffsets>
+            <PlantWorkSpeed>0.75</PlantWorkSpeed>
+            <MoveSpeed>-0.10</MoveSpeed>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <equippedAngleOffset>-30</equippedAngleOffset>
+		<tools>
+			<li>
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>2.0</cooldownTime>
+				<chanceFactor>2</chanceFactor>
+			</li>
+			<li>
+				<label>edge</label>
+				<labelUsedInLogging>false</labelUsedInLogging>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>20</power>
+				<cooldownTime>2.8</cooldownTime>
+				<armorPenetration>0.15</armorPenetration>
+				<chanceFactor>4</chanceFactor>
+			</li>
+			<li>
+				<label>demolish</label>
+				<labelUsedInLogging>false</labelUsedInLogging>
+				<capacities>
+					<li>Demolish</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>3.2</cooldownTime>
+				<armorPenetration>0.12</armorPenetration>
+			</li>
+		</tools>
+    </ThingDef>
+
+    <!-- ========== 龙娘牧羊杖 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianShepherdStaff</defName>
+        <label>龙娘 牧羊杖</label>
+        <description>缠绕着龙毛与铃铛的长杖。轻敲地面时铃声可以安抚牲畜，野生动物会变得顺从。</description>
+        <graphicData>
+            <texPath>Things/Tool/ShepherdStaff</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.1</uiIconScale>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>1.8</Mass>
+        </statBases>
+        <costList>
+            <WoodLog>30</WoodLog>
+            <WoolDragonian>20</WoolDragonian>
+        </costList>
+        <weaponTags>
+            <li>DTE_Staff_Shepherd</li>
+        </weaponTags>
+        <equippedStatOffsets>
+            <TameAnimalChance>0.20</TameAnimalChance>
+            <TrainAnimalChance>0.50</TrainAnimalChance>
+            <AnimalGatherSpeed>0.20</AnimalGatherSpeed>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <equippedAngleOffset>0</equippedAngleOffset>
+        <tools>
+            <li>
+                <label>tip</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>2.0</cooldownTime>
+                <extraMeleeDamages>
+                    <li>
+                        <def>Stun</def>
+                        <amount>2.0</amount>
+                        <chance>0.30</chance>
+                    </li>
+                </extraMeleeDamages>
+				<chanceFactor>3</chanceFactor>
+            </li>
+            <li>
+                <label>shaft</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>Poke</li>
+                </capacities>
+                <power>6</power>
+                <cooldownTime>1.8</cooldownTime>
+				<chanceFactor>2</chanceFactor>
+            </li>
+        </tools>
+			<comps>
+				<li Class="CompProperties_EquippableAbility">
+					<abilityDef>DTE_DragonianAnimalWarcall</abilityDef>
+				</li>
+			</comps>
+    </ThingDef>
+	
+    <AbilityDef MayRequire="Ludeon.RimWorld.Biotech">
+        <defName>DTE_DragonianAnimalWarcall</defName>
+        <label>唤兽契约</label>
+        <description>通过牧羊杖的力量召集附近的野生动物前来助战。</description>
+        <iconPath>UI/Abilities/AnimalWarcall</iconPath>
+        <cooldownTicksRange>30000</cooldownTicksRange>
+        <canUseAoeToGetTargets>false</canUseAoeToGetTargets>
+        <jobDef>CastAbilityOnThingWithoutWeaponInterruptible</jobDef>
+        <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
+        <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+        <groupAbility>true</groupAbility>
+        <statBases>
+            <Ability_Duration>500</Ability_Duration>
+        </statBases>
+        <verbProperties>
+            <verbClass>Verb_CastAbility</verbClass>
+            <label>warcall</label>
+            <warmupTime>2</warmupTime>
+            <range>49.9</range>
+            <drawAimPie>true</drawAimPie>
+            <requireLineOfSight>false</requireLineOfSight>
+            <warmupEffecter>AnimalWarcall_Warmup</warmupEffecter>
+            <mouseTargetingText>Choose an animal to call</mouseTargetingText>
+            <targetParams>
+                <canTargetLocations>false</canTargetLocations>
+                <canTargetPawns>true</canTargetPawns>
+                <canTargetAnimals>true</canTargetAnimals>
+                <canTargetBuildings>false</canTargetBuildings>
+                <canTargetHumans>false</canTargetHumans>
+                <canTargetEntities>False</canTargetEntities>
+                <canTargetSubhumans>False</canTargetSubhumans>
+                <canTargetMechs>false</canTargetMechs>
+                <canTargetSelf>false</canTargetSelf>
+            </targetParams>
+        </verbProperties>
+        <comps>
+            <li Class="CompProperties_AbilityGiveMentalState">
+                <compClass>CompAbilityEffect_GiveMentalState</compClass>
+                <stateDef>BerserkWarcall</stateDef>
+                <goodwillImpact>-75</goodwillImpact>
+                <casterEffect>AnimalWarcall_Cast</casterEffect>
+                <targetEffect>AnimalWarcall_CastOnTarget</targetEffect>
+                <excludeNPCFactions>true</excludeNPCFactions>
+            </li>
+        </comps>
+    </AbilityDef>
+
+    <!-- ========== 龙娘手术刀 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolMeleeBase">
+        <defName>DTE_DragonianScalpel</defName>
+        <label>龙娘 手术刀</label>
+        <description>看起来完全不像是龙娘会使用的工具，非常锋利，比起做手术龙娘更喜欢用它来屠宰。</description>
+        <graphicData>
+            <texPath>Things/Tool/Scalpel</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+			<drawSize>0.4</drawSize>
+        </graphicData>
+        <uiIconScale>1</uiIconScale>
+		<researchPrerequisites>
+                <li>SterileMaterials</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>7000</WorkToMake>
+            <Mass>0.8</Mass>
+        </statBases>
+        <costList>
+            <Steel>30</Steel>
+            <Silver>10</Silver>
+        </costList>
+        <equippedStatOffsets>
+            <MedicalTendSpeed>0.30</MedicalTendSpeed>
+            <MedicalTendQuality>0.10</MedicalTendQuality>
+            <MedicalOperationSpeed>0.20</MedicalOperationSpeed>
+            <ButcheryFleshSpeed>0.50</ButcheryFleshSpeed>
+            <ButcheryFleshEfficiency>0.15</ButcheryFleshEfficiency>
+			<DR_DragonSculptureM>10</DR_DragonSculptureM>
+        </equippedStatOffsets>
+        <equippedAngleOffset>-40</equippedAngleOffset>
+        <tools>
+            <li>
+                <label>edge</label>
+                <capacities>
+                    <li>Cut</li>
+                    <li>Stab</li>
+                </capacities>
+                <power>10</power>
+                <cooldownTime>1.5</cooldownTime>
+                <armorPenetration>0.60</armorPenetration>
+            </li>
+        </tools>
+    </ThingDef>
+	
+    <HediffDef>
+        <defName>DRM_ScalpelKillBonus</defName>
+        <label>外科专精</label>
+        <description>通过使用龙娘手术刀解剖（不管是自愿的还是非自愿的）积累的外科技巧，每次击杀都会永久提升手术成功率。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>false</isBad>
+        <defaultLabelColor>(0.6, 0.9, 0.5)</defaultLabelColor>
+        <maxSeverity>1.0</maxSeverity>
+        <stages>
+            <li>
+                <minSeverity>0</minSeverity>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 配件类（腰带层，互斥） ========== -->
+    <!-- ========================================================== -->
+
+    <!-- ========== 龙娘毛笔 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianBrush</defName>
+        <label>龙娘 毛笔</label>
+        <description>以龙毛束成的毛笔，对于大部分龙娘来说这只是涂鸦的工具，但意外地能提升研究效率。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_Brush/Brush</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+        <statBases>
+            <WorkToMake>4000</WorkToMake>
+            <Mass>0.5</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.8</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>15</WoodLog>
+            <WoolDragonian>10</WoolDragonian>
+        </costList>
+        <equippedStatOffsets>
+            <ResearchSpeed>0.20</ResearchSpeed>
+            <StudyEfficiency>0.30</StudyEfficiency>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_Brush/Brush</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘标准精工工具组 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianToolKit</defName>
+        <label>龙娘 标准精工工具组</label>
+        <description>每一个刚入行的龙娘工匠都会有的标准工具组，包含小锤、锉刀、锉针，帮助笨手笨脚的龙娘进行基本工作。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_ToolKit/ToolKit</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+		<researchPrerequisites>
+            <li>Smithing</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>5000</WorkToMake>
+            <Mass>1.0</Mass>
+            <MaxHitPoints>120</MaxHitPoints>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>20</WoodLog>
+            <Steel>30</Steel>
+            <ComponentIndustrial>2</ComponentIndustrial>
+        </costList>
+        <equippedStatOffsets>
+            <GeneralLaborSpeed>0.25</GeneralLaborSpeed>
+			<GlobalLearningFactor>0.3</GlobalLearningFactor>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_ToolKit/ToolKit</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘高级精工工具组 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianAdvancedToolKit</defName>
+        <label>龙娘 高级精工工具组</label>
+        <description>最伟大的龙娘工匠才会有的精工工具组，每一件都精确到毫厘，使用起来颇费耐心，可以让制作出来的物品品质+1。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_ToolKitAdv/ToolKitAdv</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+		<researchPrerequisites>
+                <li>Machining</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>10000</WorkToMake>
+            <Mass>1.2</Mass>
+            <MaxHitPoints>180</MaxHitPoints>
+            <Flammability>0.3</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>20</WoodLog>
+            <Plasteel>40</Plasteel>
+            <ComponentSpacer>2</ComponentSpacer>
+        </costList>
+        <equippedStatOffsets>
+            <GeneralLaborSpeed>-0.5</GeneralLaborSpeed>
+        </equippedStatOffsets>
+		    <!-- 新增：质量偏移 +1 -->
+		<comps>
+			<li Class="DragonianTechExpansion.CompProperties_QualityOffset">
+				<qualityOffset>1</qualityOffset>
+			</li>
+		</comps>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_ToolKitAdv/ToolKitAdv</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘刮刀 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianScraper</defName>
+        <label>龙娘 刮刀</label>
+        <description>用于平整墙面、清理接缝的手持刮刀。加快施工速度，减少返工概率。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_Scraper/Scraper</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+		<researchPrerequisites>
+            <li>Smithing</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>5000</WorkToMake>
+            <Mass>0.8</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>15</WoodLog>
+            <Steel>20</Steel>
+        </costList>
+        <equippedStatOffsets>
+			<ConstructionSpeed>0.25</ConstructionSpeed>
+			<ConstructSuccessChance>0.15</ConstructSuccessChance>
+			<FixBrokenDownBuildingSuccessChance>0.10</FixBrokenDownBuildingSuccessChance>
+			<GeneralLaborSpeed>0.10</GeneralLaborSpeed>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_Scraper/Scraper</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘测绘罗盘 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianCompass</defName>
+        <label>龙娘 测绘罗盘</label>
+        <description>黄铜外壳的测绘罗盘，可以辅助龙娘勘探、定位与远距离观测。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_Compass/Compass</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+		<researchPrerequisites>
+            <li>Machining</li>
+        </researchPrerequisites>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>0.6</Mass>
+            <MaxHitPoints>80</MaxHitPoints>
+            <Flammability>0.4</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>10</WoodLog>
+            <Steel>20</Steel>
+            <Gold>20</Gold>
+        </costList>
+        <equippedStatOffsets>
+            <MiningSpeed>0.20</MiningSpeed>
+			<MiningYield>0.20</MiningYield>
+            <DeepDrillingSpeed>0.30</DeepDrillingSpeed>
+            <ShootingAccuracyPawn>0.05</ShootingAccuracyPawn>
+			<MortarMissRadiusFactor>-1</MortarMissRadiusFactor>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_Compass/Compass</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘线锯 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianWireSaw</defName>
+        <label>龙娘 线锯</label>
+        <description>以龙毛编成的细索连接两端把手，适用于修剪、割取植物。使用它收获作物时还能获得少量干草。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_WireSaw/WireSaw</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+        <statBases>
+            <WorkToMake>5000</WorkToMake>
+            <Mass>0.7</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.6</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>15</WoodLog>
+            <Steel>10</Steel>
+            <WoolDragonian>10</WoolDragonian>
+        </costList>
+        <equippedStatOffsets>
+            <PlantHarvestYield>0.25</PlantHarvestYield>
+			<DrugHarvestYield>0.25</DrugHarvestYield>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_WireSaw/WireSaw</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘鱼线组 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase" MayRequire="Ludeon.RimWorld.Odyssey">
+        <defName>DTE_DragonianFishingKit</defName>
+        <label>龙娘 鱼线组</label>
+        <description>用龙毛搓成的坚韧鱼线与木制绕线轴。适合在河流与海岸边耐心垂钓。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_FishingKit/FishingKit</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+		<researchPrerequisites>
+            <li>Fishing</li>
+        </researchPrerequisites>
+        <uiIconScale>1.3</uiIconScale>
+        <statBases>
+            <WorkToMake>4500</WorkToMake>
+            <Mass>0.6</Mass>
+            <MaxHitPoints>80</MaxHitPoints>
+            <Flammability>0.7</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>10</WoodLog>
+            <WoolDragonian>15</WoolDragonian>
+        </costList>
+        <equippedStatOffsets>
+            <FishingSpeed>0.30</FishingSpeed>
+			<FishingYield>0.30</FishingYield>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_FishingKit/FishingKit</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘搅拌棒 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianStirrer</defName>
+        <label>龙娘 搅拌棒</label>
+        <description>一根金属搅拌棒，常被龙娘用于搅动锅中的汤汁、药剂或麦芽汁，省力且不易折断。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_Stirrer/Stirrer</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+        <statBases>
+            <WorkToMake>4500</WorkToMake>
+            <Mass>0.7</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>15</WoodLog>
+            <Steel>5</Steel>
+        </costList>
+        <equippedStatOffsets>
+            <CookSpeed>0.20</CookSpeed>
+			<DrugSynthesisSpeed>0.20</DrugSynthesisSpeed>
+			<DrugCookingSpeed>0.20</DrugCookingSpeed>
+            <GeneralLaborSpeed>0.05</GeneralLaborSpeed>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_Stirrer/Stirrer</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+
+    <!-- ========== 龙娘家政工具 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianHouseholdTools</defName>
+        <label>龙娘 家政工具</label>
+        <description>一把龙毛掸子，每一个龙娘女仆都会有的东西。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_HouseholdTools/HouseholdTools</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>1.3</uiIconScale>
+        <statBases>
+            <WorkToMake>4000</WorkToMake>
+            <Mass>0.5</Mass>
+            <MaxHitPoints>80</MaxHitPoints>
+            <Flammability>0.7</Flammability>
+        </statBases>
+        <costList>
+            <WoodLog>15</WoodLog>
+			<WoolDragonian>10</WoolDragonian>
+        </costList>
+        <equippedStatOffsets>
+            <CleaningSpeed>0.50</CleaningSpeed>
+            <MoveSpeed>0.20</MoveSpeed>
+        </equippedStatOffsets>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_HouseholdTools/HouseholdTools</wornGraphicPath>
+		</apparel>
+    </ThingDef>
+	
+    <!-- ========== 龙娘拖车 ========== -->
+    <ThingDef ParentName="DTE_DragonianToolApparelBase">
+        <defName>DTE_DragonianTrailer</defName>
+        <label>龙娘 拖车</label>
+        <description>一辆手工拼装的粗糙拖车，常被龙娘商人绑在腰间用于运输大量物资。虽然拖行时会让龙娘在地图上的移动变得十分笨重，但在远行时，它能极大增加队伍的总负重上限，并显著提升行进速度。</description>
+        <graphicData>
+            <texPath>Things/Apparel/DTE_Trailer/Trailer</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+        </graphicData>
+        <uiIconScale>2</uiIconScale>
+		<apparel>
+			<wornGraphicPath>Things/Apparel/DTE_Trailer/Trailer</wornGraphicPath>
+            <tags>
+                <li>DTE_Trailer</li> <!-- 覆盖掉基类的 DTE_ApparelTools -->
+            </tags>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+			</wornGraphicData>
+			<drawData>
+				<scale>1.25</scale>
+				<dataSouth>
+				<layer>-100</layer>
+				</dataSouth>
+				<dataNorth>
+				<layer>100</layer>
+				</dataNorth>
+			</drawData>
+		</apparel>
+        <statBases>
+            <WorkToMake>12000</WorkToMake>
+            <Mass>18</Mass>
+            <MaxHitPoints>250</MaxHitPoints>
+            <Flammability>0.6</Flammability>
+            <EquipDelay>2.5</EquipDelay>
+        </statBases>
+        <costList>
+            <WoodLog>60</WoodLog>
+            <Steel>40</Steel>
+            <ComponentIndustrial>2</ComponentIndustrial>
+        </costList>
+        <equippedStatOffsets>
+            <CarryingCapacity>100</CarryingCapacity>
+            <MoveSpeed>-0.50</MoveSpeed>
+        </equippedStatOffsets>
+        <comps>
+            <li Class="DragonianTechExpansion.CompProperties_TrailerBonus">
+                <extraCaravanMass>50</extraCaravanMass>
+                <caravanSpeedMultiplier>2.5</caravanSpeedMultiplier>
+            </li>
+        </comps>
+    </ThingDef>
+
+</Defs>

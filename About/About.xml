@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ModMetaData>
+	<name>[Ruamia]Dragonian Tech Expansion</name>
+	<author>十十十十十十</author>
+	<packageId>ruamia.dragoniantechexpansion</packageId>
+	<description>
+	Dragonian（龙娘）Mix版的衍生扩展，在原有龙娘种族基础上新增研究项目，完善龙娘科技树的中后期内容。
+
+	</description>
+	<supportedVersions>
+		<li>1.6</li>
+		<li>1.7</li>
+	</supportedVersions>
+    <loadAfter>
+		<li>rooandgloomy.dragonianracemod</li>
+        <li>kalospacer.dragonianmix</li>
+    </loadAfter>
+</ModMetaData>

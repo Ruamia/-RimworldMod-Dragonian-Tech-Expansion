@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ============================================ -->
+    <!-- 龙鳞：皮革类材料 -->
+    <!-- ============================================ -->
+    <ThingDef ParentName="LeatherBase">
+        <defName>DragonianScale</defName>
+        <label>龙鳞</label>
+        <description>龙人身上脱落的鳞片，相比毛发和奶这需要通过特定的手段收获。龙鳞的防护性能更好，但隔热性能略逊一筹。</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/Dscale</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>13.0</MarketValue>
+            <StuffPower_Armor_Sharp>2.0</StuffPower_Armor_Sharp>
+            <StuffPower_Armor_Blunt>1.2</StuffPower_Armor_Blunt>
+            <StuffPower_Armor_Heat>1.0</StuffPower_Armor_Heat>
+            <StuffPower_Insulation_Cold>18</StuffPower_Insulation_Cold>
+            <StuffPower_Insulation_Heat>12</StuffPower_Insulation_Heat>
+            <DeteriorationRate>2.0</DeteriorationRate>
+        </statBases>
+        <stuffProps>
+            <color>(235,216,255)</color>
+            <commonality>0.1</commonality>
+            <statOffsets>
+                <Insulation_Cold>2</Insulation_Cold>
+                <Insulation_Heat>1</Insulation_Heat>
+            </statOffsets>
+            <statFactors>
+                <Flammability>0.0</Flammability>
+                <MaxHitPoints>1.9</MaxHitPoints>
+				<Beauty>1.5</Beauty>
+            </statFactors>
+        </stuffProps>
+        <thingCategories>
+            <li>Textiles</li>
+        </thingCategories>
+    </ThingDef>
+
+    <!-- ============================================ -->
+    <!-- 龙角粉末：制成品 -->
+    <!-- ============================================ -->
+    <ThingDef ParentName="ResourceBase">
+        <defName>DragonianHornPowder</defName>
+        <label>龙角粉末</label>
+        <description>从龙角上研磨下来的细粉，相比毛发和奶这需要通过特定的手段收获。继承自龙珠的部分生物活性，可用于制作药物、强化剂和其他制剂。</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/Dhornpowder</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>15.0</MarketValue>
+            <Mass>0.03</Mass>
+            <MaxHitPoints>50</MaxHitPoints>
+            <DeteriorationRate>0</DeteriorationRate>
+        </statBases>
+        <stackLimit>150</stackLimit>
+        <thingCategories>
+            <li>Manufactured</li>
+        </thingCategories>
+        <tradeTags>
+            <li>ExoticMisc</li>
+        </tradeTags>
+    </ThingDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 1. 暗黑启灵装置 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef ParentName="ResourceBase" MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DTE_DarkPsylinkNeuroformer</defName>
+        <label>暗黑启灵装置</label>
+        <description>一台禁忌的超凡造物。使用后会在使用者的大脑中强行建立启灵神经，由于建立路径的不同，无法被已经启灵的灵能者使用。使用这种方式启灵可能存在不可预料的副作用。</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/DarkPsylink</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1,1)</drawSize>
+        </graphicData>
+        
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+        <tradeTags>
+            <li>ExoticMisc</li>
+        </tradeTags>
+        <statBases>
+            <MarketValue>4000</MarketValue>
+            <Mass>1.0</Mass>
+            <MaxHitPoints>100</MaxHitPoints>
+        </statBases>
+        <stackLimit>1</stackLimit>
+        <techLevel>Archotech</techLevel>
+        <rotatable>false</rotatable>
+
+        <comps>
+            <li Class="CompProperties_Usable">
+                <useJob>UseItem</useJob>
+                <useLabel>使用 {0_label}</useLabel>
+                <useDuration>600</useDuration>
+            </li>
+
+            <li Class="DragonianTechExpansion.CompProperties_UseEffectDarkPsylink" />
+
+            <li Class="CompProperties_UseEffectPlaySound">
+                <soundOnUsed>PsycastPsychicEffect</soundOnUsed>
+            </li>
+            
+            <li Class="CompProperties_UseEffectDestroySelf" />
+        </comps>
+    </ThingDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 2. 深度昏迷 Hediff (2天循环) ========== -->
+    <!-- ========================================================== -->
+    <HediffDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DTE_DarkPsycoma</defName>
+        <label>深度昏迷</label>
+        <description>大脑正在承受暗黑超凡碎片的反噬。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <defaultLabelColor>(0.5, 0.2, 0.6)</defaultLabelColor>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>120000</disappearsAfterTicks>
+                <showRemainingTime>true</showRemainingTime>
+            </li>
+            <!-- 醒来后，继续下一次 30 天的侵蚀 -->
+            <li Class="DragonianTechExpansion.HediffCompProperties_AddHediffOnRemoval">
+                <hediffToAdd>DTE_NeuralErosion</hediffToAdd>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.1</setMax>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 3. 神经侵蚀 Hediff (30天循环) ========== -->
+    <!-- ========================================================== -->
+    <HediffDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DTE_NeuralErosion</defName>
+        <label>神经侵蚀</label>
+        <description>暗黑碎片的力量正在缓慢地改造神经系统，这能够强行提升启灵等级，但同时伴随着一些副作用。患者可能在15到30天内再次陷入昏迷。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <defaultLabelColor>(0.8, 0.1, 0.1)</defaultLabelColor>
+        <comps>
+            <!-- 15到30 天自动消失 -->
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>900000~1800000</disappearsAfterTicks>
+            </li>
+            <!-- 消失后触发：升级、加感知缺失、挂昏迷 -->
+            <li Class="DragonianTechExpansion.HediffCompProperties_AddHediffOnRemoval">
+                <hediffToAdd>DTE_DarkPsycoma</hediffToAdd>
+                <upgradePsylink>true</upgradePsylink>
+                <secondaryHediffToAdd>DTE_PerceptionLoss</secondaryHediffToAdd>
+                <secondaryHediffSeverity>0.1</secondaryHediffSeverity>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <label>侵蚀中</label>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 4. 感知缺失 Hediff (纯 XML 剥夺需求) ========== -->
+    <!-- ========================================================== -->
+    <HediffDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DTE_PerceptionLoss</defName>
+        <label>感知缺失</label>
+        <description>神经侵蚀导致的永久性感知剥夺。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <initialSeverity>0</initialSeverity>
+        <maxSeverity>1.0</maxSeverity>
+        <stages>
+            <li> <!-- 0-10% -->
+                <label>无异常</label>
+            </li>
+			<li>
+				<minSeverity>0.11</minSeverity>
+				<label>断食</label>
+				<painOffset>-0.1</painOffset>
+				<disablesNeeds>
+					<li>Food</li>
+				</disablesNeeds>
+			</li>
+			<!-- 30%-50% 不再需要睡眠 -->
+			<li>
+				<minSeverity>0.31</minSeverity>
+				<label>无眠</label>
+				<painOffset>-0.3</painOffset>
+				<disablesNeeds>
+					<li>Food</li>
+					<li>Rest</li>
+					<li>Comfort</li>
+				</disablesNeeds>
+			</li>
+			<!-- 50%-70% 不再需要娱乐 -->
+			<li>
+				<minSeverity>0.51</minSeverity>
+				<label>枯燥</label>
+				<painOffset>-0.5</painOffset>
+				<disablesNeeds>
+					<li>Food</li>
+					<li>Rest</li>
+					<li>Comfort</li>
+					<li>Joy</li>
+					<li>Outdoors</li>
+					<li>Indoors</li>
+				</disablesNeeds>
+			</li>
+            <li> <!-- 70%-90% 禁用社交能力 -->
+                <minSeverity>0.71</minSeverity>
+                <label>社交丧失</label>
+				<painOffset>-0.7</painOffset>
+				<disablesNeeds>
+					<li>Food</li>
+					<li>Rest</li>
+					<li>Comfort</li>
+					<li>Joy</li>
+					<li>Outdoors</li>
+					<li>Indoors</li>
+					<li>Beauty</li>
+				</disablesNeeds>
+				<disabledWorkTags>
+				<li>Caring</li>
+				</disabledWorkTags>
+				<opinionOfOthersFactor>0</opinionOfOthersFactor>
+				<capMods>
+				<li>
+					<capacity>Talking</capacity>
+					<setMax>0</setMax>
+				</li>
+				</capMods>
+            </li>
+            <li> <!-- 90%-100% 禁用心情 -->
+                <minSeverity>0.91</minSeverity>
+                <label>情感剥离</label>
+				<painOffset>-0.9</painOffset>
+				<disablesNeeds>
+					<li>Food</li>
+					<li>Rest</li>
+					<li>Comfort</li>
+					<li>Outdoors</li>
+					<li>Indoors</li>
+					<li>Joy</li>
+					<li>Beauty</li>
+					<li>Mood</li>
+				</disablesNeeds>
+				<disabledWorkTags>
+				<li>Caring</li>
+				</disabledWorkTags>
+				<opinionOfOthersFactor>0</opinionOfOthersFactor>
+				<capMods>
+				<li>
+					<capacity>Talking</capacity>
+					<setMax>0</setMax>
+				</li>
+				</capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 3. 制造配方 ========== -->
+    <!-- ========================================================== -->
+    <RecipeDef MayRequire="Ludeon.RimWorld.Anomaly">
+        <defName>DTE_MakeDarkPsylinkNeuroformer</defName>
+        <label>制造暗黑启灵装置</label>
+        <description>在锻造台上将暗黑超凡碎片与高级零部件重组，制成能够强行激活启灵神经的禁忌装置。</description>
+        <jobString>正在制造暗黑启灵装置。</jobString>
+        <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+        <workSkill>Crafting</workSkill>
+        <effectWorking>Smith</effectWorking>
+        <soundWorking>Recipe_Smith</soundWorking>
+        <workAmount>25000</workAmount> <!-- 需要一定时间 -->
+        
+        <!-- 锻造台配方 -->
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>ElectricSmithy</li>
+            <li>DragonianSmith</li>
+        </recipeUsers>
+        
+        <!-- 高级制作，需要较高手工技能 -->
+        <skillRequirements>
+            <Crafting>12</Crafting>
+        </skillRequirements>
+        
+		<researchPrerequisites>
+			<li>DragonianForbiddenTech</li>
+        </researchPrerequisites>
+
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <!-- 如果你的暗黑超凡碎片DefName不同，请替换这里 -->
+                        <li>Shard</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentSpacer</li> <!-- 高级零部件 -->
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+        </ingredients>
+        
+        <products>
+            <DTE_DarkPsylinkNeuroformer>1</DTE_DarkPsylinkNeuroformer>
+        </products>
+    </RecipeDef>
+	
+	<ThingDef ParentName="ResourceBase">
+		<defName>DTE_Compost</defName>
+		<label>龙龙堆肥</label>
+		<description>由各种植物残渣、肉类废料混合而成。静置在合适温度下，会在7天后进一步发酵成珍贵的“龙坷垃”。</description>
+		<graphicData>
+		<texPath>Things/Item/Resource/DTE_Compost</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stackLimit>100</stackLimit>
+		<statBases>
+		<Mass>0.5</Mass>
+		<MarketValue>1.5</MarketValue>
+		<Flammability>0.5</Flammability>
+		</statBases>
+		<thingCategories>
+		<li>ResourcesRaw</li>
+		</thingCategories>
+		
+		<!-- 【新增】必须要有 tickerType 才能执行 CompTickRare 发酵 -->
+		<tickerType>Rare</tickerType>
+		
+		<comps>
+		<!-- 【复用你的发酵组件】 -->
+		<li Class="DragonianTechExpansion.CompProperties_MilkWineMaturation">
+			<maturationTicks>420000</maturationTicks> <!-- 7天 = 7 * 60000 -->
+			<minTemperature>10</minTemperature> <!-- 给个比较宽泛的常温范围 -->
+			<maxTemperature>45</maxTemperature>
+			<thingToTransformTo>DTE_DragonManure</thingToTransformTo>
+			<resultCount>1</resultCount> <!-- 1个堆肥变成1个龙坷垃 -->
+		</li>
+		</comps>
+		
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+		
+	</ThingDef>
+	
+	<RecipeDef>
+		<defName>DTE_MakeCompost</defName>
+		<label>制作龙龙堆肥</label>
+		<description>利用屠宰台处理用不上的植物残渣、肉类废料，将其充分混合后制成堆肥。</description>
+		<jobString>正在制作堆肥。</jobString>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<workAmount>1200</workAmount>
+		
+		<!-- 修复：1.6 版本的屠宰台 DefName 是 TableButcher -->
+		<recipeUsers>
+			<li>TableButcher</li>
+		</recipeUsers>
+	
+		<ingredients>
+			<li>
+			<filter>
+				<!-- 防止循环：禁止把堆肥本身当成原料 -->
+				<disallowedThingDefs>
+				<li>DTE_Compost</li> 
+				</disallowedThingDefs>
+				
+				<!-- 修复：使用 categories 类别来识别各种食物 -->
+				<categories>
+				<li>PlantFoodRaw</li>     <!-- 包含所有生素食（土豆、玉米等） -->
+				<li>MeatRaw</li>          <!-- 包含所有生肉 -->
+				<li>AnimalProductRaw</li> <!-- 包含蛋、奶等动物产品 -->
+				</categories>
+			</filter>
+			<count>20</count>
+			</li>
+		</ingredients>
+	
+		<!-- 产出设置：消耗20份材料，产出10份堆肥 -->
+		<products>
+		<DTE_Compost>10</DTE_Compost>
+		</products>
+		
+		<!-- 只需要普通劳力，不需要烹饪技能要求 -->
+		<skillRequirements>
+		<Cooking>0</Cooking>
+		</skillRequirements>
+		
+		<!-- 制作完成后不生成未完成的半成品（直接产出成品） -->
+		<unfinishedThingDef Inherit="False" />
+	</RecipeDef>
+	
+	<ThingDef ParentName="ResourceBase">
+		<defName>DTE_DragonManure</defName>
+		<label>龙坷垃</label>
+		<description>龙娘们说这是通过魔法催化产生的超级有机肥料，虽然真实性有待考证，不过它确实可以在合适的条件下让作物生长得更快。散发着奇异的温热，是建造肥沃保温苗圃的重要材料。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/DragonManure</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<stackLimit>100</stackLimit>
+		<statBases>
+			<Mass>0.5</Mass>
+			<MarketValue>5</MarketValue>
+			<Flammability>0.1</Flammability>
+		</statBases>
+		<thingCategories>
+			<li>ResourcesRaw</li>
+		</thingCategories>
+		<researchPrerequisites>
+			<li>DragonianAgricultureTech</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+</Defs>

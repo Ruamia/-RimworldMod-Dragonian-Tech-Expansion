@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- 虚空之惧 换皮版 -->
+	<AbilityDef MayRequire="Ludeon.RimWorld.Anomaly">
+		<defName>DorbDark_VoidTerror</defName>
+		<label>虚空之惧</label>
+		<description>精神性地诱发可怕的幻觉，导致目标因恐惧而逃跑。</description>
+		<iconPath>UI/Abilities/VoidTerror</iconPath>
+		<cooldownTicksRange>1500</cooldownTicksRange>
+		<warmupEffecter>HoraxianSpellDark_Warmup</warmupEffecter>
+		<sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
+		<writeCombatLog>true</writeCombatLog>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<abilityClass>Psycast</abilityClass>
+	
+		<statBases>
+			<Ability_RequiredPsylink>1</Ability_RequiredPsylink>
+			<Ability_EntropyGain>25</Ability_EntropyGain>
+			<Ability_PsyfocusCost>0.01</Ability_PsyfocusCost>
+			<Ability_GoodwillImpact>-25</Ability_GoodwillImpact>
+		</statBases>
+		
+		<verbProperties>
+		<verbClass>Verb_CastAbility</verbClass>
+		<warmupTime>0.5</warmupTime>
+		<range>31.9</range>
+		<drawAimPie>true</drawAimPie>
+		<requireLineOfSight>true</requireLineOfSight>
+		<soundCast>VoidTerrorCast</soundCast>
+		<targetParams>
+			<canTargetLocations>false</canTargetLocations>
+			<canTargetPawns>true</canTargetPawns>
+			<canTargetAnimals>false</canTargetAnimals>
+			<canTargetBuildings>false</canTargetBuildings>
+			<canTargetHumans>true</canTargetHumans>
+			<canTargetMechs>false</canTargetMechs>
+			<canTargetSelf>false</canTargetSelf>
+			<canTargetSubhumans>false</canTargetSubhumans>
+			<neverTargetIncapacitated>true</neverTargetIncapacitated>
+		</targetParams>
+		</verbProperties>
+		<comps>
+		<li Class="CompProperties_AbilityGiveMentalState">
+			<compClass>CompAbilityEffect_GiveMentalState</compClass>
+			<stateDef>TerrifyingHallucinations</stateDef>
+			<goodwillImpact>-25</goodwillImpact>
+			<forced>true</forced>
+		</li>
+		<li Class="CompProperties_AbilityConnectingFleckLine">
+			<fleckDef>PsycastPsychicLine</fleckDef>
+		</li>
+		<li Class="CompProperties_AbilityEffecterOnTarget">
+			<effecterDef>VoidTerror_Target</effecterDef>
+		</li>
+		</comps>
+	</AbilityDef>
+</Defs>

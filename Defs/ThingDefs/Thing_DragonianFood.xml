@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ========================================================== -->
+    <!-- ========== 1. 龙娘乳酪 ========== -->
+    <!-- ========================================================== -->
+
+    <ThingDef ParentName="OrganicProductBase">
+        <defName>DragonianCheese</defName>
+        <label>龙娘乳酪</label>
+        <description>将龙娘奶长时间熬制而成的乳酪，美味又营养。</description>
+        <graphicData>
+            <texPath>Things/Item/Resource/DragonianCheese</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+		<researchPrerequisites>
+			<li>DragonianFoodTech</li>
+		</researchPrerequisites>
+        <socialPropernessMatters>true</socialPropernessMatters>
+        <statBases>
+            <MarketValue>75</MarketValue>
+            <Mass>0.2</Mass>
+            <MaxHitPoints>80</MaxHitPoints>
+            <Nutrition>0.9</Nutrition>
+            <DeteriorationRate>3.0</DeteriorationRate>
+        </statBases>
+        <ingestible>
+            <preferability>MealSimple</preferability>
+            <foodType>Meal</foodType>
+            <joy>0.3</joy>
+            <joyKind>Gluttonous</joyKind>
+            <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+            <babiesCanIngest>true</babiesCanIngest>
+            <outcomeDoers>
+                <li Class="IngestionOutcomeDoer_GiveHediff">
+                    <hediffDef>DragonianCheeseHeal</hediffDef>
+                    <severity>1</severity>
+                </li>
+            </outcomeDoers>
+        </ingestible>
+		<thingCategories>
+			<li>Foods</li>
+		</thingCategories>
+        <thingSetMakerTags>
+            <li>RewardStandardCore</li>
+        </thingSetMakerTags>
+    </ThingDef>
+	
+    <HediffDef>
+        <defName>DragonianCheeseHeal</defName>
+        <hediffClass>HediffWithComps</hediffClass>
+        <label>龙乳自愈</label>
+        <description>龙娘乳酪激活了体内潜藏的自愈因子，伤口正在以肉眼可见的速度愈合。</description>
+        <isBad>false</isBad>
+        <defaultLabelColor>(0.95, 0.85, 0.5)</defaultLabelColor>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>60000</disappearsAfterTicks> <!-- 24 小时 -->
+                <showRemainingTime>true</showRemainingTime>
+            </li>
+            <li Class="HediffCompProperties_DisappearsOnDeath" />
+        </comps>
+        <stages>
+            <li>
+                <statFactors>
+                    <InjuryHealingFactor>5.0</InjuryHealingFactor>
+                </statFactors>
+	            <statOffsets>
+                    <ComfyTemperatureMin>-12</ComfyTemperatureMin>
+                    <ComfyTemperatureMax>12</ComfyTemperatureMax>
+                </statOffsets>
+            </li>
+        </stages>
+    </HediffDef>
+	
+    <ThoughtDef>
+        <defName>DragonianCheeseMood</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>DragonianCheeseHeal</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <stages>
+            <li>
+                <label>吃了龙娘乳酪</label>
+                <description>嘴里还留着乳酪的醇香，身体暖洋洋的。</description>
+                <baseMoodEffect>3</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+	
+	    <!-- ========== 单个配方（炉灶） ========== -->
+    <RecipeDef>
+        <defName>MakeDragonianCheese</defName>
+        <label>制作龙娘乳酪</label>
+        <description>将龙娘奶熬制成龙娘乳酪。</description>
+        <jobString>熬制龙娘乳酪中。</jobString>
+        <workAmount>800</workAmount>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <skillRequirements>
+            <Cooking>3</Cooking>
+        </skillRequirements>
+        <recipeUsers>
+            <li>Campfire</li>
+            <li>FueledStove</li>
+            <li>ElectricStove</li>
+			<li>DragonianSmith</li>
+        </recipeUsers>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>DragonianMilk</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+        </ingredients>
+        <products>
+            <DragonianCheese>1</DragonianCheese>
+        </products>
+    </RecipeDef>
+
+    <!-- ========== 批量配方（炉灶，产出 4 个） ========== -->
+    <RecipeDef>
+        <defName>MakeDragonianCheeseBulk</defName>
+        <label>批量制作龙娘乳酪</label>
+        <description>将大量龙娘奶熬制成龙娘乳酪。</description>
+        <jobString>批量熬制龙娘乳酪中。</jobString>
+        <workAmount>2800</workAmount>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <skillRequirements>
+            <Cooking>3</Cooking>
+        </skillRequirements>
+        <recipeUsers>
+            <li>Campfire</li>
+            <li>FueledStove</li>
+            <li>ElectricStove</li>
+			<li>DragonianSmith</li>
+        </recipeUsers>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>DragonianMilk</li>
+                    </thingDefs>
+                </filter>
+                <count>24</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>12</count>
+            </li>
+        </ingredients>
+        <products>
+            <DragonianCheese>4</DragonianCheese>
+        </products>
+    </RecipeDef>
+
+    <!-- ========== 手工加工点配方（1 个） ========== -->
+    <RecipeDef>
+        <defName>MakeDragonianCheeseManual</defName>
+        <label>手工制作龙娘乳酪</label>
+        <description>纯手工将龙娘奶熬制成龙娘乳酪。</description>
+        <jobString>手工熬制龙娘乳酪中。</jobString>
+        <workAmount>1200</workAmount>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <skillRequirements>
+            <Cooking>3</Cooking>
+        </skillRequirements>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>DragonianMilk</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+        </ingredients>
+        <products>
+            <DragonianCheese>1</DragonianCheese>
+        </products>
+    </RecipeDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 2. 龙奶酒 ========== -->
+    <!-- ========================================================== -->
+	
+	<!-- ================= 龙奶酒原浆 ================= -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>DragonianMilkWineMust</defName>
+		<label>龙奶酒原浆</label>
+		<description>新鲜挤出的龙奶经过初步处理后得到的原浆。静置在5°C到25°C的环境中约14天，它会自然发酵成醇厚的龙奶酒。温度过低或过高都会停止发酵。</description>
+		<graphicData>
+		<texPath>Things/Item/Resource/DmilkWineMust</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<stackLimit>25</stackLimit>
+		<researchPrerequisites>
+		<li>DragonianFoodTech</li>
+		<li>Brewing</li>
+		</researchPrerequisites>
+		<thingCategories>
+		<li>ItemsMisc</li>
+		</thingCategories>
+		<statBases>
+		<DeteriorationRate>1.0</DeteriorationRate>
+		<MarketValue>20</MarketValue>
+		<Mass>0.8</Mass>
+		<Flammability>0.2</Flammability>
+		<MaxHitPoints>60</MaxHitPoints>
+		</statBases>
+		<tickerType>Rare</tickerType>
+		<comps>
+		<!-- 30天保鲜期 -->
+		<li Class="CompProperties_Rottable">
+			<daysToRotStart>30</daysToRotStart>
+			<rotDestroys>true</rotDestroys>
+		</li>
+		<!-- 自定义发酵组件 -->
+		<li Class="DragonianTechExpansion.CompProperties_MilkWineMaturation">
+			<maturationTicks>840000</maturationTicks>
+			<minTemperature>5</minTemperature>
+			<maxTemperature>25</maxTemperature>
+			<thingToTransformTo>DragonianMilkWine</thingToTransformTo>
+			<resultCount>10</resultCount>
+		</li>
+		<li Class="CompProperties_Ingredients"/>
+		</comps>
+		<ingestible>
+		<foodType>VegetableOrFruit</foodType>
+		<preferability>NeverForNutrition</preferability>
+		</ingestible>
+	</ThingDef>
+
+	<!-- ================= 龙奶酒 ================= -->
+	<ThingDef ParentName="DrugBase">
+		<defName>DragonianMilkWine</defName>
+		<label>龙奶酒</label>
+		<description>由龙娘乳汁发酵而成的珍贵美酒。色泽乳白泛金，入口醇厚回甘，带有淡淡的奶香和花果气息。据说龙娘们只在最重要的庆典上才会开怀畅饮。</description>
+		<graphicData>
+		<texPath>Things/Item/Resource/DmilkWine</texPath>
+		<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<researchPrerequisites>
+		<li>DragonianFoodTech</li>
+		<li>Brewing</li>
+		</researchPrerequisites>
+		<rotatable>false</rotatable>
+		<stackLimit>25</stackLimit>
+		<statBases>
+		<DeteriorationRate>0.5</DeteriorationRate>
+		<Mass>0.3</Mass>
+		<Flammability>0.5</Flammability>
+		<Nutrition>0.08</Nutrition>
+		<MarketValue>200</MarketValue>
+		<Beauty>20</Beauty>
+		</statBases>
+		<ingestible>
+		<foodType>Fluid, Processed, Liquor</foodType>
+		<joyKind>Chemical</joyKind>
+		<joy>0.25</joy>
+		<nurseable>true</nurseable>
+		<drugCategory>Social</drugCategory>
+		<ingestSound>Ingest_Beer</ingestSound>
+		<ingestCommandString>Drink {0}</ingestCommandString>
+		<ingestReportString>Drinking {0}.</ingestReportString>
+		<chairSearchRadius>25</chairSearchRadius>
+		<outcomeDoers>
+			<li Class="IngestionOutcomeDoer_GiveHediff">
+			<hediffDef>AlcoholHigh</hediffDef>
+			<severity>0.5</severity>
+			<toleranceChemical>Alcohol</toleranceChemical>
+			</li>
+			<li Class="IngestionOutcomeDoer_GiveHediff">
+			<hediffDef>AmbrosiaHigh</hediffDef>
+			<severity>0.25</severity>
+			</li>
+			<li Class="IngestionOutcomeDoer_GiveHediff">
+			<hediffDef>AlcoholTolerance</hediffDef>
+			<toleranceChemical>Alcohol</toleranceChemical>
+			<severity>0.032</severity>
+			<divideByBodySize>true</divideByBodySize>
+			<multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
+			</li>
+		</outcomeDoers>
+		</ingestible>
+		<techLevel>Medieval</techLevel>
+		<comps>
+		<li Class="CompProperties_Drug">
+			<chemical>Alcohol</chemical>
+			<addictiveness>0</addictiveness>
+			<minToleranceToAddict>0.25</minToleranceToAddict>
+			<existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+			<needLevelOffset>0.9</needLevelOffset>
+			<listOrder>10</listOrder>
+		</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ================= 酿造配方 ================= -->
+	<RecipeDef>
+		<defName>MakeDragonianMilkWineMust</defName>
+		<label>制作龙奶酒原浆</label>
+		<description>将新鲜的龙奶经过初步处理制成原浆，静置后即可自然发酵成酒。</description>
+		<researchPrerequisites>
+			<li>DragonianFoodTech</li>
+		</researchPrerequisites>
+		<jobString>制作龙奶酒原浆中。</jobString>
+		<workSpeedStat>DrugCookingSpeed</workSpeedStat>
+		<workSkill>Cooking</workSkill>
+		<effectWorking>Cook</effectWorking>
+		<workAmount>1000</workAmount>
+		<soundWorking>Recipe_Brewing</soundWorking>
+		<recipeUsers>
+		<li>Brewery</li>
+		</recipeUsers>
+		<ingredients>
+		<li>
+			<filter>
+			<thingDefs>
+				<li>DragonianMilk</li>
+			</thingDefs>
+			</filter>
+			<count>50</count>
+		</li>
+		</ingredients>
+		<products>
+		<DragonianMilkWineMust>1</DragonianMilkWineMust>
+		</products>
+		<skillRequirements>
+		<Cooking>4</Cooking>
+		</skillRequirements>
+	</RecipeDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 3. 干草饼干 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef>
+        <defName>DTE_HayBiscuit</defName>
+        <label>干草饼干</label>
+        <description>在烹饪台将干草进一步风干后压铸成型的硬块。不会腐烂，可以作为廉价的远行食物或动物饲料，但除了龙娘没人会喜欢吃它。</description>
+        <thingClass>ThingWithComps</thingClass>
+        <category>Item</category>
+		<researchPrerequisites>
+			<li>DragonianFoodTech</li>
+		</researchPrerequisites>
+        <altitudeLayer>Item</altitudeLayer>
+        <useHitPoints>true</useHitPoints>
+        <selectable>true</selectable>
+        <!-- 必须加 tickerType 才能正常显示和生效 -->
+        <tickerType>Rare</tickerType> 
+        <!-- 必须加 drawGUIOverlay 才能显示堆叠数量 -->
+        <drawGUIOverlay>true</drawGUIOverlay> 
+        <socialPropernessMatters>true</socialPropernessMatters> <!-- 修复报错：防止狱卒喂食bug -->
+		
+        <graphicData>
+            <texPath>Things/Item/Resource/HayBiscuit</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>1.5</MarketValue>
+            <Mass>0.03</Mass>
+            <Nutrition>0.1</Nutrition>
+        </statBases>
+        <stackLimit>200</stackLimit>
+        
+        <ingestible>
+            <preferability>MealSimple</preferability>
+            <foodType>Meal</foodType>
+            <maxNumToIngestAtOnce>4</maxNumToIngestAtOnce>
+            <ingestSound>Meal_Eat</ingestSound>
+            <ingestCommandString>吃 {0}</ingestCommandString>
+            <ingestReportString>正在吃 {0}。</ingestReportString>
+            <outcomeDoers>
+                <li Class="IngestionOutcomeDoer_GiveHediff">
+                    <hediffDef>DTE_AteHayBiscuitBad</hediffDef>
+                    <severity>1.0</severity>
+                </li>
+            </outcomeDoers>
+        </ingestible>
+        <thingCategories>
+            <li>Foods</li>
+        </thingCategories>
+    </ThingDef>
+
+    <RecipeDef>
+        <defName>DTE_MakeHayBiscuit</defName>
+        <label>制作干草饼干</label>
+        <description>将干草风干压制成不会腐烂的饼干。</description>
+        <jobString>正在制作干草饼干。</jobString>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_CookMeal</soundWorking>
+        <workAmount>600</workAmount>
+        <recipeUsers>
+            <li>Campfire</li>
+            <li>FueledStove</li>
+            <li>ElectricStove</li>
+			<li>DragonianSmith</li>
+        </recipeUsers>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Hay</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Hay</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <DTE_HayBiscuit>8</DTE_HayBiscuit>
+        </products>
+    </RecipeDef>
+
+    <!-- 吃干草饼干的专属状态 -->
+    <HediffDef>
+        <defName>DTE_AteHayBiscuitBad</defName>
+        <label>干草渣子</label>
+        <description>满嘴的干草渣子，味道就像在嚼地毯。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>6000</disappearsAfterTicks>
+            </li>
+        </comps>
+		<stages>
+		<li>
+			<becomeVisible>false</becomeVisible>
+		</li>
+		</stages>
+    </HediffDef>
+
+    <!-- 专属的负面心情 -->
+    <ThoughtDef>
+        <defName>DTE_AteHayBiscuitMood</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>DTE_AteHayBiscuitBad</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+		<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <stages>
+            <li>
+                <label>吃了干草饼干</label>
+                <description>满嘴的干草渣子，味道就像在嚼地毯。</description>
+                <baseMoodEffect>-4</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 4. 草料面包（完全参考啤酒模板） ========== -->
+    <!-- ========================================================== -->
+    <ThingDef>
+        <defName>DTE_HayBread</defName>
+        <label>草料面包</label>
+        <description>传统的手工面包，由龙娘面包师倾情制作。外壳硬得能崩碎牙齿，内部则填充了干草，非常耐储存。相较于干草饼干来说即使是人类也能入口，不过吃完可能会有点胃部不适，推荐就着龙娘奶酪一起吃。</description>
+        <thingClass>ThingWithComps</thingClass>
+        <category>Item</category>
+		<researchPrerequisites>
+			<li>DragonianFoodTech</li>
+		</researchPrerequisites>
+        <altitudeLayer>Item</altitudeLayer>
+        <useHitPoints>true</useHitPoints>
+        <selectable>true</selectable>
+        <tickerType>Rare</tickerType> <!-- 修复报错：腐烂组件必须有Ticker -->
+        <drawGUIOverlay>true</drawGUIOverlay>
+        <smeltable>false</smeltable> <!-- 修复报错：不可熔炼 -->
+        <socialPropernessMatters>true</socialPropernessMatters> <!-- 修复报错：防止狱卒喂食bug -->
+        
+        <!-- 武器基础设定 -->
+        <equipmentType>Primary</equipmentType>
+        <techLevel>Neolithic</techLevel>
+        <weaponClasses>
+            <li>Melee</li>
+            <li>MeleeBlunt</li>
+        </weaponClasses>
+        
+        <graphicData>
+            <texPath>Things/Item/Resource/HayBread</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>8</MarketValue>
+            <Mass>0.08</Mass>
+            <Nutrition>0.35</Nutrition>
+        </statBases>
+        <stackLimit>20</stackLimit>
+        
+        <!-- 武器攻击面板 -->
+        <tools>
+            <li>
+                <label>bread</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>2.0</cooldownTime>
+                <armorPenetration>0.05</armorPenetration>
+                <chanceFactor>1</chanceFactor>
+            </li>
+        </tools>
+        
+        <!-- 食物属性 -->
+        <ingestible>
+            <preferability>MealSimple</preferability>
+            <foodType>Meal</foodType>
+            <ingestSound>Meal_Eat</ingestSound>
+            <outcomeDoers>
+                <li Class="IngestionOutcomeDoer_GiveHediff">
+                    <hediffDef>DTE_StomachAche</hediffDef>
+                    <severity>1.0</severity>
+                </li>
+            </outcomeDoers>
+        </ingestible>
+        
+        <thingCategories>
+            <li>Foods</li>
+        </thingCategories>
+        
+        <!-- 组件：参照啤酒的写法 -->
+        <comps>
+            <!-- 修复报错：用 compClass 直接挂载装备组件 -->
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <li Class="CompProperties_Forbiddable" />
+            <li Class="CompProperties_Rottable">
+                <daysToRotStart>14</daysToRotStart>
+                <rotDestroys>true</rotDestroys>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <RecipeDef>
+        <defName>DTE_MakeHayBread</defName>
+        <label>烘焙草料面包</label>
+        <description>将干草和素食混合烘焙成耐储存的粗粮面包。</description>
+        <jobString>正在烘焙草料面包。</jobString>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_CookMeal</soundWorking>
+        <workAmount>400</workAmount>
+        <recipeUsers>
+            <li>Campfire</li>
+            <li>FueledStove</li>
+            <li>ElectricStove</li>
+			<li>DragonianSmith</li>
+        </recipeUsers>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Hay</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>
+            </li>
+            <li>
+                <filter>
+                    <categories>
+                        <li>PlantFoodRaw</li>
+                    </categories>
+                </filter>
+                <count>5</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <categories>
+                <li>PlantFoodRaw</li>
+            </categories>
+            <thingDefs>
+                <li>Hay</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <DTE_HayBread>2</DTE_HayBread>
+        </products>
+    </RecipeDef>
+
+    <!-- 草料面包的胃痛状态 -->
+    <HediffDef>
+        <defName>DTE_StomachAche</defName>
+        <label>胃部不适</label>
+        <description>吃了不容易消化的东西。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>12000</disappearsAfterTicks>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <painOffset>0.01</painOffset>
+            </li>
+        </stages>
+    </HediffDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 5. 熏鱼 ========== -->
+    <!-- ========================================================== -->
+    <ThingDef MayRequire="Ludeon.RimWorld.Odyssey">
+        <defName>DTE_SmokedFish</defName>
+        <label>熏鱼</label>
+        <description>将新鲜的鱼进行熏制以达成防腐的目的。虽然直接吃味道一般，但依然可以作为优质的蛋白质食材加入到其他料理的制作当中。</description>
+		<researchPrerequisites>
+			<li>DragonianFoodTech</li>
+		</researchPrerequisites>
+        <thingClass>ThingWithComps</thingClass>
+        <category>Item</category>
+        <altitudeLayer>Item</altitudeLayer>
+        <useHitPoints>true</useHitPoints>
+        <selectable>true</selectable>
+        <tickerType>Rare</tickerType>
+        <drawGUIOverlay>true</drawGUIOverlay>
+        
+        <graphicData>
+            <texPath>Things/Item/Resource/SmokedFish</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>8</MarketValue>
+            <Mass>0.5</Mass>
+            <Nutrition>0.25</Nutrition>
+            <MaxHitPoints>80</MaxHitPoints>
+            <Flammability>0.25</Flammability>
+            <DeteriorationRate>1.0</DeteriorationRate>
+        </statBases>
+        <stackLimit>50</stackLimit>
+        
+        <ingestible>
+            <!-- 依然保留 Meat 和 Processed -->
+            <foodType>Meat, Processed</foodType>
+            <preferability>RawBad</preferability>
+            <ingestEffect>EatMeat</ingestEffect>
+            <ingestSound>RawMeat_Eat</ingestSound>
+            <tasteThought>AteRawFood</tasteThought>
+        </ingestible>
+        
+        <thingCategories>
+            <!-- 【核心修复1】加入 MeatRaw 分类，这样精致食物/简单食物就会把它当肉用 -->
+            <li>MeatRaw</li>
+            <!-- 如果你的DLC有专门的 Fish 分类，也可以加进来让它归类为鱼 -->
+            <li>Fish</li> 
+        </thingCategories>
+        
+        <comps>
+            <li Class="CompProperties_Rottable">
+                <daysToRotStart>60</daysToRotStart>
+                <rotDestroys>true</rotDestroys>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <RecipeDef MayRequire="Ludeon.RimWorld.Odyssey">
+        <defName>DTE_MakeSmokedFish</defName>
+        <label>熏制鱼类</label>
+        <description>将新鲜的鱼通过烟熏处理，延长其保质期。</description>
+        <jobString>正在熏制鱼。</jobString>
+        <workSpeedStat>CookSpeed</workSpeedStat>
+        <workSkill>Cooking</workSkill>
+        <effectWorking>Cook</effectWorking>
+        <soundWorking>Recipe_CookMeal</soundWorking>
+        <workAmount>400</workAmount>
+        <recipeUsers>
+            <li>Campfire</li>
+            <li>FueledStove</li>
+            <li>ElectricStove</li>
+			<li>DragonianSmith</li>
+        </recipeUsers>
+        
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>Fish</li>
+                    </categories>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+        
+        <fixedIngredientFilter>
+            <categories>
+                <li>Fish</li>
+            </categories>
+            <!-- 【核心修复2】明确禁止把“熏鱼”放入原料槽，防止无限套娃 -->
+            <disallowedThingDefs>
+                <li>DTE_SmokedFish</li>
+            </disallowedThingDefs>
+        </fixedIngredientFilter>
+        
+        <products>
+            <DTE_SmokedFish>2</DTE_SmokedFish>
+        </products>
+    </RecipeDef>
+
+</Defs>

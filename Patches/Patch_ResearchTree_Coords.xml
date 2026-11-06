@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <!-- 龙娘仿生部件从 (1,4) 移到 (0,4)，给 DTE 龙珠让出位置 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="DragonianBionics"]/researchViewX</xpath>
+        <value>
+            <researchViewX>0</researchViewX>
+        </value>
+    </Operation>
+
+    <!-- 龙娘护盾模块从 (2,4) 移到 (3,4)，排在仿生分支的最右侧 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="DragonianShieldModule"]/researchViewX</xpath>
+        <value>
+            <researchViewX>3</researchViewX>
+        </value>
+    </Operation>
+
+</Patch>

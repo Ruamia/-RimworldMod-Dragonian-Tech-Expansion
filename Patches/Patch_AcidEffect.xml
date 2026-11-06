@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <!-- 修改 DRM_AcidBurn -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/DamageDef[defName="DRM_AcidBurn"]</xpath>
+        <value>
+            <explosionCellFleck>Fleck_AcidSpitLaunchedMist</explosionCellFleck>
+            <explosionColorCenter>(0.5, 1, 0.3)</explosionColorCenter>
+            <explosionColorEdge>(0.5, 0.6, 0.4)</explosionColorEdge>
+        </value>
+    </Operation>
+
+    <!-- 修改 DRM_AcidCover -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/DamageDef[defName="DRM_AcidCover"]</xpath>
+        <value>
+            <explosionCellFleck>Fleck_AcidSpitLaunchedMist</explosionCellFleck>
+            <explosionColorCenter>(0.5, 1, 0.3)</explosionColorCenter>
+            <explosionColorEdge>(0.5, 0.6, 0.4)</explosionColorEdge>
+        </value>
+    </Operation>
+
+    <!-- 修改 DRM_Damage_AcidCover_Ex -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/DamageDef[defName="DRM_Damage_AcidCover_Ex"]</xpath>
+        <value>
+            <explosionCellFleck>Fleck_AcidSpitLaunchedMist</explosionCellFleck>
+            <explosionColorCenter>(0.5, 1, 0.3)</explosionColorCenter>
+            <explosionColorEdge>(0.5, 0.6, 0.4)</explosionColorEdge>
+        </value>
+    </Operation>
+</Patch>

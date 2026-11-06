@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- ========================================================== -->
+    <!-- ========== 复方药剂 - 物品与制造配方 ========== -->
+    <!-- ========================================================== -->
+	
+	<ThingDef ParentName="MedicineBase">
+		<defName>DragonianHornMedicine</defName>
+		<label>龙角复方药膏</label>
+		<description>用草药和龙角粉末制成的秘药，大幅提升了治疗效率，并能一次处理更多伤口，适合紧急治疗或高风险手术（请不要让龙娘这么做）。由于草药被龙角粉末活化而更易变质，应当仅在有需要时才进行制作或冷藏保存。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/HornMedicine</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>55</MarketValue>
+			<MedicalPotency>5.0</MedicalPotency>
+			<MedicalQualityMax>0.8</MedicalQualityMax>
+			<Mass>0.5</Mass>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>4</DeteriorationRate>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>30</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+			<li Class="CompProperties_Drug">
+				<overdoseSeverityOffset>0.01~0.03</overdoseSeverityOffset>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+	</ThingDef>
+	
+	<RecipeDef>
+		<defName>MakeDragonianHornMedicine</defName>
+		<label>制作龙角复方药膏</label>
+		<description>用捣烂的草药和龙角粉末混合制成块状的复方药膏。龙角粉末活化了草药中的治愈因子。</description>
+		<jobString>制作龙角复方药剂中。</jobString>
+		<workAmount>1</workAmount>
+		<researchPrerequisite>DragonianMedicalApplication</researchPrerequisite>
+		<recipeUsers>
+			<li>DrugLab</li>
+		</recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>DragonianHornPowder</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>MedicineHerbal</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<products>
+			<DragonianHornMedicine>2</DragonianHornMedicine>
+		</products>
+	</RecipeDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 亢奋素 - 核心化学与需求定义 ========== -->
+    <!-- ========================================================== -->
+	
+	<ChemicalDef>
+		<defName>DragonianHornStimulant</defName>
+		<label>龙角亢奋素</label>
+		<addictionHediff>DragonianHornStimulantAddiction</addictionHediff>
+		<toleranceHediff>DragonianHornStimulantTolerance</toleranceHediff>
+		<onGeneratedAddictedToleranceChance>0.5</onGeneratedAddictedToleranceChance>
+	</ChemicalDef>
+	
+	<NeedDef ParentName="DrugAddictionNeedBase">
+		<defName>Chemical_DragonianHornStimulant</defName>
+		<needClass>Need_Chemical</needClass>
+		<label>龙角亢奋素</label>
+		<description>因为对龙角亢奋素成瘾，此人需要定期服用该药物以避免戒断症状。</description>
+		<fallPerDay>0.333</fallPerDay>
+		<listPriority>45</listPriority>
+	</NeedDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 亢奋素 - 药效与副作用 ========== -->
+    <!-- ========================================================== -->
+	
+	<HediffDef>
+		<defName>DragonianHornStimulantHigh</defName>
+		<hediffClass>Hediff_High</hediffClass>
+		<label>龙角素亢奋</label>
+		<labelNoun>a dragonian horn stimulant high</labelNoun>
+		<description>龙角亢奋素带来的强大力量。身体和精神能力都得到了极大的提升。</description>
+		<defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+		<scenarioCanAdd>true</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.33</severityPerDay>
+				<showHoursToRecover>true</showHoursToRecover>
+			</li>
+			<li Class="DragonianTechExpansion.HediffCompProperties_AddHediffOnRemoval">
+				<hediffToAdd>DragonianHornStimulantComeDown</hediffToAdd>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+					<li><capacity>Consciousness</capacity><offset>0.25</offset></li>
+					<li><capacity>Moving</capacity><offset>0.40</offset></li>
+				</capMods>
+				<statFactors>
+					<RestFallRateFactor>0.6</RestFallRateFactor>
+					<InjuryHealingFactor>1.5</InjuryHealingFactor>
+				</statFactors>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	<HediffDef>
+		<defName>DragonianHornStimulantComeDown</defName>
+		<hediffClass>HediffWithComps</hediffClass>
+		<label>亢奋后精神疲劳</label>
+		<description>药效消退后身体和精神陷入了极度疲惫。</description>
+		<isBad>true</isBad>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>60000</disappearsAfterTicks>
+				<showRemainingTime>true</showRemainingTime>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath" />
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+					<li><capacity>Consciousness</capacity><offset>-0.25</offset></li>
+				</capMods>
+				<statFactors>
+					<RestFallRateFactor>2.0</RestFallRateFactor>
+				</statFactors>
+				<disabledWorkTags>
+					<li>Caring</li>
+					<li>Intellectual</li>
+				</disabledWorkTags>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	<HediffDef>
+		<defName>DragonianHornStimulantTolerance</defName>
+		<label>龙角亢奋素耐受</label>
+		<description>长期使用龙角亢奋素导致的耐受性。效果会逐渐减弱。</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<isBad>true</isBad>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>900000</disappearsAfterTicks>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<minSeverity>0</minSeverity>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	<HediffDef ParentName="AddictionBase">
+		<defName>DragonianHornStimulantAddiction</defName>
+		<label>龙角亢奋素成瘾</label>
+		<description>对这种强效精神药物产生了生理依赖。停止使用会导致严重的戒断反应。</description>
+		<hediffClass>Hediff_Addiction</hediffClass>
+		<chemicalNeed>Chemical_DragonianHornStimulant</chemicalNeed>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.045</severityPerDay>
+				<showDaysToRecover>true</showDaysToRecover>
+			</li>
+		</comps>
+		<stages>
+			<li>
+			</li>
+			<li>
+				<label>withdrawal</label>
+				<painFactor>3</painFactor>
+				<hungerRateFactorOffset>0.5</hungerRateFactorOffset>
+				<statOffsets>
+					<RestFallRateFactor>0.3</RestFallRateFactor>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.20</offset>
+					</li>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.50</offset>
+					</li>
+					<li>
+						<capacity>Sight</capacity>
+						<offset>-0.20</offset>
+					</li>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.10</offset>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+	</HediffDef>
+	
+    <!-- 亢奋 (挂在 DragonianHornStimulantHigh 上) -->
+    <ThoughtDef>
+        <defName>DragonianHornStimulantMood</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>DragonianHornStimulantHigh</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <stages>
+            <li>
+                <label>龙角亢奋素振奋</label>
+                <description>我感觉自己无所不能！</description>
+                <baseMoodEffect>12</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- 亢奋消退 (挂在 DragonianHornStimulantComeDown 上) -->
+    <ThoughtDef>
+        <defName>DragonianHornStimulantComeDownMood</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>DragonianHornStimulantComeDown</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <stages>
+            <li>
+                <label>亢奋消退</label>
+                <description>那股无所不能的感觉消退了，我现在感到内心好空虚。</description>
+                <baseMoodEffect>-10</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- 戒断 (挂在 DragonianHornStimulantAddiction 上，只在成瘾 stage 2 生效) -->
+    <ThoughtDef>
+        <defName>DragonianHornStimulantWithdrawal</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>DragonianHornStimulantAddiction</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+        <stages>
+            <li>
+                <visible>false</visible>
+            </li>
+            <li>
+                <label>龙角亢奋素戒断</label>
+                <description>全身上下都在抽搐，头痛欲裂。我需要更多龙角亢奋素。</description>
+                <baseMoodEffect>-22</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+	
+    <!-- ========================================================== -->
+    <!-- ========== 亢奋素 - 物品与制造配方 ========== -->
+    <!-- ========================================================== -->
+	
+	<ThingDef ParentName="MakeableDrugBase">
+		<defName>DragonianHornStimulant</defName>
+		<label>龙角亢奋素</label>
+		<description>用龙角粉末和精神叶混合制成的长效强化剂。具有振奋精神，消除疲劳的功效，就连龙娘都觉得自己变聪明了！但效果结束后同样伴随着副作用且具有成瘾性。</description>
+	    <descriptionHyperlinks>
+			<HediffDef>DragonianHornStimulantHigh</HediffDef>
+			<HediffDef>DragonianHornStimulantComeDown</HediffDef>
+		</descriptionHyperlinks>
+		<graphicData>
+			<texPath>Things/Item/Resource/HornStimulant</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<WorkToMake>10</WorkToMake>
+			<MarketValue>80</MarketValue>
+			<Mass>0.1</Mass>
+		</statBases>
+		<techLevel>Medieval</techLevel>
+		<ingestible>
+			<joyKind>Chemical</joyKind>
+			<joy>0.40</joy>
+			<drugCategory>Hard</drugCategory>
+			<foodType>Processed, Fluid</foodType>
+			<baseIngestTicks>80</baseIngestTicks>
+			<ingestSound>Ingest_Inject</ingestSound>
+			<ingestCommandString>服用 {0}</ingestCommandString>
+			<ingestReportString>正在服用 {0}。</ingestReportString>
+			<useEatingSpeedStat>true</useEatingSpeedStat>
+			<chairSearchRadius>0</chairSearchRadius>
+			<outcomeDoers>
+				<li Class="IngestionOutcomeDoer_GiveHediff">
+					<hediffDef>DragonianHornStimulantHigh</hediffDef>
+					<severity>1</severity>
+					<toleranceChemical>DragonianHornStimulant</toleranceChemical>
+				</li>
+				<li Class="IngestionOutcomeDoer_OffsetNeed">
+					<need>Rest</need>
+					<offset>0.5</offset>
+					<toleranceChemical>DragonianHornStimulant</toleranceChemical>
+				</li>
+				<li Class="IngestionOutcomeDoer_OffsetPsyfocus">
+					<offset>1.0</offset>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<recipeMaker>
+			<researchPrerequisite>DragonianMedicalApplication</researchPrerequisite>
+			<recipeUsers>
+				<li>DrugLab</li>
+			</recipeUsers>
+			<soundWorking>Recipe_Drug</soundWorking>
+			<displayPriority>1500</displayPriority>
+		</recipeMaker>
+		<costList>
+			<DragonianHornPowder>1</DragonianHornPowder>
+			<PsychoidLeaves>6</PsychoidLeaves>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Drug">
+				<chemical>DragonianHornStimulant</chemical>
+				<addictiveness>0.026</addictiveness>
+				<existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+				<needLevelOffset>0.9</needLevelOffset>
+				<isCombatEnhancingDrug>true</isCombatEnhancingDrug>
+				<listOrder>200</listOrder>
+				<overdoseSeverityOffset>0.02~0.05</overdoseSeverityOffset>
+				<largeOverdoseChance>0.005</largeOverdoseChance>
+			</li>
+		</comps>
+	</ThingDef>
+	
+
+    <!-- ========================================================== -->
+    <!-- ========== 催情素 - 核心化学与需求定义 ========== -->
+    <!-- ========================================================== -->
+
+    <ChemicalDef>
+        <defName>DragonianAphrodisiac</defName>
+        <label>催情剂</label>
+        <addictionHediff>DragonianAphrodisiacAddiction</addictionHediff>
+        <toleranceHediff>DragonianAphrodisiacTolerance</toleranceHediff>
+        <onGeneratedAddictedToleranceChance>0.25</onGeneratedAddictedToleranceChance>
+    </ChemicalDef>
+
+    <NeedDef ParentName="DrugAddictionNeedBase">
+        <defName>Chemical_DragonianAphrodisiac</defName>
+        <needClass>Need_Chemical</needClass>
+        <label>催情剂</label>
+        <description>因为对催情素成瘾，此人需要定期服用该药物以避免戒断症状。</description>
+        <fallPerDay>0.5</fallPerDay>
+        <listPriority>45</listPriority>
+    </NeedDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 催情素 - 药效与副作用 ========== -->
+    <!-- ========================================================== -->
+
+    <!-- 正面药效（2天） -->
+    <HediffDef>
+        <defName>DragonianAphrodisiacHigh</defName>
+        <hediffClass>Hediff_High</hediffClass>
+        <label>催情剂作用</label>
+        <description>龙角粉末与大麻叶提取物正在刺激多巴胺与荷尔蒙分泌，身体变得异常敏感且充满吸引力。</description>
+        <defaultLabelColor>(1,0.4,0.7)</defaultLabelColor>
+        <scenarioCanAdd>true</scenarioCanAdd>
+        <maxSeverity>1.0</maxSeverity>
+        <isBad>false</isBad>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-0.5</severityPerDay>
+                <showHoursToRecover>true</showHoursToRecover>
+            </li>
+            <li Class="HediffCompProperties_GiveAbility">
+                <abilityDef>DTE_AphrodisiacCharm</abilityDef>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <capMods>
+                    <li><capacity>Consciousness</capacity><offset>-0.1</offset></li>
+                </capMods>
+                <statOffsets>
+                    <PawnBeauty>2.0</PawnBeauty>
+                    <SocialImpact>0.50</SocialImpact>
+                </statOffsets>
+                <statFactors>
+                    <Fertility>2.0</Fertility>
+                </statFactors>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- 耐受 -->
+    <HediffDef>
+        <defName>DragonianAphrodisiacTolerance</defName>
+        <label>催情剂耐受</label>
+        <description>身体对催情素的敏感度下降，需要更多剂量才能达到效果。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <initialSeverity>0</initialSeverity>
+        <maxSeverity>1.0</maxSeverity>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-0.02</severityPerDay>
+            </li>
+            <li Class="DragonianTechExpansion.HediffCompProperties_AddHediffOnRemoval">
+                <hediffToAdd>Dementia</hediffToAdd>
+            </li>
+        </comps>
+        <stages>
+            <li></li>
+        </stages>
+    </HediffDef>
+
+    <!-- 成瘾 -->
+    <HediffDef ParentName="AddictionBase">
+        <defName>DragonianAphrodisiacAddiction</defName>
+        <label>催情剂成瘾</label>
+        <description>对这种强效荷尔蒙药物产生了生理依赖。停止使用会导致严重的戒断反应。</description>
+        <hediffClass>Hediff_Addiction</hediffClass>
+        <chemicalNeed>Chemical_DragonianAphrodisiac</chemicalNeed>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-0.045</severityPerDay>
+                <showDaysToRecover>true</showDaysToRecover>
+            </li>
+        </comps>
+        <stages>
+            <li>
+            </li>
+            <li>
+                <label>withdrawal</label>
+                <painFactor>2.5</painFactor>
+                <hungerRateFactorOffset>0.5</hungerRateFactorOffset>
+                <statOffsets>
+                    <RestFallRateFactor>0.4</RestFallRateFactor>
+                    <PawnBeauty>-1.0</PawnBeauty>
+                </statOffsets>
+                <capMods>
+                    <li><capacity>Consciousness</capacity><offset>-0.15</offset></li>
+                    <li><capacity>Moving</capacity><offset>-0.20</offset></li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <!-- ========================================================== -->
+    <!-- ========== 催情剂 - 物品与制造配方 ========== -->
+    <!-- ========================================================== -->
+
+    <ThingDef ParentName="MakeableDrugBase">
+        <defName>DragonianAphrodisiac</defName>
+        <label>龙角催情剂</label>
+        <description>用龙角粉末与大麻叶混合提炼出的乳白色液体。能大幅增强使用者的魅力与生育能力，副作用是影响神智并具有成瘾性，长期使用可能会导致严重的神经损伤，因此在许多地区被列为违禁药物，但在地下黑市仍供不应求。</description>
+        <descriptionHyperlinks>
+            <HediffDef>DragonianAphrodisiacHigh</HediffDef>
+            <HediffDef>DragonianAphrodisiacAddiction</HediffDef>
+        </descriptionHyperlinks>
+        <graphicData>
+            <texPath>Things/Item/Resource/DragonianAphrodisiac</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <WorkToMake>10</WorkToMake>
+            <MarketValue>60</MarketValue>
+            <Mass>0.1</Mass>
+        </statBases>
+        <techLevel>Neolithic</techLevel>
+        <ingestible>
+            <joyKind>Chemical</joyKind>
+            <joy>0.40</joy>
+            <drugCategory>Hard</drugCategory>
+            <foodType>
+                <li>Processed</li>
+                <li>Fluid</li>
+            </foodType>
+            <baseIngestTicks>80</baseIngestTicks>
+            <ingestSound>Ingest_Inject</ingestSound>
+            <ingestCommandString>服用 {0}</ingestCommandString>
+            <ingestReportString>正在服用 {0}。</ingestReportString>
+            <useEatingSpeedStat>true</useEatingSpeedStat>
+            <chairSearchRadius>0</chairSearchRadius>
+            <outcomeDoers>
+                <li Class="IngestionOutcomeDoer_GiveHediff">
+                    <hediffDef>DragonianAphrodisiacHigh</hediffDef>
+                    <severity>1</severity>
+                    <toleranceChemical>DragonianAphrodisiac</toleranceChemical>
+                </li>
+                <li Class="IngestionOutcomeDoer_GiveHediff">
+                    <hediffDef>DragonianAphrodisiacTolerance</hediffDef>
+                    <severity>0.1</severity>
+                </li>
+            </outcomeDoers>
+        </ingestible>
+        <recipeMaker>
+            <researchPrerequisite>DragonianMedicalApplication</researchPrerequisite>
+            <recipeUsers>
+                <li>DrugLab</li>
+            </recipeUsers>
+            <soundWorking>Recipe_Drug</soundWorking>
+            <displayPriority>1500</displayPriority>
+        </recipeMaker>
+        <costList>
+            <DragonianHornPowder>1</DragonianHornPowder>
+            <SmokeleafLeaves>4</SmokeleafLeaves>
+        </costList>
+        <comps>
+            <li Class="CompProperties_Drug">
+                <chemical>DragonianAphrodisiac</chemical>
+                <addictiveness>0.03</addictiveness>
+                <existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+                <needLevelOffset>0.9</needLevelOffset>
+                <isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+                <listOrder>200</listOrder>
+                <overdoseSeverityOffset>0.02~0.05</overdoseSeverityOffset>
+                <largeOverdoseChance>0.005</largeOverdoseChance>
+            </li>
+        </comps>
+    </ThingDef>
+	
+    <!-- 催情素诱惑技能 -->
+    <AbilityDef>
+        <defName>DTE_AphrodisiacCharm</defName>
+        <label>催情诱惑</label>
+        <description>利用催情剂引发的荷尔蒙场，对目标释放强烈的心理暗示，使其在接下来的几天内深深地迷恋上施法者。</description>
+        <iconPath>UI/Abilities/WordOfLove</iconPath> <!-- 可以直接用原版的图标 -->
+        <cooldownTicksRange>0</cooldownTicksRange> <!-- 药物技能不需要冷却 -->
+        <hostile>false</hostile>
+        <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+        
+        <!-- 使用近战施法动作 -->
+        <jobDef>CastAbilityOnThingMelee</jobDef>
+        
+        <verbProperties>
+            <verbClass>Verb_CastAbilityTouch</verbClass>
+            <warmupTime>2</warmupTime>
+            <range>-1</range>
+            <drawAimPie>false</drawAimPie>
+            <targetParams>
+                <canTargetAnimals>false</canTargetAnimals>
+                <canTargetSelf>false</canTargetSelf>
+                <canTargetBuildings>false</canTargetBuildings>
+                <canTargetMechs>false</canTargetMechs>
+            </targetParams>
+        </verbProperties>
+        
+        <comps>
+            <!-- 我们的自定义爱意组件 -->
+            <li Class="DragonianTechExpansion.CompProperties_AbilityCharm">
+                <compClass>DragonianTechExpansion.CompAbilityEffect_Charm</compClass>
+            </li>
+            <!-- 借用原版的迷乱之语社交互动，触发好感度大幅提升 -->
+            <li Class="CompProperties_AbilitySocialInteraction">
+                <interactionDef>WordOfLove</interactionDef>
+            </li>
+            <!-- 施法时的灵能特效（看起来更有魅惑感） -->
+            <li Class="CompProperties_AbilityFleckOnTarget">
+                <fleckDef>WordOfApply</fleckDef>
+                <sound>Psycast_WordOf_Effect</sound>
+            </li>
+        </comps>
+    </AbilityDef>
+	
+</Defs>
